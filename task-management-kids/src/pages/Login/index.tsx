@@ -3,8 +3,8 @@ import { Container } from './style';
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
-import { InputPassword } from '../../components/InputPassword';
 import { ButtonText } from '../../components/ButtonText';
+import { PasswordStrengthMeter } from '../../components/PasswordStrengthMeter';
 
 import imageLogup from '../../assets/image-logup.svg';
 
@@ -14,7 +14,6 @@ import { MdEmail, MdVpnKey } from  'react-icons/md';
 import { useState } from 'react';
 
 import { toast } from 'react-toastify';
-import { PrimeReactProvider } from 'primereact/api';
 
 
 export function Login(){
@@ -23,7 +22,6 @@ export function Login(){
   // const [toastVisible, setToastVisible] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [value, setValue] = useState<string>("");
 
   async function handleLogin(e: React.FormEvent){
     e.preventDefault();
@@ -34,10 +32,7 @@ export function Login(){
 
   };
 
-
-
   return(
-    <PrimeReactProvider>
       <Container>
         {/* <ToastContainer /> */}
         <div>
@@ -47,7 +42,6 @@ export function Login(){
           Faça o login!
         </h1>
           <form className='form-container' onSubmit={handleLogin}>
-              <InputPassword />
               <Input
                 textLabel="Login"
                 nameInput="login"
@@ -56,14 +50,17 @@ export function Login(){
                 type="text"
                 onChange={e => setLogin(e.target.value)}
               />
-              <Input
-                textLabel="Senha"
-                nameInput="password"
-                placeholder="*************"
-                Icon={MdVpnKey}
-                type="password"
-                onChange={e => setPassword(e.target.value)}
-              />
+              <div className='input-password'>
+                <Input
+                  textLabel="Senha"
+                  nameInput="password"
+                  placeholder="*************"
+                  Icon={MdVpnKey}
+                  type="password"
+                  onChange={e => setPassword(e.target.value)}
+                />
+                <PasswordStrengthMeter password={password}/>
+              </div>
               <div className='box-container'>
                 <Button
                   value="Enviar"
@@ -85,7 +82,5 @@ export function Login(){
               </div>
           </form>
     </Container>
-  </PrimeReactProvider>
-
   )
 }

@@ -16,12 +16,16 @@ export const Container = styled.div`
     font-size: clamp(1.5rem, 2.5vw, 2rem);
   }
 
-  .form-container, .box-container, .box-buttons{
+  .form-container, .box-container, .box-buttons, .input-password{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 100%;
+  }
+
+  .input-password{
+    gap: 4px;
   }
 
   .form-container{

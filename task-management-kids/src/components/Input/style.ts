@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Password } from 'primereact/password';
 
 export const Container = styled.div`
   display: flex;
@@ -22,7 +21,7 @@ export const Container = styled.div`
     justify-content: left;
     gap: 8px;
 
-    padding: 8px;
+    padding: 12px;
     width: 100%;
 
     background: ${({theme}) => theme.COLORS.WHITE};
@@ -48,8 +47,4 @@ export const Container = styled.div`
       width: 100%;
     }
   }
-`
-
-export const InputPassword = styled(Password)`
-
 `
