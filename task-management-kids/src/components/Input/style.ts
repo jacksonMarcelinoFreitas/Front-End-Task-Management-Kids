@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Password } from 'primereact/password';
 
 export const Container = styled.div`
   display: flex;
@@ -47,6 +48,8 @@ export const Container = styled.div`
       width: 100%;
     }
   }
+`
 
+export const InputPassword = styled(Password)`
 
 `

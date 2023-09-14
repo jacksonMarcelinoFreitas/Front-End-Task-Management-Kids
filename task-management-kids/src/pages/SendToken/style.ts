@@ -9,42 +9,41 @@ export const Container = styled.div`
   width: 100%;
   padding: 24px;
 
-  h1{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+  .box-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 257px;
+    min-width: 200px;
   }
 
   p{
-    color: ${({ theme }) => theme.COLORS.PINK_400};
     font-family: 'Poppins', sans-serif;
-    font-size: 12px;
     font-weight: 400;
+    font-size: 20px;
+    /* font-size: clamp(1.5rem, 2.5vw, 2rem); */
     text-align: center;
-    line-height: 14px;
+    line-height: 24px;
   }
 
-  .form-container, .box-container{
+  .box-buttons, .box-inputs{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 100%;
-  }
 
-  .form-container{
-    gap: 16px;
-
-    margin: 0 24px;
-    max-width: 300px;
-    min-width: 200;
-  }
-
-  .box-container{
     gap: 8px;
   }
 
-
-
+  .box-buttons{
+    justify-content: right;
+    align-items: end;
+    button{
+      font-size: 16px;
+    }
+  }
 
 `
