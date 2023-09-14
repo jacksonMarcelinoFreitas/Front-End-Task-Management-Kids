@@ -1,4 +1,9 @@
 import { createGlobalStyle } from "styled-components";
+import 'react-toastify/dist/ReactToastify.css';
+//theme
+import "primereact/resources/themes/bootstrap4-dark-blue/theme.css";
+//core
+import "primereact/resources/primereact.min.css";
 
 export default createGlobalStyle `
   * {

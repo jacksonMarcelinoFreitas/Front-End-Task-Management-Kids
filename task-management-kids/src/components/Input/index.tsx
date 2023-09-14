@@ -1,5 +1,6 @@
 import { Container } from './style';
 
+
 interface InputProps {
   type: string,
   value?: string,
@@ -7,9 +8,10 @@ interface InputProps {
   placeholder?: string,
   nameInput: string,
   Icon?: React.ElementType,
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export function Input({Icon, nameInput, type, textLabel, placeholder, value, ...rest}: InputProps){
+export function Input({Icon, nameInput, type, textLabel, placeholder, value, onChange, ...rest}: InputProps){
   return(
     <Container {...rest}>
       {
@@ -26,6 +28,7 @@ export function Input({Icon, nameInput, type, textLabel, placeholder, value, ...
           type={type}
           id={nameInput}
           placeholder={placeholder}
+          onChange={onChange}
         />
       </div>
     </Container>

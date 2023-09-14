@@ -16,7 +16,7 @@ export const Container = styled.div`
     font-size: clamp(1.5rem, 2.5vw, 2rem);
   }
 
-  .input-container, .box-container, .box-buttons{
+  .form-container, .box-container, .box-buttons{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +24,7 @@ export const Container = styled.div`
     width: 100%;
   }
 
-  .input-container{
+  .form-container{
     gap: 16px;
 
     margin: 0 24px;
@@ -41,8 +41,5 @@ export const Container = styled.div`
     flex-direction: row;
     width: 100%;
   }
-
-
-
 
 `
