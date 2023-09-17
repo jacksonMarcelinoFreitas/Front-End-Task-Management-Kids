@@ -6,9 +6,9 @@ export const Container = styled.button`
 
   padding: 0 16px;
 
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
-  font-family: 'Inter', sans-serif;
+  /* font-family: 'Inter', sans-serif; */
   text-align: center;
 
 `

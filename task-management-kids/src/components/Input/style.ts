@@ -47,4 +47,13 @@ export const Container = styled.div`
       width: 100%;
     }
   }
+
+  .message-error{
+    width: 70%;
+    font-family: 'Inter', sans-serif;
+    /* word-wrap: break-word; */
+    text-align: left;
+    font-size: 12px;
+    color: ${({theme}) => theme.COLORS.PINK_400};
+  }
 `

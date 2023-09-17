@@ -1,86 +1,95 @@
 import { Container } from './style';
-// import { ToastMessage } from '../../components/Toast/index';
-
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { ButtonText } from '../../components/ButtonText';
 import { PasswordStrengthMeter } from '../../components/PasswordStrengthMeter';
-
 import imageLogup from '../../assets/image-logup.svg';
-
-import { useNavigate } from "react-router-dom";
 import { MdEmail, MdVpnKey } from  'react-icons/md';
-
-import { useState } from 'react';
-
+// import { useState } from 'react';
+import { schema } from '../../utils/form-schema-login';
+import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
-
 
 export function Login(){
   const navigate = useNavigate();
 
-  // const [toastVisible, setToastVisible] = useState(false);
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const formik = useFormik({
+    initialValues: { login: '', password: '' },
+    validationSchema: schema,
+    onSubmit: async (values, { setSubmitting }) => {
+      setSubmitting(true);
 
-  async function handleLogin(e: React.FormEvent){
-    e.preventDefault();
+      try{
 
-    if(!login || !password){
-      toast.warn('Todos os campos precisam ser preenchidos!');
-    }
+        //adicionar chamada da API
+        console.log(JSON.stringify(values, null, 2))
+        // throw new Error("Isso é um erro forçado!");
+      }catch(error){
+        toast.error(`${error}`);
+      }
 
-  };
+      setSubmitting(false);
+    },
+  })
 
   return(
       <Container>
-        {/* <ToastContainer /> */}
-        <div>
-          <img src={imageLogup} alt="imagem de login"/>
-        </div>
-        <h1>
-          Faça o login!
-        </h1>
-          <form className='form-container' onSubmit={handleLogin}>
+          <div>
+            <img src={imageLogup} alt="imagem de login"/>
+          </div>
+          <h1>
+            Faça o login!
+          </h1>
+          <form onSubmit={formik.handleSubmit}>
+            <div className='box-container'>
               <Input
-                textLabel="Login"
-                nameInput="login"
+                label="Login"
+                name="login"
+                type="text"
                 placeholder="jhonDoe@gmail.com or nickname"
                 Icon={MdEmail}
-                type="text"
-                onChange={e => setLogin(e.target.value)}
+                error={formik.errors.login}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.login}
+                touched={formik.touched.login}
               />
+
               <div className='input-password'>
                 <Input
-                  textLabel="Senha"
-                  nameInput="password"
+                  label="Password"
+                  name="password"
+                  type="password"
                   placeholder="*************"
                   Icon={MdVpnKey}
-                  type="password"
-                  onChange={e => setPassword(e.target.value)}
+                  error={formik.errors.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                  touched={formik.touched.password}
                 />
-                <PasswordStrengthMeter password={password}/>
+                <PasswordStrengthMeter password={formik.values.password}/>
               </div>
-              <div className='box-container'>
-                <Button
-                  value="Enviar"
+              <Button
+                value="Enviar"
+                type="submit"
+                disabled={!formik.isValid || formik.isSubmitting}
+              />
+              <div className='box-buttons'>
+                <ButtonText
+                  value="Esqueci a senha!"
                   type="button"
-                  onClick={handleLogin}
+                  onClick={() => navigate('/register')}
                 />
-                <div className='box-buttons'>
-                  <ButtonText
-                    value="Esqueci a senha!"
-                    type="button"
-                    onClick={() => navigate('/register')}
-                  />
-                  <ButtonText
-                    value="Cadastre-se!"
-                    type="button"
-                    onClick={() => navigate('/register')}
-                  />
-                </div>
+                <ButtonText
+                  value="Cadastre-se!"
+                  type="button"
+                  onClick={() => navigate('/register')}
+                />
               </div>
-          </form>
+            </div>
+        </form>
     </Container>
   )
 }

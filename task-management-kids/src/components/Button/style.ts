@@ -18,4 +18,9 @@ export const Container = styled.button`
   svg{
     color: ${({ theme }) => theme.COLORS.WHITE};
   }
+
+  &.disabled-button {
+    opacity: 70%;
+  }
+
 `

@@ -1,24 +1,26 @@
 import { Container } from './style';
 
-
 interface InputProps {
   type: string,
   value?: string,
-  textLabel?: string,
+  label?: string,
   placeholder?: string,
-  nameInput: string,
+  name?: string,
+  error?: string,
+  touched?: boolean,
   Icon?: React.ElementType,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export function Input({Icon, nameInput, type, textLabel, placeholder, value, onChange, ...rest}: InputProps){
+export function Input({Icon, name, type, label, placeholder, error, touched, value, onChange, onBlur, ...rest}: InputProps){
+
   return(
     <Container {...rest}>
       {
-        textLabel&&
-        <label htmlFor={nameInput}>{textLabel}</label>
+        label&&
+        <label htmlFor={name}>{label}</label>
       }
-
       <div>
         {
           Icon&&
@@ -26,11 +28,18 @@ export function Input({Icon, nameInput, type, textLabel, placeholder, value, onC
         }
         <input
           type={type}
-          id={nameInput}
-          placeholder={placeholder}
+          name={name}
+          value={value}
+          onBlur={onBlur}
+          autoComplete="off"
           onChange={onChange}
+          placeholder={placeholder}
         />
       </div>
+      {
+        touched && error ?
+        (<span className='message-error'>{error}</span>) : null
+      }
     </Container>
   )
 }
