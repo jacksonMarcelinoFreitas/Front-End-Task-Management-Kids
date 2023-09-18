@@ -49,7 +49,7 @@ export const Container = styled.div`
   }
 
   .message-error{
-    width: 70%;
+    width: 100%;
     font-family: 'Inter', sans-serif;
     /* word-wrap: break-word; */
     text-align: left;

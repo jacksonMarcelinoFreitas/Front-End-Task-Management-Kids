@@ -2,7 +2,7 @@ import { Container } from './style';
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
-import { Checkbox } from '../../components/Checkbox';
+import { CheckboxPrivacyPolicies } from '../../components/PrivacyPolicies';
 import { ButtonText } from '../../components/ButtonText';
 
 import imageLogin from '../../assets/image-login.svg';
@@ -10,29 +10,36 @@ import imageLogin from '../../assets/image-login.svg';
 import { useNavigate } from "react-router-dom";
 import { BsFillPersonFill } from  'react-icons/bs';
 import { MdEmail, MdVpnKey } from  'react-icons/md';
-
+import { schema } from '../../utils/form-schema-logup';
+import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
+import Modal from 'react-modal';
 import { useState } from 'react';
+
+Modal.setAppElement('#root');
+
 
 export function Logup(){
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [term, setTerm] = useState(false);
+  const formik = useFormik({
+    initialValues: { name: '', email: '', password: '', read_terms: false},
+    validationSchema: schema,
+    onSubmit: async (values, { setSubmitting }) => {
+      setSubmitting(true);
 
-  const handleLogup = (e: React.FormEvent) => {
-    e.preventDefault();
+      try{
 
-    if(!name || !email || !password){
-      alert('Todos os campos precisam ser preenchidos!')
-    }
+        //adicionar chamada da API
+        console.log(JSON.stringify(values, null, 2))
+        // throw new Error("Isso é um erro forçado!");
+      }catch(error){
+        toast.error(`${error}`);
+      }
 
-    if(term == false){
-      alert('Você precisa ler e aceitar os termos para cadastrar-se!')
-    }
-
-  };
+      setSubmitting(false);
+    },
+  })
 
   return(
     <Container>
@@ -42,42 +49,61 @@ export function Logup(){
       <h1>
         Cadastre-se!
       </h1>
-      <form className='form-container' onSubmit={handleLogup}>
+      <form className='form-container' onSubmit={formik.handleSubmit}>
         <Input
-          textLabel="Nome completo"
-          nameInput="name"
-          placeholder="jhonDoe"
-          Icon={BsFillPersonFill}
+          label="Nome completo"
+          name="name"
           type="text"
-          onChange={e => setName(e.target.value)}
+          Icon={BsFillPersonFill}
+          placeholder="jhonDoe"
+          error={formik.errors.name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.name}
+          touched={formik.touched.name}
         />
         <Input
-          textLabel="E-mail"
-          nameInput="email"
-          placeholder="jhonDoe@gmail.com"
-          Icon={MdEmail}
+          label="E-mail"
+          name="email"
           type="email"
-          onChange={e => setEmail(e.target.value)}
+          Icon={MdEmail}
+          placeholder="jhonDoe@gmail.com"
+          error={formik.errors.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
+          touched={formik.touched.email}
         />
         <Input
-          textLabel="Senha"
-          nameInput="password"
-          placeholder="*************"
+          label="Senha"
+          name="password"
           Icon={MdVpnKey}
+          placeholder="*************"
           type="password"
-          onChange={e => setPassword(e.target.value)}
+          error={formik.errors.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
+          touched={formik.touched.password}
         />
-        <Checkbox
-          text="Li e concordo com os termos e políticas de privacidade"
-          link="#"
-          onChange={e => setTerm(e.target.checked)}
+        <CheckboxPrivacyPolicies
+          text1="termos"
+          text2="políticas de privacidade"
+          link1="#"
+          link2="#"
+          name='read_terms'
+          error={formik.errors.read_terms}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          checked={formik.values.read_terms}
+          touched={formik.touched.read_terms}
         />
         <div className='box-container'>
           <p>*O cadastro deve ser realizado somente por um responsável</p>
           <Button
             value="Enviar"
-            type= "button"
-            onClick={handleLogup}
+            type= "submit"
+            disabled={!formik.isValid || formik.isSubmitting}
           />
           <ButtonText
             value="Fazer login"

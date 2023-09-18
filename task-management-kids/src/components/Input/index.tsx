@@ -27,6 +27,7 @@ export function Input({Icon, name, type, label, placeholder, error, touched, val
           <Icon size={20} />
         }
         <input
+          id={name}
           type={type}
           name={name}
           value={value}
