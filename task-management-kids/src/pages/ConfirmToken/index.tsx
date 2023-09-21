@@ -21,19 +21,19 @@ export function ConfirmToken(){
 
         <div className="box-inputs">
           <Input
-            nameInput="token"
+            name="token"
             placeholder="TOKEN"
             Icon={MdVpnKey}
             type="text"
           />
           <Input
-            nameInput="new password"
+            name="new password"
             placeholder="nova senha"
             Icon={BiSolidLock}
             type="password"
           />
           <Input
-            nameInput="comfirm password"
+            name="comfirm password"
             placeholder="confirmar senha"
             Icon={BiSolidLock}
             type="password"

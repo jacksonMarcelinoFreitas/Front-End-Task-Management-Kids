@@ -19,7 +19,7 @@ export function SendToken(){
 
         <div className="box-inputs">
           <Input
-            nameInput="email"
+            name="email"
             placeholder="jhonDoe@gmail.com"
             Icon={MdEmail}
             type="email"

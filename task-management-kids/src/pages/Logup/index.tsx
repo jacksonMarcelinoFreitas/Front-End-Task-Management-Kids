@@ -1,61 +1,106 @@
-import { Container } from './style';
-
+import { CheckboxPrivacyPolicies } from '../../components/PrivacyPolicies';
+import { AiFillEye, AiFillEyeInvisible } from  'react-icons/ai';
+import { ButtonText } from '../../components/ButtonText';
+import { schema } from '../../utils/form-schema-logup';
+import imageLogin from '../../assets/image-login.svg';
+import { MdEmail } from  'react-icons/md';
+import { BsFillPersonFill } from  'react-icons/bs';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
-import { CheckboxPrivacyPolicies } from '../../components/PrivacyPolicies';
-import { ButtonText } from '../../components/ButtonText';
-
-import imageLogin from '../../assets/image-login.svg';
-
-import { useNavigate } from "react-router-dom";
-import { BsFillPersonFill } from  'react-icons/bs';
-import { MdEmail, MdVpnKey } from  'react-icons/md';
-import { schema } from '../../utils/form-schema-logup';
-import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { api } from '../../services/api';
+import { Container } from './style';
 import { toast } from 'react-toastify';
-import Modal from 'react-modal';
+import { useFormik } from 'formik';
 import { useState } from 'react';
+import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
-
 
 export function Logup(){
   const navigate = useNavigate();
 
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [readTerms, setReadTerms] = useState(false)
+  const [eyeIsClosed, setEyeIsClosed] = useState(false)
+
+  const toggleEye = () => {
+    eyeIsClosed ? setEyeIsClosed(false) : setEyeIsClosed(true)
+  }
+
   const formik = useFormik({
-    initialValues: { name: '', email: '', password: '', read_terms: false},
+    initialValues:{name: '',email: '',password: '',readTerms: false},
     validationSchema: schema,
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit:
+      async (values, { setSubmitting }) => {
       setSubmitting(true);
+
+      const {name, email, password, readTerms} = values;
+      setName(name);
+      setEmail(email);
+      setPassword(password);
+      setReadTerms(readTerms);
 
       try{
 
-        //adicionar chamada da API
-        console.log(JSON.stringify(values, null, 2))
-        // throw new Error("Isso é um erro forçado!");
+        handleSignUp();
+
       }catch(error){
+
         toast.error(`${error}`);
+
       }
 
       setSubmitting(false);
     },
   })
 
+  const handleSignUp = () => {
+    api.post('/v1/user/sponsor/new-user', {name, email, password, readTerms})
+
+    .then( response => {
+
+        toast.success(response.data.message)
+        navigate('/')
+
+    })
+    .catch(error => {
+        if(error.response){
+
+          toast.error(error.response.data.message)
+          console.error(error.response.data)
+
+        }else if(error.request){
+
+          toast.error('Erro de requisição!');
+          toast.error(error.request);
+
+        }else{
+
+          toast.error('Não foi possível fazer o cadstro!');
+          console.error(error.message);
+
+        }
+    });
+  }
+
   return(
     <Container>
       <div>
-        <img src={imageLogin} alt="imagem de login"/>
+        <img src={imageLogin} alt='imagem de login'/>
       </div>
       <h1>
         Cadastre-se!
       </h1>
       <form className='form-container' onSubmit={formik.handleSubmit}>
         <Input
-          label="Nome completo"
-          name="name"
-          type="text"
+          label='Nome completo'
+          name='name'
+          type='text'
           Icon={BsFillPersonFill}
-          placeholder="jhonDoe"
+          placeholder='jhonDoe'
           error={formik.errors.name}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -63,11 +108,11 @@ export function Logup(){
           touched={formik.touched.name}
         />
         <Input
-          label="E-mail"
-          name="email"
-          type="email"
+          label='E-mail'
+          name='email'
+          type='email'
           Icon={MdEmail}
-          placeholder="jhonDoe@gmail.com"
+          placeholder='jhonDoe@gmail.com'
           error={formik.errors.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -75,39 +120,40 @@ export function Logup(){
           touched={formik.touched.email}
         />
         <Input
-          label="Senha"
-          name="password"
-          Icon={MdVpnKey}
-          placeholder="*************"
-          type="password"
+          label='Senha'
+          name='password'
+          Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
+          placeholder='*************'
+          type={eyeIsClosed ? 'text' : 'password'}
           error={formik.errors.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
           touched={formik.touched.password}
+          onClick={toggleEye}
         />
         <CheckboxPrivacyPolicies
-          text1="termos"
-          text2="políticas de privacidade"
-          link1="#"
-          link2="#"
-          name='read_terms'
-          error={formik.errors.read_terms}
+          text1='termos'
+          text2='políticas de privacidade'
+          link1='#'
+          link2='#'
+          name='readTerms'
+          error={formik.errors.readTerms}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          checked={formik.values.read_terms}
-          touched={formik.touched.read_terms}
+          checked={formik.values.readTerms}
+          touched={formik.touched.readTerms}
         />
         <div className='box-container'>
           <p>*O cadastro deve ser realizado somente por um responsável</p>
           <Button
-            value="Enviar"
-            type= "submit"
+            value='Enviar'
+            type= 'submit'
             disabled={!formik.isValid || formik.isSubmitting}
           />
           <ButtonText
-            value="Fazer login"
-            type= "button"
+            value='Fazer login'
+            type= 'button'
             onClick={() => navigate('/')}
           />
         </div>

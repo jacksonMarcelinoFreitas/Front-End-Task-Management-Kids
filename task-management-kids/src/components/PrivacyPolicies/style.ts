@@ -47,3 +47,25 @@ export const Container = styled.div`
     color: ${({theme}) => theme.COLORS.PINK_400};
   }
 `
+
+export const BoxButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
+  width: 100%;
+  padding: 0 0 16px 0;
+
+  button{
+    font-size: 18px;
+    text-align: center;
+
+    color: ${({theme}) => theme.COLORS.WHITE};
+    background-color: ${({theme}) => theme.COLORS.PINK_400};
+
+    border-radius: 8px;
+    padding: 0 16px;
+
+    height: 42px;
+  }
+`

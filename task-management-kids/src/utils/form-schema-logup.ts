@@ -19,7 +19,7 @@ export const schema = Yup.object().shape({
       }
     )
     .required("A senha é obrigatória"),
-  read_terms: Yup.boolean()
+  readTerms: Yup.boolean()
     .oneOf([true], "Você deve concordar com os termos")
     .required("Você deve concordar com os termos para continuar"),
 });

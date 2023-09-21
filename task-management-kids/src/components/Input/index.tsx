@@ -11,9 +11,10 @@ interface InputProps {
   Icon?: React.ElementType,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (e: React.MouseEventHandler<HTMLInputElement>) => void;
 }
 
-export function Input({Icon, name, type, label, placeholder, error, touched, value, onChange, onBlur, ...rest}: InputProps){
+export function Input({Icon, name, type, label, placeholder, error, touched, value, onChange, onBlur, onClick, ...rest}: InputProps){
 
   return(
     <Container {...rest}>
@@ -24,7 +25,7 @@ export function Input({Icon, name, type, label, placeholder, error, touched, val
       <div>
         {
           Icon&&
-          <Icon size={20} />
+          <Icon size={20} onClick={onClick} />
         }
         <input
           id={name}

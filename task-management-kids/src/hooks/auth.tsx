@@ -1,57 +1,87 @@
 import { api } from '../services/api';
-import { createContext, useContext, useState, useEffect  } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode  } from 'react';
+// import jwt from 'jsonwebtoken';
 
-const AuthContext = createContext({});
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
-function AuthProvider({children}){
+interface Credentials {
+  login: string;
+  password: string;
+}
 
-  interface Credentials {
-    login: string;
-    password: string;
-  }
+interface AuthContextType {
+  user: User | null;
+  signIn: (credentials: Credentials) => Promise<void>;
+  signOut: () => void;
+}
 
-  async function signIn({ login, password }: Credentials) {
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function AuthProvider({ children }: { children: ReactNode }){
+
+  const [data, setData] = useState<{ user: User | null, token: string | null }>({
+    user: null,
+    token: null,
+  });
+
+  async function signIn({ login, password }: Credentials){
+    try {
+      const response = await api.post ('/v1/auth/login', { login, password});
+      const { user, token } = response.data;
+
+      localStorage.setItem("@kidsTasker:user", JSON.stringify(user));
+      localStorage.setItem("@kidsTasker:token", token);
+
+      // estará no cabeçalho de todas as requisiçoes
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      setData({user, token});
+
+    } catch (error) {
+
+    }
   }
 
   function signOut(){
-    // localStorage.removeItem("@rocketnotes:token");
-    // localStorage.removeItem("@rocketnotes:user");
+    localStorage.removeItem("@kidsTasker:user");
+    localStorage.removeItem("@kidsTasker:token");
 
-    // setData({});
+    setData({ user: null, token: null });
   }
 
   useEffect(() => {
-    //busca no localstorage as credencias
-    // const token = localStorage.getItem("@rocketnotes:token");
-    // const user = localStorage.getItem("@rocketnotes:user");
+    // busca no localstorage as credencias
+    const token = localStorage.getItem("@kidsTasker:token");
+    const user = localStorage.getItem("@kidsTasker:user");
 
-    // if(token && user){
-    //   api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    if(token && user){
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-    //   setData({
-    //     token,
-    //     user: JSON.parse(user)
-    //   });
-    // }
+      setData({
+        token,
+        user: JSON.parse(user)
+      });
+    }
 
   }, []);
 
   return(
     //Aqui todas as páginas filhas herdarão as informações de user (contexto)
-    <AuthContext.Provider
-      value={{
-        signIn,
-        signOut,
-      }}>
-
+    <AuthContext.Provider value={{ signIn, signOut, user: data.user}}>
       {children}
     </AuthContext.Provider>
   )
 }
 
-function useAuth(){
+function useAuth(): AuthContextType{
   const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth deve ser usado dentro de um AuthProvider');
+  }
   return context;
 }
 

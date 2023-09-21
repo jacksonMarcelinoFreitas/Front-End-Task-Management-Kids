@@ -2,12 +2,13 @@ import { Container } from "./style";
 interface InputProps {
   value: string;
   disabled?: boolean;
+  className?: string;
   Icon?: React.ElementType;
   type?: 'submit' | 'button' | 'reset';
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export function Button({Icon, value, type, disabled, onClick, ...rest}: InputProps){
+export function Button({Icon, value, type, disabled, onClick, className, ...rest}: InputProps){
 
   const buttonClass = disabled ? 'disabled-button' : '';
 
@@ -15,7 +16,7 @@ export function Button({Icon, value, type, disabled, onClick, ...rest}: InputPro
     <Container
       onClick={onClick}
       type={type}
-      className={`${buttonClass}`}
+      className={`${className} ${buttonClass}`}
       {...rest}
     >
       {
