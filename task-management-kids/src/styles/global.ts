@@ -9,24 +9,23 @@ export default createGlobalStyle`
     }
 
   #root{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
+    width: 100vw;
     height: 100%;
   }
 
   body {
     background-image: ${({ theme }) => theme.COLORS.GRADIENT_BACKGROUND};
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
     color: ${( { theme }) => theme.COLORS.GRAY_700};
 
-    height: 100vh;
+    height: 100%;
     width: 100vw;
 
-    background-repeat: no-repeat;
-
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   body, input, button, textarea{

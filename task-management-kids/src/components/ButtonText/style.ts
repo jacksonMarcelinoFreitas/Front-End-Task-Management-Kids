@@ -4,7 +4,7 @@ export const Container = styled.button`
   background: transparent;
   color: ${({theme}) => theme.COLORS.VIOLET_700};
 
-  padding: 0 16px;
+  /* padding: 0 16px; */
 
   font-size: 16px;
   font-weight: 500;

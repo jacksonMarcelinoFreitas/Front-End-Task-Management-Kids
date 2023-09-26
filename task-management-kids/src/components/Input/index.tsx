@@ -2,15 +2,15 @@ import { Container } from './style';
 
 interface InputProps {
   type: string,
-  value?: string,
+  value?: string | number | undefined,
   label?: string,
-  placeholder?: string,
   name?: string,
   error?: string,
   touched?: boolean,
+  placeholder?: string,
   Icon?: React.ElementType,
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick?: (e: React.MouseEventHandler<HTMLInputElement>) => void;
 }
 

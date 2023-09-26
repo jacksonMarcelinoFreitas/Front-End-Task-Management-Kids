@@ -6,6 +6,7 @@ export const Container = styled.div`
   justify-content: left;
   flex-direction: column;
   gap: 4px;
+
   width: 100%;
 
   label{

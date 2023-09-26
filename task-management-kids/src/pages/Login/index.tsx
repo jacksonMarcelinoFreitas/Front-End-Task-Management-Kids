@@ -1,8 +1,8 @@
-import { PasswordStrengthMeter } from '../../components/PasswordStrengthMeter';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { ButtonText } from '../../components/ButtonText';
 import { schema } from '../../utils/form-schema-login';
 import imageLogup from '../../assets/image-logup.svg';
-import { MdEmail, MdVpnKey } from  'react-icons/md';
+import { MdEmail } from  'react-icons/md';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { useNavigate } from 'react-router-dom';
@@ -13,41 +13,59 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 
 
+interface UserLogin{
+  login: string,
+  password: string,
+}
+
+
 export function Login(){
-  const navigate = useNavigate();
   const { signIn } = useAuth();
+  const navigate = useNavigate();
+  const [eyeIsClosed, setEyeIsClosed] = useState(false)
 
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleSignIn = () => {
-      signIn({login, password});
+  const toggleEye = () => {
+    eyeIsClosed ? setEyeIsClosed(false) : setEyeIsClosed(true)
   }
 
-  const formik = useFormik({
-    initialValues:{
-      login: '',
-      password: ''
-    },
+  const formik = useFormik(
+  {
+    initialValues:{login: '', password: ''},
     validationSchema: schema,
-    onSubmit: async (values, { setSubmitting }) => {
-      setSubmitting(true);
+    onSubmit:
+      async (values, { setSubmitting }) => {
 
-      try{
+        setSubmitting(true);
+
         const { login, password } = values;
-        setLogin(login);
-        setPassword(password);
+        // console.log(JSON.stringify(values, null, 2))
 
-        //adicionar chamada da API
-        console.log(JSON.stringify(values, null, 2))
-        // throw new Error("Isso é um erro forçado!");
-      }catch(error){
-        toast.error(`${error}`);
-      }
+        try{
 
-      setSubmitting(false);
+          const response = handleSignIn({login, password})
+
+        }catch(error: any){
+
+          if(error.response){
+              if(error.response == 403){
+                toast.error(error.response.data.message);
+              }
+          }
+
+          else{
+            toast.error(`${error}`);
+
+          }
+
+        }
+
+        setSubmitting(false);
     },
   })
+
+  const handleSignIn = ({login , password}: UserLogin) => {
+    signIn({login, password});
+  }
 
   return(
       <Container>
@@ -57,7 +75,7 @@ export function Login(){
           <h1>
             Faça o login!
           </h1>
-          <form onSubmit={formik.handleSubmit}>
+          <form className='form-container' onSubmit={formik.handleSubmit}>
             <div className='box-container'>
               <Input
                 label="Login"
@@ -78,20 +96,19 @@ export function Login(){
                   name="password"
                   type="password"
                   placeholder="*************"
-                  Icon={MdVpnKey}
+                  Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
+                  onClick={toggleEye}
                   error={formik.errors.password}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
                   touched={formik.touched.password}
                 />
-                <PasswordStrengthMeter password={formik.values.password}/>
               </div>
               <Button
                 value="Enviar"
                 type="submit"
                 disabled={!formik.isValid || formik.isSubmitting}
-                onClick={handleSignIn}
               />
               <div className='box-buttons'>
                 <ButtonText

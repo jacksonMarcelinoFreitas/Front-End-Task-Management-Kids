@@ -2,13 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   gap: 32px;
-  width: 100%;
-  padding: 24px;
 
+  width: 100vw;
+  height: 100vh;
+
+  padding: 24px 32px;
 
   h1{
     font-family: 'Poppins', sans-serif;
@@ -19,7 +21,7 @@ export const Container = styled.div`
   .form-container, .box-container, .box-buttons, .input-password{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
     width: 100%;
   }
@@ -32,8 +34,8 @@ export const Container = styled.div`
     gap: 16px;
 
     margin: 0 24px;
-    max-width: 300px;
-    min-width: 200;
+    max-width: 100%;
+    min-width: 200px;
   }
 
   .box-container{

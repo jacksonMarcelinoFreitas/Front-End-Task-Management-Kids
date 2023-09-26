@@ -1,16 +1,25 @@
-import { api } from '../services/api';
 import { createContext, useContext, useState, useEffect, ReactNode  } from 'react';
-// import jwt from 'jsonwebtoken';
+import { toast } from 'react-toastify';
+import { api } from '../services/api';
+import jwt_decode from 'jwt-decode';
 
-interface User {
-  id: number;
+interface User{
   name: string;
   email: string;
+  role: string[];
+  externalId: string;
 }
 
 interface Credentials {
   login: string;
   password: string;
+}
+
+interface JwtPayload {
+  sub: string
+  name: string
+  role: string[];
+  externalId: string
 }
 
 interface AuthContextType {
@@ -23,26 +32,49 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 function AuthProvider({ children }: { children: ReactNode }){
 
-  const [data, setData] = useState<{ user: User | null, token: string | null }>({
+  const [data, setData] = useState<{ user: User | null, token: string }>({
     user: null,
-    token: null,
+    token: '',
   });
 
   async function signIn({ login, password }: Credentials){
+
     try {
-      const response = await api.post ('/v1/auth/login', { login, password});
-      const { user, token } = response.data;
 
-      localStorage.setItem("@kidsTasker:user", JSON.stringify(user));
-      localStorage.setItem("@kidsTasker:token", token);
+      const response = await api.post('/v1/auth/login', {login, password});
 
-      // estará no cabeçalho de todas as requisiçoes
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      const { token } = response.data;
+
+      const { sub, externalId, name, role } = jwt_decode(token) as JwtPayload;
+
+      const user = {
+        email: sub,
+        externalId,
+        name,
+        role,
+      };
 
       setData({user, token});
 
-    } catch (error) {
+      localStorage.setItem("@kidsTasker:token", token);
+      localStorage.setItem("@kidsTasker:user", JSON.stringify(user));
 
+      // estará no cabeçalho de todas as requisiçoes
+      api.defaults.headers.common['Authorization'] = data.token;
+
+    } catch (error: any) {
+
+      if (error.response) {
+
+        if (error.response.status === 403) {
+          toast.error(`${error.response.data.message}`);
+        }
+
+      }else{
+
+        toast.error('Não foi possível fazer login!');
+
+      }
     }
   }
 
@@ -50,7 +82,7 @@ function AuthProvider({ children }: { children: ReactNode }){
     localStorage.removeItem("@kidsTasker:user");
     localStorage.removeItem("@kidsTasker:token");
 
-    setData({ user: null, token: null });
+    setData({ user: null, token: '' });
   }
 
   useEffect(() => {
@@ -59,11 +91,11 @@ function AuthProvider({ children }: { children: ReactNode }){
     const user = localStorage.getItem("@kidsTasker:user");
 
     if(token && user){
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      // api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
       setData({
+        user: JSON.parse(user),
         token,
-        user: JSON.parse(user)
       });
     }
 

@@ -1,3 +1,4 @@
+import { PasswordStrengthMeter } from '../../components/PasswordStrengthMeter';
 import { CheckboxPrivacyPolicies } from '../../components/PrivacyPolicies';
 import { AiFillEye, AiFillEyeInvisible } from  'react-icons/ai';
 import { ButtonText } from '../../components/ButtonText';
@@ -17,13 +18,16 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
+interface UserRegister{
+  name: string,
+  email: string,
+  password: string,
+  readTerms: boolean,
+}
+
 export function Logup(){
   const navigate = useNavigate();
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [readTerms, setReadTerms] = useState(false)
   const [eyeIsClosed, setEyeIsClosed] = useState(false)
 
   const toggleEye = () => {
@@ -38,14 +42,10 @@ export function Logup(){
       setSubmitting(true);
 
       const {name, email, password, readTerms} = values;
-      setName(name);
-      setEmail(email);
-      setPassword(password);
-      setReadTerms(readTerms);
 
       try{
 
-        handleSignUp();
+        handleSignUp({name, email, password, readTerms});
 
       }catch(error){
 
@@ -57,7 +57,7 @@ export function Logup(){
     },
   })
 
-  const handleSignUp = () => {
+  const handleSignUp = ({name, email, password, readTerms}: UserRegister) => {
     api.post('/v1/user/sponsor/new-user', {name, email, password, readTerms})
 
     .then( response => {
@@ -132,6 +132,7 @@ export function Logup(){
           touched={formik.touched.password}
           onClick={toggleEye}
         />
+        <PasswordStrengthMeter password={formik.values.password}/>
         <CheckboxPrivacyPolicies
           text1='termos'
           text2='políticas de privacidade'

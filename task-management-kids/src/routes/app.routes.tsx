@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import { Logup } from '../pages/Logup';
+import { RegisterChild } from '../pages/RegisterChild';
 
 export function AppRoutes(){
     return(
         <Routes>
-            <Route path="/" element={<Logup />} />
+            <Route path="/registerChild" element={<RegisterChild />} />
         </Routes>
     )
 }
