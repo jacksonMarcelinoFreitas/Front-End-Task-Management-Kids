@@ -10,7 +10,9 @@ export const Container = styled.div`
   "border-dashed";
 
   /* width: 100vw; */
-  /* height: 100vh; */
+  height: 100%;
+
+  padding: 0 0px 32px 0;
 
   .title-navigate{
     grid-area: 'title-navigate';

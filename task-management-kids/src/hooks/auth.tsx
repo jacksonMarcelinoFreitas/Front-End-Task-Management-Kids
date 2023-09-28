@@ -59,8 +59,7 @@ function AuthProvider({ children }: { children: ReactNode }){
       localStorage.setItem("@kidsTasker:token", token);
       localStorage.setItem("@kidsTasker:user", JSON.stringify(user));
 
-      // estará no cabeçalho de todas as requisiçoes
-      api.defaults.headers.common['Authorization'] = data.token;
+      api.defaults.headers.common['Authorization'] = token;
 
     } catch (error: any) {
 
@@ -87,15 +86,16 @@ function AuthProvider({ children }: { children: ReactNode }){
 
   useEffect(() => {
     // busca no localstorage as credencias
+
     const token = localStorage.getItem("@kidsTasker:token");
     const user = localStorage.getItem("@kidsTasker:user");
 
     if(token && user){
-      // api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      api.defaults.headers.common['Authorization'] = token;
 
       setData({
         user: JSON.parse(user),
-        token,
+        token: token,
       });
     }
 

@@ -26,6 +26,7 @@ export default createGlobalStyle`
 
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+
   }
 
   body, input, button, textarea{
@@ -53,5 +54,15 @@ export default createGlobalStyle`
 
   button:hover , a:hover{
       filter: brightness(0.9);
+  }
+
+  body::-webkit-scrollbar{
+    width: 12px;
+    background: transparent;
+  }
+
+  body::-webkit-scrollbar-thumb{
+    background: ${({theme}) => theme.COLORS.TURQUOSE_400};
+    border-radius: 8px;
   }
 `;

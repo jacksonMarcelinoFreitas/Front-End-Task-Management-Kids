@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import { Container } from './style';
 
-export function BorderDashed({ children, ...rest }: {children?: ReactNode}){
+export function BorderDashed({ children, className, ...rest }: {children?: ReactNode, className?: string}){
   return(
-    <Container {...rest}>
+    <Container className={className} {...rest}>
       {children}
     </Container>
   )

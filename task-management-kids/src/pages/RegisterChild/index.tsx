@@ -5,22 +5,20 @@ import { ButtonText } from '../../components/ButtonText';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
 import { Container } from './style';
 import { useState } from 'react';
 import { useFormik } from 'formik';
 
-interface ChildRegister{
-  confirmPassword?: string,
-  age: number | undefined,
-  nickname: string,
-  password: string,
-  name: string,
-}
-
 export function RegisterChild(){
+  const navigate = useNavigate();
   const [eyeIsClosed, setEyeIsClosed] = useState(false)
+
+  const handleBack = () => {
+    navigate(-1);
+  }
 
   const toggleEye = () => {
     eyeIsClosed ? setEyeIsClosed(false) : setEyeIsClosed(true)
@@ -28,8 +26,8 @@ export function RegisterChild(){
 
   const formik = useFormik({
     initialValues:{
+      age: '',
       name:'',
-      age: undefined,
       nickname:'',
       password:'',
       confirmPassword:''
@@ -43,41 +41,46 @@ export function RegisterChild(){
 
       try{
 
-        handleRegisterChild({name, age, nickname, password});
+        await api.post('/v1/user/child/new-user', {name, age, nickname, password});
 
-      }catch(error){
-        // if(error.response){
+        toast.success(`Criança cadastrada com sucesso!`);
 
-        // }
-        toast.error(`${error}`);
+        navigate(-1);
+
+      }catch(error: any){
+
+        if(error.response){
+
+          if(error.response.data.status === 403){
+
+            toast.error(`${'Problemas de autorização, tente fazer o login novamente!'}`);
+
+          }
+
+          toast.error(`${error.response.data.message}`);
+
+        }else{
+
+          toast.error(`${'Não foi possível cadastrar a criança!'}`);
+
+        }
 
       }
 
       setSubmitting(false);
-    },
-  })
+    }},
+  );
 
-  async function handleRegisterChild({ name, age, nickname, password }: ChildRegister){
-
-    const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ0YXNrLW1hbmFnZW1lbnQiLCJzdWIiOiJtYXRoZXVzam9zZWp1bGlhb0BnbWFpbC5jb20iLCJleHRlcm5hbElkIjoiMzBjY2U2ZmEtNzI0Yy00ODhkLThiMDItOTdjMWQ4ODk4YzNhIiwibmFtZSI6Ik1hdGhldXMgSm9zw6kgSnVsacOjbyIsInJvbGUiOlsiU1BPTlNPUiIsIkNISUxEIl0sImV4cCI6MTY5NTcwNDEwNn0.w7ekv9tYYafCzAb4kr7ztXxLGuEwHkQqNg39C65GVM0"
-
-    api.defaults.headers.common['Authorization'] = token;
-
-    const response = await api.post('/v1/user/child/new-user', {name, age, nickname, password});
-    console.log(response.data);
-
-    // const { externalId, name, nickname, age, role } = response.data;
-
-    return response;
-  }
+  // async function handleRegisterChild({ name, age, nickname, password }: ChildRegister){
+  //   return response;
+  // }
 
   return(
     <Container>
       <Header />
       <div className='title-navigate'>
         <p>Cadastrar criança</p>
-        <ButtonText value='Voltar' type='button'/>
+        <ButtonText value='Voltar' type='button' onClick={handleBack}/>
       </div>
       <BorderDashed>
         <form onSubmit={formik.handleSubmit}>
