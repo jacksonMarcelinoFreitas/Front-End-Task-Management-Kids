@@ -4,6 +4,7 @@ import { IoMenu, IoPower } from 'react-icons/io5';
 import { useAuth } from '../../hooks/auth';
 import { useState } from "react";
 import { confirmLogout } from './confirmLogout';
+import { useNavigate } from "react-router-dom";
 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
@@ -12,6 +13,7 @@ interface headerTypes{
 }
 
 export function Header({icon, ...rest}: headerTypes){
+  const navigate = useNavigate();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const openModal = () =>{setModalIsOpen(true)}
   const closeModal = () =>{setModalIsOpen(false)}
@@ -19,6 +21,11 @@ export function Header({icon, ...rest}: headerTypes){
 
   const openMenu = () => {
 
+  }
+
+  const handleSignOut = () =>{
+    signOut();
+    navigate('/');
   }
 
   const customModalStyle = {
@@ -67,7 +74,7 @@ export function Header({icon, ...rest}: headerTypes){
           <div dangerouslySetInnerHTML={{ __html: confirmLogout }} />
           <div className="box-buttons">
               <button onClick={closeModal}>Não</button>
-              <button onClick={signOut}>Sim</button>
+              <button onClick={handleSignOut}>Sim</button>
           </div>
         </StyledModal>
       </Modal>

@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, ReactNode  } from 'reac
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
 import jwt_decode from 'jwt-decode';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 interface User{
   name: string;
@@ -66,6 +67,7 @@ function AuthProvider({ children }: { children: ReactNode }){
       if (error.response) {
 
         if (error.response.status === 403) {
+          toast.error(`${error.response.data}`);
           toast.error(`${error.response.data.message}`);
         }
 
@@ -82,6 +84,7 @@ function AuthProvider({ children }: { children: ReactNode }){
     localStorage.removeItem("@kidsTasker:token");
 
     setData({ user: null, token: '' });
+
   }
 
   useEffect(() => {

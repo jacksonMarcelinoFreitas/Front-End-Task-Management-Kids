@@ -12,7 +12,9 @@ export default {
         CYAN_400: "#01CAFE",
         CYAN_100: "#4DDBFF",
 
+        TURQUOSE_700: "#28AB7B",
         TURQUOSE_400: "#31DB9D",
+        TURQUOSE_300: "#31DB9D",
         TURQUOSE_100: "#75E1BA",
 
         VIOLET_700: "#74309D",

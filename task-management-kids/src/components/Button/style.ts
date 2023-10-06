@@ -4,7 +4,7 @@ export const Container = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 8px;
 
   background: ${({ theme }) => theme.COLORS.VIOLET_700};
   color: ${({theme}) => theme.COLORS.WHITE};

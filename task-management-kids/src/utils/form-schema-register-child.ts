@@ -14,7 +14,6 @@ export const schema = yup.object().shape({
     .min(3, 'O nickname deve ter pelo menos 3 caracteres'),
   password: yup
     .string()
-    .required('A senha é obrigatória')
     .min(6, 'A senha deve ter pelo menos 6 caracteres'),
     // .test(
     //   "password",
@@ -26,6 +25,5 @@ export const schema = yup.object().shape({
     // ),
   confirmPassword: yup
     .string()
-    .required('A confirmação de senha é obrigatória')
     .oneOf([yup.ref('password'),], 'As senhas devem coincidir'),
 });

@@ -2,20 +2,36 @@ import { TitleNavigation } from '../../components/TitleNavigation';
 import { schema } from '../../utils/form-schema-register-child';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { BorderDashed } from '../../components/BorderDashed';
-import { ButtonText } from '../../components/ButtonText';
+// import { ButtonText } from '../../components/ButtonText';
+import { HiTrash } from 'react-icons/hi2';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
 import { Container } from './style';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 
-export function RegisterChild(){
+interface Task {
+  externalId: string;
+  name: string;
+  reward: number;
+  description: string;
+  performed: boolean;
+  createdDate: string;
+}
+
+type Data = Task[];
+
+
+export function EditTask(){
+  const { id } = useParams();
   const navigate = useNavigate();
   const [eyeIsClosed, setEyeIsClosed] = useState(false)
+  const [data, setData ] = useState<Data>([]);
+
 
   const handleBack = () => {
     navigate(-1);
@@ -27,22 +43,21 @@ export function RegisterChild(){
 
   const formik = useFormik({
     initialValues:{
-      age: '',
       name:'',
-      nickname:'',
-      password:'',
-      confirmPassword:''
+      reward:'',
+      description:'',
+      performed:''
     },
     validationSchema: schema,
     onSubmit:
       async (values, { setSubmitting }) => {
       setSubmitting(true);
 
-      const { name, age, nickname, password } = values;
+      const { name, reward, description, performed } = values;
 
       try{
 
-        await api.post('/v1/user/child/new-user', {name, age, nickname, password});
+        await api.post('/v1/user/child/new-user', { name, reward, description, performed });
 
         toast.success(`Criança cadastrada com sucesso!`);
 
@@ -72,15 +87,50 @@ export function RegisterChild(){
     }},
   );
 
-  // async function handleRegisterChild({ name, age, nickname, password }: ChildRegister){
-  //   return response;
-  // }
+  useEffect(()=>{
+    async function fetchChild(){
+
+      try {
+
+        const response = await api.get(`/v1/task/${id}`);
+
+        const task: Data = response.data;
+
+        setData(task);
+
+        toast.success(response.data.message);
+
+      } catch (error: any) {
+        if(error.response){
+
+          if(error.response.status === 400){
+
+            toast.error(error.response.data.message)
+
+          }else if(error.response.status === 403){
+
+            toast.error('Você teve problemas de autorização. Faça o login novamente!')
+
+          }
+
+        }else{
+
+          toast.error('Não foi possível registrar a criança!');
+
+        }
+
+      }
+
+    }
+
+    fetchChild();
+  },[])
 
   return(
     <Container>
       <Header />
       <TitleNavigation
-        title='Cadastrar criança'
+        title='Editar tarefa'
         titleButton='Voltar'
         onClick={handleBack}
       />
@@ -89,8 +139,7 @@ export function RegisterChild(){
           <Input
             type='text'
             name='name'
-            placeholder='Mariana'
-            label='Nome da criança'
+            label='Nome da atividade'
             error={formik.errors.name}
             value={formik.values.name}
             onBlur={formik.handleBlur}
@@ -98,56 +147,34 @@ export function RegisterChild(){
             onChange={formik.handleChange}
           />
           <Input
-            type='text'
-            name='nickname'
-            label='Nickname'
-            placeholder='Mari'
-            onBlur={formik.handleBlur}
-            error={formik.errors.nickname}
-            onChange={formik.handleChange}
-            value={formik.values.nickname}
-            touched={formik.touched.nickname}
-          />
-          <Input
             type='number'
-            name='age'
-            label='Idade'
-            placeholder='8'
+            name='reward'
+            label='Remuneração'
+            error={formik.errors.reward}
+            value={formik.values.reward}
             onBlur={formik.handleBlur}
-            error={formik.errors.age}
+            touched={formik.touched.reward}
             onChange={formik.handleChange}
-            value={formik.values.age}
-            touched={formik.touched.age}
           />
           <Input
-            label='Senha'
-            name='password'
-            onClick={toggleEye}
-            placeholder='************'
+            type='text'
+            name='description'
+            label='Descrição'
+            error={formik.errors.description}
+            value={formik.values.description}
             onBlur={formik.handleBlur}
-            error={formik.errors.password}
+            touched={formik.touched.description}
             onChange={formik.handleChange}
-            value={formik.values.password}
-            touched={formik.touched.password}
-            type={eyeIsClosed ? 'text' : 'password'}
-            Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
-          />
-          <Input
-            onClick={toggleEye}
-            name='confirmPassword'
-            label='Confirme a senha'
-            placeholder='************'
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            error={formik.errors.confirmPassword}
-            value={formik.values.confirmPassword}
-            type={eyeIsClosed ? 'text' : 'password'}
-            touched={formik.touched.confirmPassword}
-            Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
           />
           <Button
             type='submit'
-            value='Cadastrar'
+            value='Editar'
+            disabled={!formik.isValid || formik.isSubmitting}
+          />
+          <Button
+            type='button'
+            value='Excluir'
+            Icon={HiTrash}
             disabled={!formik.isValid || formik.isSubmitting}
           />
         </form>
