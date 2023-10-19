@@ -2,7 +2,6 @@ import { TitleNavigation } from '../../components/TitleNavigation';
 import { schema } from '../../utils/form-schema-register-child';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { BorderDashed } from '../../components/BorderDashed';
-import { ButtonText } from '../../components/ButtonText';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
@@ -14,12 +13,8 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 
 export function RegisterChild(){
-  const navigate = useNavigate();
   const [eyeIsClosed, setEyeIsClosed] = useState(false)
-
-  const handleBack = () => {
-    navigate(-1);
-  }
+  const navigate = useNavigate();
 
   const toggleEye = () => {
     eyeIsClosed ? setEyeIsClosed(false) : setEyeIsClosed(true)
@@ -45,8 +40,7 @@ export function RegisterChild(){
         await api.post('/v1/user/child/new-user', {name, age, nickname, password});
 
         toast.success(`Criança cadastrada com sucesso!`);
-
-        navigate(-1);
+        navigate('/');
 
       }catch(error: any){
 
@@ -72,17 +66,13 @@ export function RegisterChild(){
     }},
   );
 
-  // async function handleRegisterChild({ name, age, nickname, password }: ChildRegister){
-  //   return response;
-  // }
-
   return(
     <Container>
       <Header />
       <TitleNavigation
-        title='Cadastrar criança'
         titleButton='Voltar'
-        onClick={handleBack}
+        title='Cadastrar criança'
+        onClick={() => navigate('/')}
       />
       <BorderDashed>
         <form onSubmit={formik.handleSubmit}>
@@ -109,8 +99,8 @@ export function RegisterChild(){
             touched={formik.touched.nickname}
           />
           <Input
-            type='number'
             name='age'
+            type='number'
             label='Idade'
             placeholder='8'
             onBlur={formik.handleBlur}

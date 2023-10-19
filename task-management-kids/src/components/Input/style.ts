@@ -10,8 +10,6 @@ export const Container = styled.div`
   width: 100%;
 
   label{
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
     font-weight: 400;
     color: ${({theme}) => theme.COLORS.GRAY_700};
   }
@@ -52,7 +50,6 @@ export const Container = styled.div`
   .message-error{
     width: 100%;
     font-family: 'Inter', sans-serif;
-    /* word-wrap: break-word; */
     text-align: left;
     font-size: 12px;
     color: ${({theme}) => theme.COLORS.PINK_400};

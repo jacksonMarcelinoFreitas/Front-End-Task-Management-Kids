@@ -1,54 +1,65 @@
 import { TitleNavigation } from '../../components/TitleNavigation';
-import { schema } from '../../utils/form-schema-register-child';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { BorderDashed } from '../../components/BorderDashed';
-// import { ButtonText } from '../../components/ButtonText';
-import { HiTrash } from 'react-icons/hi2';
-import { Button } from '../../components/Button';
-import { Header } from '../../components/Header';
-import { Input } from '../../components/Input';
+import { StyledModal } from '../../components/Header/style';
 import { useNavigate, useParams } from 'react-router-dom';
+import { InputCheck } from '../../components/InputCheck';
+import { confirmDeleteTask } from './confirmDeleteTask';
+import { customModalStyle } from './confirmDeleteTask';
+import schema from '../../utils/form-schema-edit-task';
+import { TextArea } from '../../components/TextArea';
+import { Header } from '../../components/Header';
+import { Button } from '../../components/Button';
+import { useUserId } from '../../hooks/userId';
+import { Input } from '../../components/Input';
+import { useEffect, useState } from 'react';
+import { HiTrash } from 'react-icons/hi2';
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
 import { Container } from './style';
-import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 
-interface Task {
-  externalId: string;
-  name: string;
-  reward: number;
-  description: string;
-  performed: boolean;
-  createdDate: string;
-}
-
-type Data = Task[];
-
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 
 export function EditTask(){
-  const { id } = useParams();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const closeModal = () =>{setModalIsOpen(false)}
+  const openModal = () =>{setModalIsOpen(true)}
+  const [loading, setLoading] = useState(true);
+  const { userId } = useUserId();
   const navigate = useNavigate();
-  const [eyeIsClosed, setEyeIsClosed] = useState(false)
-  const [data, setData ] = useState<Data>([]);
+  const { id } = useParams();
 
+  const [initialValues, setInitialValues] = useState({
+    name: '',
+    reward: 0,
+    description: '',
+    performed: false,
+  });
 
-  const handleBack = () => {
-    navigate(-1);
-  }
+  async function handleDeleteTask(){
+    try {
+      const response = await api.delete(`/v1/task/${id}`);
 
-  const toggleEye = () => {
-    eyeIsClosed ? setEyeIsClosed(false) : setEyeIsClosed(true)
+      if(response.status == 200){
+        toast.success('Apagado com sucesso!');
+        navigate(`/TasksChild/${userId}`);
+      }
+
+    } catch (error: any) {
+
+      if(error.response){
+        toast.error('Erro')
+
+      }
+
+    }
   }
 
   const formik = useFormik({
-    initialValues:{
-      name:'',
-      reward:'',
-      description:'',
-      performed:''
-    },
+    initialValues,
     validationSchema: schema,
+    enableReinitialize: true,
     onSubmit:
       async (values, { setSubmitting }) => {
       setSubmitting(true);
@@ -57,11 +68,11 @@ export function EditTask(){
 
       try{
 
-        await api.post('/v1/user/child/new-user', { name, reward, description, performed });
+        await api.put(`/v1/task/${id}`, { name, reward, description, performed });
 
-        toast.success(`Criança cadastrada com sucesso!`);
+        toast.success(`Tarefa atualizada com sucesso!`);
 
-        navigate(-1);
+        navigate(`/TasksChild/${userId}`);
 
       }catch(error: any){
 
@@ -77,7 +88,7 @@ export function EditTask(){
 
         }else{
 
-          toast.error(`${'Não foi possível cadastrar a criança!'}`);
+          toast.error(`${'Não foi possível editar a criança!'}`);
 
         }
 
@@ -89,36 +100,24 @@ export function EditTask(){
 
   useEffect(()=>{
     async function fetchChild(){
-
       try {
 
         const response = await api.get(`/v1/task/${id}`);
+        const task = response.data;
 
-        const task: Data = response.data;
+        setInitialValues({
+          name: task.name,
+          reward: task.reward,
+          description: task.description,
+          performed: task.performed,
+        });
 
-        setData(task);
-
-        toast.success(response.data.message);
+        setLoading(false);
 
       } catch (error: any) {
-        if(error.response){
-
-          if(error.response.status === 400){
-
-            toast.error(error.response.data.message)
-
-          }else if(error.response.status === 403){
-
-            toast.error('Você teve problemas de autorização. Faça o login novamente!')
-
-          }
-
-        }else{
-
-          toast.error('Não foi possível registrar a criança!');
-
+        if (error.response) {
+          toast.error('Erro');
         }
-
       }
 
     }
@@ -132,10 +131,20 @@ export function EditTask(){
       <TitleNavigation
         title='Editar tarefa'
         titleButton='Voltar'
-        onClick={handleBack}
+        onClick={() => navigate(`/TasksChild/${userId}`)}
       />
       <BorderDashed>
         <form onSubmit={formik.handleSubmit}>
+          <InputCheck
+            id='performed'
+            name='performed'
+            onBlur={formik.handleBlur}
+            text='Marcar como realizada'
+            onChange={formik.handleChange}
+            error={formik.errors.performed}
+            checked={formik.values.performed}
+            touched={formik.touched.performed}
+          />
           <Input
             type='text'
             name='name'
@@ -150,21 +159,20 @@ export function EditTask(){
             type='number'
             name='reward'
             label='Remuneração'
+            onBlur={formik.handleBlur}
             error={formik.errors.reward}
             value={formik.values.reward}
-            onBlur={formik.handleBlur}
-            touched={formik.touched.reward}
             onChange={formik.handleChange}
+            touched={formik.touched.reward}
           />
-          <Input
-            type='text'
-            name='description'
+          <TextArea
             label='Descrição'
+            name='description'
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
             error={formik.errors.description}
             value={formik.values.description}
-            onBlur={formik.handleBlur}
             touched={formik.touched.description}
-            onChange={formik.handleChange}
           />
           <Button
             type='submit'
@@ -176,10 +184,24 @@ export function EditTask(){
             value='Excluir'
             Icon={HiTrash}
             disabled={!formik.isValid || formik.isSubmitting}
+            onClick={openModal}
           />
         </form>
       </BorderDashed>
-
+      <Modal
+            isOpen={modalIsOpen}
+            style={customModalStyle}
+            onRequestClose={closeModal}
+            contentLabel="Confirmar logout"
+      >
+        <StyledModal>
+          <div dangerouslySetInnerHTML={{ __html: confirmDeleteTask }} />
+          <div className="box-buttons">
+              <button onClick={closeModal}>Não</button>
+              <button onClick={handleDeleteTask}>Sim</button>
+          </div>
+        </StyledModal>
+      </Modal>
     </Container>
   )
 }

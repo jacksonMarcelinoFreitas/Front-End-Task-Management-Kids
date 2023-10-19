@@ -1,38 +1,29 @@
 import { Container, StyledCardButton } from './style';
+import { ICardChild } from './type';
 
-interface InputProps {
-  nameChild?: string,
-  age?: number,
-  tasks?: number | 0,
-  value?: string,
-  // externalId?: string,
-  textButton?: string,
-  Icon?: React.ElementType,
-  // type?: "button" | "submit" | "reset",
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
 
-export function CardChild({Icon, nameChild, age, tasks, textButton, onClick, value, ...rest}: InputProps){
-
+export function CardChild({ Icon, nameChild, age, tasks, textButton, onClick, value, ...rest }: ICardChild){
   return(
     <Container {...rest}>
-      <div className='box-left'>
-        <div className='intern-box-left'>
-          <p>{nameChild}</p>
-          <span>{age} anos</span>
+      <div className="container-card">
+        <div className='box-left'>
+          <div className='intern-box-left'>
+            <p>{nameChild}</p>
+            <span>{age} anos</span>
+          </div>
+          <div className='intern-box-right'>
+            <p>{tasks}</p>
+            <span>tarefas</span>
+          </div>
         </div>
-        <div className='intern-box-right'>
-          <p>{tasks}</p>
-          <span>tarefas</span>
-        </div>
+        <StyledCardButton type='button' value={value} onClick={onClick}>
+          {
+            Icon &&
+            <Icon size={28}  />
+          }
+          <span>{textButton}</span>
+        </StyledCardButton>
       </div>
-      <StyledCardButton type='button' value={value} onClick={onClick}>
-        {
-          Icon &&
-          <Icon size={28}  />
-        }
-        <span>{textButton}</span>
-      </StyledCardButton>
     </Container>
   )
 }

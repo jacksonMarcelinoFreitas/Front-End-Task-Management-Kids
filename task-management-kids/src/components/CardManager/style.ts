@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import listImage from '../../assets/list-child-back-card.svg'
 import registerImage from '../../assets/register-child-back-card.svg'
 import startImage from '../../assets/start-child-back-card.svg'
+import listImage from '../../assets/list-child-back-card.svg'
 import editImage from '../../assets/edit-child-back-card.svg'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   &.edit, &.register, &.list, &.start {
@@ -15,10 +15,10 @@ export const Container = styled.div`
 
     border-radius: 12px;
 
-    color: ${({theme}) => theme.COLORS.WHITE};
     font-size: 20px;
     font-weight: bold;
     font-family: 'Poppins' sans-serif;
+    color: ${({theme}) => theme.COLORS.WHITE};
 
     background-position: -16px 0px;
     background-repeat: no-repeat;

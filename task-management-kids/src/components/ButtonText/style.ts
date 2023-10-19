@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.button`
-  background: transparent;
-  color: ${({theme}) => theme.COLORS.VIOLET_700};
+font-size: 18px;
+font-weight: 600;
+text-align: center;
 
-  /* padding: 0 16px; */
-
-  font-size: 16px;
-  font-weight: 500;
-  /* font-family: 'Inter', sans-serif; */
-  text-align: center;
-
+background: transparent;
+color: ${({theme}) => theme.COLORS.GRAY_700};
 `

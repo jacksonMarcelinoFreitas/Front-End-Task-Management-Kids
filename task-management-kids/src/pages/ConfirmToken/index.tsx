@@ -1,13 +1,10 @@
-import { Container } from './style';
-
+import { ButtonText } from '../../components/ButtonText';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
-import { ButtonText } from '../../components/ButtonText';
-
 import { useNavigate } from "react-router-dom";
-import { MdVpnKey } from  'react-icons/md';
 import { BiSolidLock } from  'react-icons/bi';
-
+import { MdVpnKey } from  'react-icons/md';
+import { Container } from './style';
 
 export function ConfirmToken(){
   const navigate = useNavigate();
@@ -21,22 +18,22 @@ export function ConfirmToken(){
 
         <div className="box-inputs">
           <Input
-            name="token"
-            placeholder="TOKEN"
-            Icon={MdVpnKey}
             type="text"
+            name="token"
+            Icon={MdVpnKey}
+            placeholder="TOKEN"
           />
           <Input
+            type="password"
+            Icon={BiSolidLock}
             name="new password"
             placeholder="nova senha"
-            Icon={BiSolidLock}
-            type="password"
           />
           <Input
+            type="password"
+            Icon={BiSolidLock}
             name="comfirm password"
             placeholder="confirmar senha"
-            Icon={BiSolidLock}
-            type="password"
           />
         </div>
 
@@ -46,8 +43,8 @@ export function ConfirmToken(){
             onClick={() => alert("Botão clicado")}
           />
           <ButtonText
-            value="Voltar"
             type='button'
+            value="Voltar"
             onClick={() => navigate('/')}
           />
         </div>

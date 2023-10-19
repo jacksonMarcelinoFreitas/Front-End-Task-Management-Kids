@@ -1,11 +1,9 @@
-import { Container } from './style';
-
+import { ButtonText } from '../../components/ButtonText';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
-import { ButtonText } from '../../components/ButtonText';
-
 import { useNavigate } from "react-router-dom";
 import { MdEmail } from  'react-icons/md';
+import { Container } from './style';
 
 export function SendToken(){
   const navigate = useNavigate();
@@ -20,21 +18,21 @@ export function SendToken(){
         <div className="box-inputs">
           <Input
             name="email"
-            placeholder="jhonDoe@gmail.com"
-            Icon={MdEmail}
             type="email"
+            Icon={MdEmail}
+            placeholder="jhonDoe@gmail.com"
           />
         </div>
 
         <div className="box-buttons">
           <Button
-            value="Enviar"
             type='button'
+            value="Enviar"
             onClick={() => navigate("/newPassword")}
           />
           <ButtonText
-            value="Voltar"
             type='button'
+            value="Voltar"
             onClick={() => navigate('/')}
           />
         </div>

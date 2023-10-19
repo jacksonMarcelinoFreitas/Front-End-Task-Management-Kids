@@ -1,20 +1,7 @@
 import { Container } from './style';
+import { IInput } from './type';
 
-interface InputProps {
-  type: string,
-  value?: string | number | undefined,
-  label?: string,
-  name?: string,
-  error?: string,
-  touched?: boolean,
-  placeholder?: string,
-  Icon?: React.ElementType,
-  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: (e: React.MouseEventHandler<HTMLInputElement>) => void;
-}
-
-export function Input({Icon, name, type, label, placeholder, error, touched, value, onChange, onBlur, onClick, ...rest}: InputProps){
+export function Input({Icon, name, type, label, placeholder, error, touched, value, onChange, onBlur, onClick, ...rest}: IInput){
 
   return(
     <Container {...rest}>

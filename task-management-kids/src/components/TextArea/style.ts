@@ -10,9 +10,10 @@ export const Container = styled.div`
   width: 100%;
 
   label{
-    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+
     color: ${({theme}) => theme.COLORS.GRAY_700};
   }
 
@@ -22,12 +23,12 @@ export const Container = styled.div`
     justify-content: left;
     gap: 8px;
 
-    padding: 12px;
     width: 100%;
-
-    background: ${({theme}) => theme.COLORS.WHITE};
+    padding: 12px;
 
     border-radius: 8px;
+
+    background: ${({theme}) => theme.COLORS.WHITE};
 
     svg{
       color: ${({theme}) => theme.COLORS.GRAY_700};
@@ -36,18 +37,18 @@ export const Container = styled.div`
     textarea{
 
       &::placeholder{
-        color: ${({theme}) => theme.COLORS.GRAY_300};
         font-size: 12px;
+        color: ${({theme}) => theme.COLORS.GRAY_300};
       }
 
-      color: ${({theme}) => theme.COLORS.GRAY_700};
       background: transparent;
+      color: ${({theme}) => theme.COLORS.GRAY_700};
 
       font-weight: 400;
 
       width: 100%;
       height: 200px;
-      /* height: fit-content; */
+
       resize: none;
     }
   }
@@ -55,7 +56,6 @@ export const Container = styled.div`
   .message-error{
     width: 100%;
     font-family: 'Inter', sans-serif;
-    /* word-wrap: break-word; */
     text-align: left;
     font-size: 12px;
     color: ${({theme}) => theme.COLORS.PINK_400};

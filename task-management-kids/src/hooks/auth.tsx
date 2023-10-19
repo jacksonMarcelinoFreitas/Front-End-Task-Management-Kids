@@ -1,52 +1,26 @@
 import { createContext, useContext, useState, useEffect, ReactNode  } from 'react';
+import { IAuthContextType, IJwtPayload, IUser, ICredentials} from './types';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
 import jwt_decode from 'jwt-decode';
-import { Navigate, useNavigate } from 'react-router-dom';
 
-interface User{
-  name: string;
-  email: string;
-  role: string[];
-  externalId: string;
-}
-
-interface Credentials {
-  login: string;
-  password: string;
-}
-
-interface JwtPayload {
-  sub: string
-  name: string
-  role: string[];
-  externalId: string
-}
-
-interface AuthContextType {
-  user: User | null;
-  signIn: (credentials: Credentials) => Promise<void>;
-  signOut: () => void;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 
 function AuthProvider({ children }: { children: ReactNode }){
 
-  const [data, setData] = useState<{ user: User | null, token: string }>({
+  const [data, setData] = useState<{ user: IUser | null, token: string }>({
     user: null,
     token: '',
   });
 
-  async function signIn({ login, password }: Credentials){
+  async function signIn({ login, password }: ICredentials){
 
     try {
-
       const response = await api.post('/v1/auth/login', {login, password});
 
       const { token } = response.data;
 
-      const { sub, externalId, name, role } = jwt_decode(token) as JwtPayload;
+      const { sub, externalId, name, role } = jwt_decode(token) as IJwtPayload;
 
       const user = {
         email: sub,
@@ -93,6 +67,9 @@ function AuthProvider({ children }: { children: ReactNode }){
     const token = localStorage.getItem("@kidsTasker:token");
     const user = localStorage.getItem("@kidsTasker:user");
 
+    api.defaults.headers.common['Authorization'] = null;
+
+
     if(token && user){
       api.defaults.headers.common['Authorization'] = token;
 
@@ -112,7 +89,7 @@ function AuthProvider({ children }: { children: ReactNode }){
   )
 }
 
-function useAuth(): AuthContextType{
+function useAuth(): IAuthContextType{
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth deve ser usado dentro de um AuthProvider');

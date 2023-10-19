@@ -1,15 +1,8 @@
 import { Container } from './style';
+import { ICardManager } from './type';
 
-interface InputProps{
-  textCard: string,
-  typeCard?: CardType,
-  onClick?: (e: React.MouseEvent) => void;
-}
 
-type CardType = 'edit' | 'register' | 'list' | 'start';
-
-export function CardManager({textCard, typeCard, onClick, ...rest}: InputProps){
-
+export function CardManager({ textCard, typeCard, onClick, ...rest }: ICardManager){
   return(
     <Container onClick={onClick} className={typeCard} {...rest}>
       <p>{textCard}</p>

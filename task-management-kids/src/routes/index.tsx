@@ -1,10 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
-import { AppRoutes } from './app.routes';
+import { ChildRoutes } from './child.routes';
 import { AuthRoutes } from './auth.routes';
-// import { ChildProviderRoutes } from './child.routes';
-import { useAuth } from '../hooks/auth'; //hook que já traz os dados do contexto
-// import { ChildProvider } from '../Contexts/useChildContext';
-
+import { useAuth } from '../hooks/auth';
 
 export function Routes(){
     const { user } = useAuth();
@@ -12,8 +9,8 @@ export function Routes(){
         <BrowserRouter>
             { user ?
             // <>
-                // {/* <ChildProviderRoutes /> */}
-                <AppRoutes />
+                <ChildRoutes />
+                // <AppRoutes />
             // </>
             :
                 <AuthRoutes /> }

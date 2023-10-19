@@ -1,14 +1,10 @@
+import { TitleNavigation } from '../../components/TitleNavigation';
+import { CardManager } from '../../components/CardManager';
 import { useNavigate, useParams  } from 'react-router-dom';
 import { Header } from '../../components/Header';
-import { CardManager } from '../../components/CardManager';
-import { TitleNavigation } from '../../components/TitleNavigation';
 import { Container, BoxCards } from './style';
-import { useState, useEffect } from "react";
-import { api } from '../../services/api';
-import { toast } from 'react-toastify';
 
 export function ManagerChild(){
-
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -16,30 +12,30 @@ export function ManagerChild(){
     <Container>
       <Header />
       <TitleNavigation
-        title='Gerenciar criança'
         titleButton='Voltar'
+        title='Gerenciar criança'
         onClick={() => navigate('/')}
       />
       <BoxCards>
         <CardManager
-          textCard='Editar criança'
           typeCard='edit'
+          textCard='Editar criança'
           onClick={() => {navigate(`/EditChild/${id}`)}}
         />
         <CardManager
-          textCard='Cadastrar tarefa'
           typeCard='register'
+          textCard='Cadastrar tarefa'
           onClick={() => {navigate(`/RegisterTask/${id}`)}}
         />
         <CardManager
-          textCard='Listar tarefas'
           typeCard='list'
-          onClick={() => {navigate(`/TasksChild/${id}`)}}
+          textCard='Listar tarefas'
+          onClick={() => {navigate(`/ListTasksSponsor/${id}`)}}
         />
         <CardManager
-          textCard='Iniciar novo ciclo'
           typeCard='start'
-          onClick={() => {navigate(`/StartChild/${id}`)}}
+          textCard='Iniciar novo ciclo'
+          onClick={() => {navigate(`/StartNewCicle/${id}`)}}
         />
       </BoxCards>
     </Container>

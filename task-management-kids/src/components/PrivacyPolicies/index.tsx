@@ -1,45 +1,15 @@
+import { policy, term, customModalStyle } from './htmlTermsAndConditions';
 import { Container, BoxButton } from './style';
-import { policy } from './htmlPrivacyPolicie';
-import { term } from './htmlTermsAndConditions';
+import { InputCheck } from '../InputCheck';
+import { IPrivacyPolicy } from './type';
 import { useState } from 'react';
 import Modal from 'react-modal';
 
-interface InputProps{
-  text1?: string;
-  text2?: string;
-  link1?: string;
-  link2?: string;
-  name?: string,
-  value?: string,
-  error?: string,
-  touched?: boolean,
-  checked?: boolean,
-  Icon?: React.ElementType,
-  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
-}
 
-const customModalStyle = {
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-  },
-
-  content: {
-    padding: '32px',
-    backgroundColor: 'white',
-    borderRadius: '16px',
-    border: 'none',
-    boxShadow: '5px 3px 10px rgba(49, 219, 157, 0.8)',
-  },
-}
-
-
-export function CheckboxPrivacyPolicies({text1, text2, link1, link2, value, touched, name, checked, onChange, onClick, onBlur, error, ...rest}: InputProps){
+export function CheckboxPrivacyPolicies({text1, text2, link1, link2, value, touched, name, checked, onChange, onClick, onBlur, error, ...rest}: IPrivacyPolicy){
 
   const [isOpenModal1, setIsOpenModal1] = useState(false);
   const [isOpenModal2, setIsOpenModal2] = useState(false);
-
   const openModal1 = () =>{setIsOpenModal1(true)}
   const openModal2 = () =>{setIsOpenModal2(true)}
   const closeModal1 = () =>{setIsOpenModal1(false)}
@@ -48,14 +18,13 @@ export function CheckboxPrivacyPolicies({text1, text2, link1, link2, value, touc
   return (
     <Container {...rest}>
       <div className='box'>
-        <input
-          id='check'
+        <InputCheck
           name={name}
-          type="checkbox"
-          onChange={onChange}
           onBlur={onBlur}
           checked={checked}
+          onChange={onChange}
         />
+
         {
           text1&&
           <label htmlFor='check'>
@@ -65,28 +34,32 @@ export function CheckboxPrivacyPolicies({text1, text2, link1, link2, value, touc
           </label>
         }
       </div>
+        {
+          touched && error ?
+          (<span className='message-error'>{error}</span>) : null
+        }
       <Modal
           isOpen={isOpenModal1}
           style={customModalStyle}
-          onRequestClose={closeModal1}
           contentLabel="Termos de uso"
+          onRequestClose={closeModal1}
       >
-        <BoxButton><button onClick={closeModal1}>Voltar</button></BoxButton>
+        <BoxButton>
+          <button onClick={closeModal1}>Voltar</button>
+        </BoxButton>
         <div dangerouslySetInnerHTML={{ __html: term }} />
       </Modal>
       <Modal
-          isOpen={isOpenModal2}
-          style={customModalStyle}
-          onRequestClose={closeModal2}
-          contentLabel="Políticas de privacidade"
+        isOpen={isOpenModal2}
+        style={customModalStyle}
+        onRequestClose={closeModal2}
+        contentLabel="Políticas de privacidade"
       >
-        <BoxButton><button onClick={closeModal2}>Voltar</button></BoxButton>
-        <div  dangerouslySetInnerHTML={{ __html: policy }} />
+        <BoxButton>
+          <button onClick={closeModal2}>Voltar</button>
+        </BoxButton>
+        <div dangerouslySetInnerHTML={{ __html: policy }} />
       </Modal>
-      {
-        touched && error ?
-        (<span className='message-error'>{error}</span>) : null
-      }
     </Container>
   )
 }

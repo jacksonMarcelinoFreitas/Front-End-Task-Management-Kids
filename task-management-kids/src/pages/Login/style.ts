@@ -21,8 +21,8 @@ export const Container = styled.div`
   .form-container, .box-container, .box-buttons, .input-password{
     display: flex;
     align-items: center;
-    justify-content: space-around;
     flex-direction: column;
+    justify-content: space-around;
     width: 100%;
   }
 
@@ -45,7 +45,19 @@ export const Container = styled.div`
 
   .box-buttons{
     flex-direction: row;
+
     width: 100%;
+
+    button{
+      font-size: 16px;
+
+      border: none;
+
+      background: none;
+      color: ${({ theme }) => theme.COLORS.VIOLET_400};
+    }
   }
+
+
 
 `

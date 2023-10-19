@@ -1,21 +1,14 @@
 import { Container } from "./style";
-interface InputProps {
-  value: string;
-  disabled?: boolean;
-  className?: string;
-  Icon?: React.ElementType;
-  type?: 'submit' | 'button' | 'reset';
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
+import { IButtonProps } from './type';
 
-export function Button({Icon, value, type, disabled, onClick, className, ...rest}: InputProps){
+export function Button({ Icon, value, type, disabled, onClick, className, ...rest }: IButtonProps){
 
   const buttonClass = disabled ? 'disabled-button' : '';
 
   return(
     <Container
-      onClick={onClick}
       type={type}
+      onClick={onClick}
       className={`${className} ${buttonClass}`}
       {...rest}
     >

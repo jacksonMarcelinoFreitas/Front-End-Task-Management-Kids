@@ -6,13 +6,12 @@ export const Container = styled.button`
   justify-content: center;
   gap: 8px;
 
-  background: ${({ theme }) => theme.COLORS.VIOLET_700};
   color: ${({theme}) => theme.COLORS.WHITE};
+  background: ${({ theme }) => theme.COLORS.VIOLET_700};
 
   border-radius: 8px;
 
   padding: 12px;
-
   width: 100%;
 
   svg{
@@ -22,5 +21,4 @@ export const Container = styled.button`
   &.disabled-button {
     opacity: 70%;
   }
-
 `

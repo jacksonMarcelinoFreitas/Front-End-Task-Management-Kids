@@ -1,12 +1,7 @@
+import { ITitleNavigation } from "./type";
 import { Container } from "./style";
 
-interface typeProps{
-  title?: string,
-  titleButton?: string,
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
-
-export function TitleNavigation({title, titleButton, onClick, ...rest}: typeProps){
+export function TitleNavigation({title, titleButton, onClick, ...rest}: ITitleNavigation){
   return(
     <Container {...rest}>
       {

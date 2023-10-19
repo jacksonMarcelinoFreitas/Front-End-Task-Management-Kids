@@ -1,26 +1,23 @@
-import { IconType } from "react-icons";
-import { Container, StyledModal } from "./style";
+import { confirmLogout, customModalStyle } from './confirmLogout';
 import { IoMenu, IoPower } from 'react-icons/io5';
-import { useAuth } from '../../hooks/auth';
-import { useState } from "react";
-import { confirmLogout } from './confirmLogout';
+import { Container, StyledModal } from "./style";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../hooks/auth';
+import { IHeaderTypes } from './type';
+import { useState } from "react";
 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
-interface headerTypes{
-  icon?: IconType;
-}
 
-export function Header({icon, ...rest}: headerTypes){
-  const navigate = useNavigate();
+export function Header({ icon, ...rest }: IHeaderTypes){
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const openModal = () =>{setModalIsOpen(true)}
   const closeModal = () =>{setModalIsOpen(false)}
+  const openModal = () =>{setModalIsOpen(true)}
+  const navigate = useNavigate();
   const { signOut } = useAuth();
 
   const openMenu = () => {
-
+    //implementar abertura do menu
   }
 
   const handleSignOut = () =>{
@@ -28,40 +25,19 @@ export function Header({icon, ...rest}: headerTypes){
     navigate('/');
   }
 
-  const customModalStyle = {
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.452)',
-    },
-
-    content: {
-      position: 'absolute' as 'absolute',
-      top: '0',
-      left: '0',
-      right: '0',
-      bottom: '0',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'column' as 'column',
-      backgroundColor: 'transparent',
-      borderRadius: '16px',
-      border: 'none',
-    },
-  }
-
   return(
     <Container {...rest}>
 
       <IoMenu
-        className='menu-icon'
         size={24}
         onClick={openMenu}
+        className='menu-icon'
       />
 
       <IoPower
-        className='logout-icon'
         size={24}
         onClick={openModal}
+        className='logout-icon'
       />
 
       <Modal

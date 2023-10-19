@@ -9,7 +9,6 @@ export const Container = styled.div`
   "title-navigate"
   "border-dashed";
 
-  /* width: 100vw; */
   height: 100%;
 
   padding: 0 0px 32px 0;

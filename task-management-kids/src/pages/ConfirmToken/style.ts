@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   gap: 32px;
+
   width: 100%;
   padding: 24px;
 
@@ -15,17 +16,17 @@ export const Container = styled.div`
     justify-content: right;
     flex-direction: column;
     gap: 16px;
+
     max-width: 257px;
     min-width: 200px;
   }
 
   p{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
     font-size: 20px;
-    /* font-size: clamp(1.5rem, 2.5vw, 2rem); */
-    text-align: center;
+    font-weight: 400;
     line-height: 24px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
   }
 
   .box-buttons, .box-inputs{
@@ -33,14 +34,15 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     width: 100%;
 
     gap: 8px;
   }
 
   .box-buttons{
-    justify-content: right;
     align-items: end;
+    justify-content: right;
 
     button{
       font-size: 16px;

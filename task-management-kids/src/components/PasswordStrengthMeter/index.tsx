@@ -1,11 +1,8 @@
 import { Container } from './style';
 import zxcvbn from 'zxcvbn';
+import { ITypePassword } from './type';
 
-interface InputProps {
-  password: string;
-}
-
-export function PasswordStrengthMeter({ password }: InputProps) {
+export function PasswordStrengthMeter({ password }: ITypePassword) {
   const testedResult = zxcvbn(password);
 
   const createPasswordLabel = () => {

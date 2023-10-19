@@ -1,12 +1,7 @@
 import { Container } from "./style";
+import { IButtonText } from './type';
 
-interface InputProps {
-  value: string;
-  type: 'submit'|'button'|'reset';
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export function ButtonText({value, type, onClick, ...rest}: InputProps){
+export function ButtonText({ value, type, onClick, ...rest }: IButtonText){
   return(
     <Container onClick={onClick} type={type} {...rest}>
       {value}

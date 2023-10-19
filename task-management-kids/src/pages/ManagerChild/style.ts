@@ -9,6 +9,8 @@ export const Container = styled.div`
   "title-navigate"
   "cards";
 
+  margin-bottom: 32px;
+
   grid-area: 'cards';
 
   color: ${({theme}) => theme.COLORS.GRAY_700};

@@ -1,18 +1,7 @@
 import { Container } from './style';
+import { ITextArea } from './type';
 
-interface InputProps {
-  value?: string | number | undefined,
-  label?: string,
-  name?: string,
-  error?: string,
-  touched?: boolean,
-  placeholder?: string,
-  onBlur?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onClick?: (e: React.MouseEventHandler<HTMLTextAreaElement>) => void;
-}
-
-export function TextArea({name, label, placeholder, error, touched, value, onChange, onBlur, onClick, ...rest}: InputProps){
+export function TextArea({name, label, placeholder, error, touched, value, onChange, onBlur, onClick, ...rest}: ITextArea){
 
   return(
     <Container {...rest}>

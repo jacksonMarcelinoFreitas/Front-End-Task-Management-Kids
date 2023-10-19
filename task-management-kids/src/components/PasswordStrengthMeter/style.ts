@@ -5,8 +5,9 @@ export const Container = styled.div`
   align-items: start;
   justify-content: left;
   flex-direction: column;
-  width: 100%;
   gap: 2px;
+
+  width: 100%;
 
   font-size: 12px;
   font-family: 'Poppins',sans-serif;
@@ -19,8 +20,8 @@ export const Container = styled.div`
   }
 
   .password-strength-meter-progress::-webkit-progress-bar {
-    background-color: ${({theme}) => theme.COLORS.TURQUOSE_400};
     border-radius: 10px;
+    background-color: ${({theme}) => theme.COLORS.TURQUOSE_400};
   }
 
   .password-strength-meter-progress::-webkit-progress-value {
@@ -32,13 +33,13 @@ export const Container = styled.div`
     background-color: ${({theme}) => theme.COLORS.PINK_400};
   }
   .strength-Fair::-webkit-progress-value {
-  background-color: ${({theme}) => theme.COLORS.VIOLET_400};
+    background-color: ${({theme}) => theme.COLORS.VIOLET_400};
   }
   .strength-Good::-webkit-progress-value {
-  background-color: ${({theme}) => theme.COLORS.CYAN_400};
+    background-color: ${({theme}) => theme.COLORS.CYAN_400};
   }
   .strength-Strong::-webkit-progress-value {
-  background-color: ${({theme}) => theme.COLORS.CYAN_700};
+    background-color: ${({theme}) => theme.COLORS.CYAN_700};
   }
 
 `

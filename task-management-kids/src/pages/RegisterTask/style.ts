@@ -4,8 +4,9 @@ export const Container = styled.div`
   .form-container, .box-container{
     display: flex;
     align-items: center;
-    justify-content: space-around;
     flex-direction: column;
+    justify-content: space-around;
+
     width: 100%;
   }
   .box-container{

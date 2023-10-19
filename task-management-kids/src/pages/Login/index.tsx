@@ -1,23 +1,16 @@
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { ButtonText } from '../../components/ButtonText';
 import { schema } from '../../utils/form-schema-login';
 import imageLogup from '../../assets/image-logup.svg';
-import { MdEmail } from  'react-icons/md';
 import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
 import { useNavigate } from 'react-router-dom';
+import { Input } from '../../components/Input';
+import { MdEmail } from  'react-icons/md';
 import { useAuth } from '../../hooks/auth';
 import { toast } from 'react-toastify';
 import { Container } from './style';
+import { IUserLogin } from './type';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-
-
-interface UserLogin{
-  login: string,
-  password: string,
-}
-
 
 export function Login(){
   const { signIn } = useAuth();
@@ -38,7 +31,6 @@ export function Login(){
         setSubmitting(true);
 
         const { login, password } = values;
-        // console.log(JSON.stringify(values, null, 2))
 
         try{
 
@@ -63,7 +55,7 @@ export function Login(){
     },
   })
 
-  const handleSignIn = ({login , password}: UserLogin) => {
+  const handleSignIn = ({login , password}: IUserLogin) => {
     signIn({login, password});
   }
 
@@ -78,49 +70,51 @@ export function Login(){
           <form className='form-container' onSubmit={formik.handleSubmit}>
             <div className='box-container'>
               <Input
-                label="Login"
-                name="login"
                 type="text"
-                placeholder="jhonDoe@gmail.com or nickname"
+                name="login"
+                label="Login"
                 Icon={MdEmail}
-                error={formik.errors.login}
-                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                error={formik.errors.login}
                 value={formik.values.login}
                 touched={formik.touched.login}
+                onChange={formik.handleChange}
+                placeholder="jhonDoe@gmail.com or nickname"
               />
 
               <div className='input-password'>
                 <Input
-                  label="Password"
                   name="password"
-                  type="password"
-                  placeholder="*************"
-                  Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
+                  label="Password"
                   onClick={toggleEye}
+                  placeholder="*************"
+                  onBlur={formik.handleBlur}
                   error={formik.errors.password}
                   onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
                   value={formik.values.password}
                   touched={formik.touched.password}
+                  type={eyeIsClosed ? 'text' : 'password'}
+                  Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
                 />
               </div>
               <Button
-                value="Enviar"
                 type="submit"
+                value="Enviar"
                 disabled={!formik.isValid || formik.isSubmitting}
               />
               <div className='box-buttons'>
-                <ButtonText
-                  value="Esqueci a senha!"
-                  type="button"
+                <button
+                  type='button'
                   onClick={() => navigate('/register')}
-                />
-                <ButtonText
-                  value="Cadastre-se!"
-                  type="button"
+                >
+                  Esqueci a senha!
+                </button>
+                <button
+                  type='button'
                   onClick={() => navigate('/register')}
-                />
+                >
+                  Cadastre-se!
+                </button>
               </div>
             </div>
         </form>

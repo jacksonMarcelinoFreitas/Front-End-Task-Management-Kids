@@ -1,29 +1,22 @@
 import { PasswordStrengthMeter } from '../../components/PasswordStrengthMeter';
 import { CheckboxPrivacyPolicies } from '../../components/PrivacyPolicies';
 import { AiFillEye, AiFillEyeInvisible } from  'react-icons/ai';
-import { ButtonText } from '../../components/ButtonText';
 import { schema } from '../../utils/form-schema-logup';
 import imageLogin from '../../assets/image-login.svg';
-import { MdEmail } from  'react-icons/md';
 import { BsFillPersonFill } from  'react-icons/bs';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { useNavigate } from 'react-router-dom';
+import { MdEmail } from  'react-icons/md';
 import { api } from '../../services/api';
-import { Container } from './style';
+import { IUserRegister } from './type';
 import { toast } from 'react-toastify';
+import { Container } from './style';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
-
-interface UserRegister{
-  name: string,
-  email: string,
-  password: string,
-  readTerms: boolean,
-}
 
 export function Logup(){
   const navigate = useNavigate();
@@ -57,7 +50,7 @@ export function Logup(){
     },
   })
 
-  const handleSignUp = ({name, email, password, readTerms}: UserRegister) => {
+  const handleSignUp = ({ name, email, password, readTerms }: IUserRegister) => {
     api.post('/v1/user/sponsor/new-user', {name, email, password, readTerms})
 
     .then( response => {
@@ -96,52 +89,52 @@ export function Logup(){
       </h1>
       <form className='form-container' onSubmit={formik.handleSubmit}>
         <Input
-          label='Nome completo'
           name='name'
           type='text'
-          Icon={BsFillPersonFill}
+          label='Nome completo'
           placeholder='jhonDoe'
+          Icon={BsFillPersonFill}
           error={formik.errors.name}
-          onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.name}
           touched={formik.touched.name}
+          onChange={formik.handleChange}
         />
         <Input
-          label='E-mail'
           name='email'
           type='email'
+          label='E-mail'
           Icon={MdEmail}
-          placeholder='jhonDoe@gmail.com'
-          error={formik.errors.email}
-          onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          error={formik.errors.email}
           value={formik.values.email}
+          placeholder='jhonDoe@gmail.com'
+          onChange={formik.handleChange}
           touched={formik.touched.email}
         />
         <Input
           label='Senha'
           name='password'
-          Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
+          onClick={toggleEye}
           placeholder='*************'
-          type={eyeIsClosed ? 'text' : 'password'}
+          onBlur={formik.handleBlur}
           error={formik.errors.password}
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.password}
           touched={formik.touched.password}
-          onClick={toggleEye}
+          type={eyeIsClosed ? 'text' : 'password'}
+          Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
         />
         <PasswordStrengthMeter password={formik.values.password}/>
         <CheckboxPrivacyPolicies
-          text1='termos'
-          text2='políticas de privacidade'
           link1='#'
           link2='#'
+          text1='termos'
           name='readTerms'
+          onBlur={formik.handleBlur}
+          text2='políticas de privacidade'
           error={formik.errors.readTerms}
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           checked={formik.values.readTerms}
           touched={formik.touched.readTerms}
         />
@@ -152,11 +145,12 @@ export function Logup(){
             type= 'submit'
             disabled={!formik.isValid || formik.isSubmitting}
           />
-          <ButtonText
-            value='Fazer login'
-            type= 'button'
+          <button
+            type='button'
             onClick={() => navigate('/')}
-          />
+          >
+            Fazer login
+          </button>
         </div>
       </form>
     </Container>

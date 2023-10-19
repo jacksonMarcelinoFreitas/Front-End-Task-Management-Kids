@@ -1,17 +1,12 @@
+import { ListTasksChild } from '../pages/ListTasksChild';
+import { ShowTask } from '../pages/ShowTask';
 import { Routes, Route } from 'react-router-dom';
-import { Home } from '../pages/Home';
-import { ManagerChild } from '../pages/ManagerChild';
-import { EditChild } from '../pages/EditChild';
-import { ChildProvider } from '../Contexts/useChildContext'; // Importe o ChildProvider
 
-export function ChildProviderRoutes() {
+export function ChildRoutes() {
   return (
-    <ChildProvider>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/ManagerChild/:id" element={<ManagerChild />} />
-        <Route path="/EditChild/:id" element={<EditChild />} />
+        <Route path="/" element={<ListTasksChild />} />
+        <Route path="/task/:id" element={<ShowTask />} />
       </Routes>
-    </ChildProvider>
   );
 }

@@ -2,26 +2,25 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: grid;
-  grid-template-rows: 64px min-content auto;
   grid-auto-rows: min-content;
+  grid-template-rows: 64px min-content auto;
   grid-template-areas:
   "header"
   "title-navigate"
   "border-dashed";
 
-  /* width: 100vw; */
   height: 100%;
 
   padding: 0 0px 32px 0;
 
   .title-navigate{
     grid-area: 'title-navigate';
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     width: 100%;
-
     padding: 0 32px;
     margin: 32px 0 8px 0;
 
@@ -38,8 +37,8 @@ export const Container = styled.div`
   form{
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     gap: 8px;
 
     width: 100%;

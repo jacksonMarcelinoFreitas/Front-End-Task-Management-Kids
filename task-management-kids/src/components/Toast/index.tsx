@@ -1,12 +1,8 @@
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { IToastMessage } from './type';
 
-interface ToastMessageProps {
-  type?: 'success' | 'warn' | 'error' | 'info';
-  message?: string;
-}
-
-export function ToastMessage({ type = 'info', message } : ToastMessageProps){
+export function ToastMessage({ type = 'info', message }: IToastMessage){
   if (!message) return null;
 
   switch (type) {

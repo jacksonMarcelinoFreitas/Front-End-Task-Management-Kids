@@ -4,12 +4,12 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: grid;
-  grid-template-rows: 64px min-content auto;
-  grid-auto-rows: min-content;
   grid-template-areas:
   "header"
   "title-navigate"
   "list-child";
+  grid-auto-rows: min-content;
+  grid-template-rows: 64px min-content auto;
 
   color: ${({theme}) => theme.COLORS.GRAY_700};
 
@@ -46,10 +46,14 @@ export const Container = styled.div`
   .box-container{
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     gap: 24px;
 
+    width: 100%;
+  }
+
+  .box-card{
     width: 100%;
   }
 
@@ -74,31 +78,32 @@ export const CardButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 
+  width: 100%;
+  height: 96px;
   padding: 0 32px;
+
+  position: relative;
 
   font-size: 16px;
   line-height: 20px;
   text-align: center;
 
-  background-color: ${({theme}) => theme.COLORS.PINK_100};
-  color: ${({theme}) => theme.COLORS.WHITE};
   background-image: url(${cardImage});
   background-repeat: no-repeat, repeat;
   background-position: -16px 8px;
+  background-color: ${({theme}) => theme.COLORS.PINK_100};
 
-  border: 2px solid  ${({theme}) => theme.COLORS.PINK_400};
+  color: ${({theme}) => theme.COLORS.WHITE};
+
   border-radius: 12px;
-
-  width: 100%;
-  height: 96px;
+  border: 2px solid  ${({theme}) => theme.COLORS.PINK_400};
 
   overflow: hidden;
 
   .icon-plus{
-    color: ${({theme}) => theme.COLORS.GRAY_700};
     font-size: 36px;
+    color: ${({theme}) => theme.COLORS.VIOLET_700};
   }
 
   p{

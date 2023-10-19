@@ -1,31 +1,27 @@
 import { TitleNavigation } from '../../components/TitleNavigation';
 import noRegistryChild from '../../assets/no-regitry-child.svg';
 import { BorderDashed } from '../../components/BorderDashed';
-import { useNavigate } from 'react-router-dom';
 import { CardChild } from '../../components/CardChild';
 import { Header } from '../../components/Header';
 import { Container, CardButton } from './style';
+import { useNavigate } from 'react-router-dom';
+import { useUserId } from '../../hooks/userId';
 import { useState, useEffect } from "react";
 import { FaUserEdit } from 'react-icons/fa';
+import { api } from '../../services/api';
 import { TiPlus } from 'react-icons/ti';
 import { toast } from 'react-toastify';
-import { api } from '../../services/api';
-
-type Child = {
-  numberTasks: number;
-  externalId: string;
-  nickname: string;
-  tasks: number;
-  name: string;
-  role: string;
-  age: number;
-};
-
-type Data = Child[];
+import { IData } from './type';
 
 export function Home(){
   const navigate = useNavigate();
-  const [ data, setData ] = useState<Data>([]);
+  const { setUserId } = useUserId();
+  const [ data, setData ] = useState<IData>([]);
+
+  function handleClickChild(idChild: string){
+    setUserId(idChild);
+    navigate(`/ManagerChild/${idChild}`)
+  }
 
   async function fetchChildren(){
 
@@ -54,48 +50,53 @@ export function Home(){
     <Container>
 
       <Header />
+      <TitleNavigation
+        title='Crianças'
+      />
       {
-        !data &&
+        (data.length === 0) &&
         <BorderDashed className='border-dashed' >
+
           <div className='box-container'>
+
             <img src={noRegistryChild} alt="sem registros de crianças" />
             <p className='message'>Você ainda não tem crianças registradas!</p>
+
             <CardButton onClick={() => navigate('/registerChild')}>
               <TiPlus className='icon-plus'/>
               <p>Adicionar criança</p>
             </CardButton>
+
           </div>
+
         </BorderDashed>
       }
+
       {
-        data &&
-        <TitleNavigation
-          title='Crianças'
-        />
-      }
-      {
-        data &&
+        (data.length !== 0) &&
         <div className='card-container'>
           <CardButton onClick={() => navigate('/registerChild')}>
               <TiPlus className='icon-plus'/>
               <p>Adicionar criança</p>
           </CardButton>
-          {
-            data.map(child => (
-              <CardChild
-                age={child.age}
-                Icon={FaUserEdit}
-                tasks={child.numberTasks}
-                textButton='Gerenciar'
-                nameChild={child.name}
-                key={child.externalId}
-                value={child.externalId}
-                onClick={() => {navigate(`/ManagerChild/${child.externalId}`)}}
-              />
-            ))
-          }
+          <div className="box-card">
+            {
+              data.map(child => (
+                <CardChild
+                  age={child.age}
+                  Icon={FaUserEdit}
+                  textButton='Gerenciar'
+                  nameChild={child.name}
+                  key={child.externalId}
+                  value={child.externalId}
+                  tasks={child.numberTasks}
+                  onClick={() => handleClickChild(child.externalId)}
+                />
+              ))
+            }
+          </div>
         </div>
-    }
+      }
     </Container>
   )
 }

@@ -2,18 +2,20 @@
   import { schema } from '../../utils/form-schema-register-child';
   import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
   import { BorderDashed } from '../../components/BorderDashed';
-  import { HiTrash } from 'react-icons/hi2';
+  import { StyledModal } from '../../components/Header/style';
+  import { useNavigate, useParams } from 'react-router-dom';
+  import { confirmDeleteChild } from './confirmDeleteChild';
+  import { customModalStyle } from './confirmDeleteChild';
   import { Button } from '../../components/Button';
   import { Header } from '../../components/Header';
   import { Input } from '../../components/Input';
-  import { useNavigate, useParams } from 'react-router-dom';
+  import { useEffect, useState } from 'react';
+  import { HiTrash } from 'react-icons/hi2';
   import { api } from '../../services/api';
   import { toast } from 'react-toastify';
   import { Container } from './style';
-  import { StyledModal } from '../../components/Header/style';
-  import { useEffect, useState } from 'react';
   import { useFormik } from 'formik';
-  import { confirmDelete } from './confirmDelete';
+  import { IChildData } from './type';
 
   import Modal from 'react-modal';
   Modal.setAppElement('#root');
@@ -21,12 +23,12 @@
   export function EditChild(){
 
     const [eyeIsClosed, setEyeIsClosed] = useState(false)
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const closeModal = () =>{setModalIsOpen(false)}
+    const openModal = () =>{setModalIsOpen(true)}
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const { id } = useParams();
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const openModal = () =>{setModalIsOpen(true)}
-    const closeModal = () =>{setModalIsOpen(false)}
 
     const [initialValues, setInitialValues] = useState({
       age: '',
@@ -36,27 +38,6 @@
       confirmPassword: '',
     });
 
-    const customModalStyle = {
-      overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.452)',
-      },
-
-      content: {
-        position: 'absolute' as 'absolute',
-        top: '0',
-        left: '0',
-        right: '0',
-        bottom: '0',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column' as 'column',
-        backgroundColor: 'transparent',
-        borderRadius: '16px',
-        border: 'none',
-      },
-    }
-
     useEffect(()=>{
       async function fetchData() {
         try {
@@ -64,11 +45,11 @@
           const child = response.data;
 
           setInitialValues({
+            password: '',
             age: child.age,
             name: child.name,
-            nickname: child.nickname,
-            password: '',
             confirmPassword: '',
+            nickname: child.nickname,
           });
 
           setLoading(false);
@@ -119,7 +100,18 @@
 
         try{
 
-          await api.put(`/v1/user/update-child/${id}`, {name, age, nickname, password});
+          const requestData: IChildData = {
+            name,
+            age,
+            nickname,
+          };
+
+          if (password !== '') {
+            requestData.password = password;
+          }
+
+
+          await api.put(`/v1/user/update-child/${id}`, requestData);
           toast.success(`Criança atualizada com sucesso!`);
 
           navigate(-1);
@@ -153,9 +145,9 @@
         <Container>
           <Header />
           <TitleNavigation
-            title='Editar criança'
             titleButton='Voltar'
-            onClick={()=> {navigate(`/ManagerChild/${id}`)}}
+            title='Editar criança'
+            onClick={() => {navigate(`/ManagerChild/${id}`)}}
           />
           <BorderDashed>
             <form onSubmit={formik.handleSubmit}>
@@ -240,7 +232,7 @@
             contentLabel="Confirmar logout"
           >
             <StyledModal>
-              <div dangerouslySetInnerHTML={{ __html: confirmDelete }} />
+              <div dangerouslySetInnerHTML={{ __html: confirmDeleteChild }} />
               <div className="box-buttons">
                   <button onClick={closeModal}>Não</button>
                   <button onClick={handleDeleteChild}>Sim</button>

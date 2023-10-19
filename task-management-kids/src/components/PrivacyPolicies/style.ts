@@ -3,16 +3,17 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     gap: 8px;
+
     width: 100%;
 
   .box {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: row;
+    justify-content: center;
     gap: 8px;
 
     width: 100%;
@@ -22,14 +23,13 @@ export const Container = styled.div`
       width: 24px;
     }
 
-
     label{
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 400;
       line-height: 16px;
-      text-align: center;
       font-weight: 500;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
 
       a{
         color: ${({theme}) => theme.COLORS.VIOLET_700};
@@ -40,10 +40,9 @@ export const Container = styled.div`
 
   .message-error{
     width: 100%;
-    font-family: 'Inter', sans-serif;
-    /* word-wrap: break-word; */
-    text-align: left;
     font-size: 12px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
     color: ${({theme}) => theme.COLORS.PINK_400};
   }
 `
@@ -60,12 +59,12 @@ export const BoxButton = styled.div`
     font-size: 18px;
     text-align: center;
 
+    height: 42px;
+
+    padding: 0 16px;
+    border-radius: 8px;
+
     color: ${({theme}) => theme.COLORS.WHITE};
     background-color: ${({theme}) => theme.COLORS.PINK_400};
-
-    border-radius: 8px;
-    padding: 0 16px;
-
-    height: 42px;
   }
 `
