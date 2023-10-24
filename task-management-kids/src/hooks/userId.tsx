@@ -6,10 +6,10 @@ export const UserIdContext = createContext<IUserIdContext | undefined>(undefined
 function UserIdProvider({ children }: { children: ReactNode }) {
     const [userId, setUserId] = useState('')
 
-    async function handleResetUserId() {
-        localStorage.removeItem(`@kidsTasker:userId`);
-        setUserId('');
-    }
+    // async function handleResetUserId() {
+    //     localStorage.removeItem(`@kidsTasker:userId`);
+    //     setUserId('');
+    // }
 
     useEffect(() => {
         const storedUserId = (localStorage.getItem(`@kidsTasker:userId`) || '');
@@ -26,7 +26,7 @@ function UserIdProvider({ children }: { children: ReactNode }) {
         <UserIdContext.Provider value={{
             userId,
             setUserId,
-            handleResetUserId,
+            // handleResetUserId,
         }}>
             { children }
         </UserIdContext.Provider>

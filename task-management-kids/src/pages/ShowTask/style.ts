@@ -26,6 +26,7 @@ export const Container = styled.div`
 .title-name, .title-description, .title-reward, .value{
   width: 100%;
   padding: 16px;
+
 }
 
 .title-name, .title-description, .title-reward{
@@ -48,6 +49,8 @@ export const Container = styled.div`
   border-radius: 12px 12px 0 0;
 
   overflow: hidden;
+
+  font-size: 16px;
 }
 
 .title-name{
@@ -64,6 +67,8 @@ export const Container = styled.div`
   background-color: ${({theme}) => theme.COLORS.WHITE};
 
   border-radius: 0 0 12px 12px;
+
+  color: ${({theme}) => theme.COLORS.GRAY_700};
 }
 
 .absolute{
@@ -132,9 +137,9 @@ export const Container = styled.div`
   z-index: -1;
 }
 
-
-
-
-
+.custom-modal{
+  position: absolute;
+  z-index: 1000;
+}
 
 `

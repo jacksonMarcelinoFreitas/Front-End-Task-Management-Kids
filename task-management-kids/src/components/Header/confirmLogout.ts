@@ -3,6 +3,9 @@ export const confirmLogout = (`
 <html>
     <head>
         <style>
+          div{
+            z-index: 2;
+          }
           h1{
             font-size: 24px;
             font-family: 'Inter', sans-serif;
@@ -26,6 +29,7 @@ export const customModalStyle = {
   },
 
   content: {
+    className: 'custom-modal',
     position: 'absolute' as 'absolute',
     top: '0',
     left: '0',

@@ -1,7 +1,7 @@
 import { Container } from "./style";
 import { IButtonProps } from './type';
 
-export function Button({ Icon, value, type, disabled, onClick, className, ...rest }: IButtonProps){
+export function Button({ Icon, value, type, disabled, onClick, className, loading, ...rest }: IButtonProps){
 
   const buttonClass = disabled ? 'disabled-button' : '';
 
@@ -16,7 +16,7 @@ export function Button({ Icon, value, type, disabled, onClick, className, ...res
         Icon&&
         <Icon size={22}/>
       }
-      {value}
+      {!loading ? value : 'loading...'}
     </Container>
   )
 }

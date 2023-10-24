@@ -65,4 +65,20 @@ export default createGlobalStyle`
     background: ${({theme}) => theme.COLORS.TURQUOSE_400};
     border-radius: 8px;
   }
+
+  .loader{
+    position: absolute;
+    /* width: 100%; */
+    height: 100vh;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 0, 0.8);
+    color: #31DB9D;
+    z-index: 6;
+  }
 `;

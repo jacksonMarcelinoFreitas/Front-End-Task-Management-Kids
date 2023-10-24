@@ -41,7 +41,6 @@ function AuthProvider({ children }: { children: ReactNode }){
       if (error.response) {
 
         if (error.response.status === 403) {
-          toast.error(`${error.response.data}`);
           toast.error(`${error.response.data.message}`);
         }
 
@@ -56,6 +55,8 @@ function AuthProvider({ children }: { children: ReactNode }){
   function signOut(){
     localStorage.removeItem("@kidsTasker:user");
     localStorage.removeItem("@kidsTasker:token");
+
+    api.defaults.headers.common['Authorization'] = null;
 
     setData({ user: null, token: '' });
 

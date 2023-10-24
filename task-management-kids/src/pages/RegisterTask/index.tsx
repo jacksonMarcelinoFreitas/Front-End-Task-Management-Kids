@@ -62,7 +62,8 @@ export function RegisterTask(){
       <TitleNavigation
         titleButton="Voltar"
         title="Cadastrar tarefa"
-        onClick={() => navigate(`/ManagerChild/${id}`)}
+        // onClick={() => navigate(`/ManagerChild/${id}`)}
+        onClick={() => navigate(-1)}
       />
       <BorderDashed>
         <form className="form-container" onSubmit={formik.handleSubmit} >

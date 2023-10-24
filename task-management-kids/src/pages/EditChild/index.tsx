@@ -6,6 +6,7 @@
   import { useNavigate, useParams } from 'react-router-dom';
   import { confirmDeleteChild } from './confirmDeleteChild';
   import { customModalStyle } from './confirmDeleteChild';
+  import { ThreeDots } from  'react-loader-spinner';
   import { Button } from '../../components/Button';
   import { Header } from '../../components/Header';
   import { Input } from '../../components/Input';
@@ -13,6 +14,7 @@
   import { HiTrash } from 'react-icons/hi2';
   import { api } from '../../services/api';
   import { toast } from 'react-toastify';
+
   import { Container } from './style';
   import { useFormik } from 'formik';
   import { IChildData } from './type';
@@ -24,9 +26,9 @@
 
     const [eyeIsClosed, setEyeIsClosed] = useState(false)
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const closeModal = () =>{setModalIsOpen(false)}
     const openModal = () =>{setModalIsOpen(true)}
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -41,6 +43,7 @@
     useEffect(()=>{
       async function fetchData() {
         try {
+          setIsLoading(true);
           const response = await api.get(`v1/user/list-child/${id}`);
           const child = response.data;
 
@@ -52,11 +55,13 @@
             nickname: child.nickname,
           });
 
-          setLoading(false);
+          setIsLoading(false);
+
 
         } catch (error: any) {
           if (error.response) {
             toast.error('Erro');
+            setIsLoading(false);
           }
         }
       }
@@ -70,17 +75,20 @@
 
     async function handleDeleteChild(){
       try {
+        setIsLoading(true);
         const response = await api.delete(`/v1/user/delete-child/${id}`);
 
         if(response.status == 200){
           toast.success('Apagado com sucesso!');
           navigate('/');
+          setIsLoading(false);
         }
 
       } catch (error: any) {
 
         if(error.response){
           toast.error('Erro')
+          setIsLoading(false);
 
         }
 
@@ -141,7 +149,19 @@
     );
 
     return(
-      loading ? <div>Loading...</div> : (
+      <div>
+        {isLoading ? (
+        <ThreeDots
+          height="80"
+          width="80"
+          radius="9"
+          color="#75E1BA"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass="loader"
+          visible={isLoading}
+          />
+          ) : (
         <Container>
           <Header />
           <TitleNavigation
@@ -230,7 +250,7 @@
             style={customModalStyle}
             onRequestClose={closeModal}
             contentLabel="Confirmar logout"
-          >
+            >
             <StyledModal>
               <div dangerouslySetInnerHTML={{ __html: confirmDeleteChild }} />
               <div className="box-buttons">
@@ -241,6 +261,9 @@
           </Modal>
 
         </Container>
-      )
-    )
+        )}
+      </div>
+    );
+
+
   }

@@ -5,8 +5,8 @@ const schema = Yup.object().shape({
     .min(5, 'O nome deve ter pelo menos 5 caracteres')
     .required('O nome da atividade é obrigatório'),
   description: Yup.string()
-    .max(200, 'A descrição não pode ter mais de 200 caracteres'),
-    // .required('A descrição é obrigatória'),
+    .max(255, 'A descrição não pode ter mais de 200 caracteres')
+    .required('A descrição é obrigatória'),
   reward: Yup.number()
     .typeError('A recompensa deve ser um número')
     .positive('A recompensa deve ser um número positivo')

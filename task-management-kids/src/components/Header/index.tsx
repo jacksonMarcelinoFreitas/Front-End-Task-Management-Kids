@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../hooks/auth';
 import { IHeaderTypes } from './type';
 import { useState } from "react";
-
 import Modal from 'react-modal';
+
 Modal.setAppElement('#root');
 
 export function Header({ icon, ...rest }: IHeaderTypes){
