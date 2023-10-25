@@ -1,6 +1,4 @@
-import cardImage from '../../assets/child-task.svg';
 import styled from "styled-components";
-
 
 export const Container = styled.div`
   display: grid;

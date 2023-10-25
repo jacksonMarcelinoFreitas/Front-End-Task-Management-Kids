@@ -14,7 +14,7 @@ const schema = Yup.object().shape({
     .transform((value, originalValue) => (originalValue === '' ? null : value))
     .test('is-decimal', 'A recompensa deve ter no máximo 2 casas decimais', (value) => {
       if (!value) return true; // Permite campos vazios
-      return value.toString().match(/^\d+(\.\d{1,2})?$/);
+      return !!value.toString().match(/^\d+(\.\d{1,2})?$/);
     }),
     // .required('A recompensa é obrigatória'),
 });

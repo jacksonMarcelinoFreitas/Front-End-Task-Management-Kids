@@ -1,5 +1,5 @@
 export interface IInputCheck {
-  id: string,
+  id?: string,
   name?: string,
   text?: string,
   error?: string,
