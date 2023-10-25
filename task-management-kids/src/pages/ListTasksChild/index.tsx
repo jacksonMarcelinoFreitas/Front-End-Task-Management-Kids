@@ -76,32 +76,32 @@ export function ListTasksChild() {
   }, [user]);
 
   return (
-    <div>
+    <Container>
+      <Header />
+      <div>
       {isLoading ? (
         <ThreeDots
           height="80"
           width="80"
           radius="9"
-          color="#75E1BA"
+          color="#74309D"
           ariaLabel="three-dots-loading"
           wrapperStyle={{}}
           wrapperClass="loader"
           visible={isLoading}
         />) : (
-        <Container>
-          <Header />
-          {(data.length === 0) &&
+        <div>
+          {
+            (data.length === 0) &&
             <BorderDashed className='border-dashed'>
-
               <div className='box-container'>
-
                 <img src={noRegistryChild} alt="sem registros de tarefas" />
                 <p className='message'>Você ainda não tem tarefas!</p>
-
               </div>
-
-            </BorderDashed>}
-          {(data.length !== 0) &&
+            </BorderDashed>
+          }
+          {
+            (data.length !== 0) &&
             <div className='card-container'>
               <p className='tasks-unperfomed'>Tarefas não realizadas</p>
               <div className="box-not-performed">
@@ -137,9 +137,11 @@ export function ListTasksChild() {
                     onClick={() => { navigate(`/task/${task.externalId}`); }} />
                 ))}
               </div>
-            </div>}
-        </Container>
+            </div>
+          }
+        </div>
       )}
-    </div>
+      </div>
+    </Container>
   );
 }

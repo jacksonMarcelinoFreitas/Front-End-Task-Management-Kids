@@ -38,6 +38,7 @@ export function Logup(){
 
       try{
 
+        await new Promise(resolve => setTimeout(resolve, 1000));
         handleSignUp({name, email, password, readTerms});
 
       }catch(error){
@@ -143,6 +144,7 @@ export function Logup(){
           <Button
             value='Enviar'
             type= 'submit'
+            isLoading={formik.isSubmitting}
             disabled={!formik.isValid || formik.isSubmitting}
           />
           <button

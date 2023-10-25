@@ -40,9 +40,7 @@ export function RegisterTask(){
           }catch(error: any){
 
             if(error.response){
-
               toast.error(error.response.data.message);
-
             }
 
             else{
@@ -104,6 +102,7 @@ export function RegisterTask(){
             <Button
               type="submit"
               value="Cadastrar"
+              isLoading={formik.isSubmitting}
               disabled={!formik.isValid || formik.isSubmitting}
             />
           </div>

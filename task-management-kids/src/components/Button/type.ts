@@ -1,7 +1,7 @@
 export interface IButtonProps {
   value: string;
   disabled?: boolean;
-  loading?: boolean;
+  isLoading?: boolean;
   className?: string;
   Icon?: React.ElementType;
   type?: 'submit' | 'button' | 'reset';

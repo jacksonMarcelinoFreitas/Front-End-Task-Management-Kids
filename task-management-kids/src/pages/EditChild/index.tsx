@@ -24,6 +24,7 @@
 
   export function EditChild(){
 
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
     const [eyeIsClosed, setEyeIsClosed] = useState(false)
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -75,20 +76,21 @@
 
     async function handleDeleteChild(){
       try {
-        setIsLoading(true);
+        closeModal();
+        setIsButtonLoading(true);
         const response = await api.delete(`/v1/user/delete-child/${id}`);
 
         if(response.status == 200){
           toast.success('Apagado com sucesso!');
           navigate('/');
-          setIsLoading(false);
+          setIsButtonLoading(false);
         }
 
       } catch (error: any) {
 
         if(error.response){
           toast.error('Erro')
-          setIsLoading(false);
+          setIsButtonLoading(false);
 
         }
 
@@ -155,7 +157,7 @@
           height="80"
           width="80"
           radius="9"
-          color="#75E1BA"
+          color="#74309D"
           ariaLabel="three-dots-loading"
           wrapperStyle={{}}
           wrapperClass="loader"
@@ -233,13 +235,15 @@
               <Button
                 type='submit'
                 value='Editar'
+                isLoading={formik.isSubmitting}
                 disabled={!formik.isValid || formik.isSubmitting}
               />
               <Button
                 type='button'
                 value='Excluir'
                 Icon={HiTrash}
-                disabled={!formik.isValid || formik.isSubmitting}
+                isLoading={isButtonLoading}
+                disabled={!formik.isValid || isButtonLoading}
                 onClick={openModal}
               />
             </form>

@@ -14,11 +14,22 @@ export const Container = styled.button`
   padding: 12px;
   width: 100%;
 
-  svg{
-    color: ${({ theme }) => theme.COLORS.WHITE};
+  .loaderButton, .valueButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .valueButton{
+    svg{
+      color: ${({ theme }) => theme.COLORS.WHITE};
+    }
   }
 
   &.disabled-button {
     opacity: 70%;
   }
+
+
 `

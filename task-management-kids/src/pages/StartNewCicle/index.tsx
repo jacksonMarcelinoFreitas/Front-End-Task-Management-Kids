@@ -97,6 +97,8 @@ export function StartNewCicle(){
           <Button
             value="Confirmar"
             type="submit"
+            isLoading={formik.isSubmitting}
+            disabled={!formik.isValid || formik.isSubmitting}
           />
           <ButtonText
             value="Voltar"

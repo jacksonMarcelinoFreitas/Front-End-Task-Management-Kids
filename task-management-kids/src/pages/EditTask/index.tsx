@@ -25,6 +25,7 @@ Modal.setAppElement('#root');
 export function EditTask(){
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
   const closeModal = () =>{setModalIsOpen(false)}
   const openModal = () =>{setModalIsOpen(true)}
   const { userId } = useUserId();
@@ -40,23 +41,26 @@ export function EditTask(){
 
   async function handleDeleteTask(){
     try {
-      setIsLoading(true);
+      closeModal();
+      setIsButtonLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 5000));
+
       const response = await api.delete(`/v1/task/${id}`);
 
       if(response.status == 200){
         toast.success('Apagado com sucesso!');
         navigate(`/ListTasksSponsor/${userId}`);
-        setIsLoading(false);
+        setIsButtonLoading(false);
       }
 
     } catch (error: any) {
 
       if(error.response){
         toast.error('Erro')
-        setIsLoading(false);
+        setIsButtonLoading(false);
 
       }
-      setIsLoading(false);
+      setIsButtonLoading(false);
 
     }
   }
@@ -73,13 +77,11 @@ export function EditTask(){
 
       try{
 
-        setIsLoading(true);
         await api.put(`/v1/task/${id}`, { name, reward, description, performed });
 
         toast.success(`Tarefa atualizada com sucesso!`);
 
         navigate(`/ListTasksSponsor/${userId}`);
-        setIsLoading(false);
 
       }catch(error: any){
 
@@ -88,17 +90,14 @@ export function EditTask(){
           if(error.response.data.status === 403){
 
             toast.error(`${'Problemas de autorização, tente fazer o login novamente!'}`);
-            setIsLoading(false);
 
           }
 
           toast.error(`${error.response.data.message}`);
-          setIsLoading(false);
 
         }else{
 
           toast.error(`${'Não foi possível editar a criança!'}`);
-          setIsLoading(false);
 
         }
 
@@ -144,7 +143,7 @@ export function EditTask(){
           height="80"
           width="80"
           radius="9"
-          color="#75E1BA"
+          color="#74309D"
           ariaLabel="three-dots-loading"
           wrapperStyle={{}}
           wrapperClass="loader"
@@ -202,22 +201,24 @@ export function EditTask(){
               <Button
                 type='submit'
                 value='Editar'
+                isLoading={formik.isSubmitting}
                 disabled={!formik.isValid || formik.isSubmitting}
               />
               <Button
                 type='button'
                 value='Excluir'
                 Icon={HiTrash}
-                disabled={!formik.isValid || formik.isSubmitting}
+                isLoading={isButtonLoading}
+                disabled={!formik.isValid || isButtonLoading}
                 onClick={openModal}
               />
             </form>
           </BorderDashed>
           <Modal
-                isOpen={modalIsOpen}
-                style={customModalStyle}
-                onRequestClose={closeModal}
-                contentLabel="Confirmar logout"
+            isOpen={modalIsOpen}
+            style={customModalStyle}
+            onRequestClose={closeModal}
+            contentLabel="Confirmar logout"
           >
             <StyledModal>
               <div dangerouslySetInnerHTML={{ __html: confirmDeleteTask }} />

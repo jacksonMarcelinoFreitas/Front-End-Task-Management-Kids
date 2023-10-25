@@ -77,8 +77,7 @@ export default createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(0, 0, 0, 0.8);
-    color: #31DB9D;
+    background-color: rgba(49, 219, 157, 0);
     z-index: 6;
   }
 `;

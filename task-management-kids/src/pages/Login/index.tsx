@@ -34,7 +34,8 @@ export function Login(){
 
         try{
 
-          const response = handleSignIn({login, password})
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          handleSignIn({login, password})
 
         }catch(error: any){
 
@@ -100,6 +101,7 @@ export function Login(){
               <Button
                 type="submit"
                 value="Enviar"
+                isLoading={formik.isSubmitting}
                 disabled={!formik.isValid || formik.isSubmitting}
               />
               <div className='box-buttons'>

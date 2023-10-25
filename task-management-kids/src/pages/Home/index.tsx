@@ -53,69 +53,65 @@ export function Home(){
   },[])
 
   return(
-    <div>
-      {isLoading ? (<ThreeDots
-        height="80"
-        width="80"
-        radius="9"
-        color="#75E1BA"
-        ariaLabel="three-dots-loading"
-        wrapperStyle={{}}
-        wrapperClass="loader"
-        visible={isLoading}
-      />) : (
         <Container>
           <Header />
-          <TitleNavigation
-            title='Crianças'
-          />
-          {
-            (data.length === 0) &&
-            <BorderDashed className='border-dashed' >
-
-              <div className='box-container'>
-
-                <img src={noRegistryChild} alt="sem registros de crianças" />
-                <p className='message'>Você ainda não tem crianças registradas!</p>
-
-                <CardButton onClick={() => navigate('/registerChild')}>
-                  <TiPlus className='icon-plus'/>
-                  <p>Adicionar criança</p>
-                </CardButton>
-
-              </div>
-
-            </BorderDashed>
-          }
-
-          {
-            (data.length !== 0) &&
-            <div className='card-container'>
-              <CardButton onClick={() => navigate('/registerChild')}>
-                  <TiPlus className='icon-plus'/>
-                  <p>Adicionar criança</p>
-              </CardButton>
-              <div className="box-card">
+          <div>
+            {isLoading ? (<ThreeDots
+              height="80"
+              width="80"
+              radius="9"
+              color="#74309D"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClass="loader"
+              visible={isLoading}
+            />) : (
+              <div>
+                <TitleNavigation
+                  title='Crianças'
+                />
                 {
-                  data.map(child => (
-                    <CardChild
-                      age={child.age}
-                      Icon={FaUserEdit}
-                      textButton='Gerenciar'
-                      nameChild={child.name}
-                      key={child.externalId}
-                      value={child.externalId}
-                      tasks={child.numberTasks}
-                      onClick={() => handleClickChild(child.externalId)}
-                    />
-                  ))
+                  (data.length === 0) &&
+                  <BorderDashed className='border-dashed' >
+                    <div className='box-container'>
+                      <img src={noRegistryChild} alt="sem registros de crianças" />
+                      <p className='message'>Você ainda não tem crianças registradas!</p>
+                      <CardButton onClick={() => navigate('/registerChild')}>
+                        <TiPlus className='icon-plus'/>
+                        <p>Adicionar criança</p>
+                      </CardButton>
+                    </div>
+                  </BorderDashed>
+                }
+                {
+                  (data.length !== 0) &&
+                  <div className='card-container'>
+                    <CardButton onClick={() => navigate('/registerChild')}>
+                        <TiPlus className='icon-plus'/>
+                        <p>Adicionar criança</p>
+                    </CardButton>
+                    <div className="box-card">
+                      {
+                        data.map(child => (
+                          <CardChild
+                            age={child.age}
+                            Icon={FaUserEdit}
+                            textButton='Gerenciar'
+                            nameChild={child.name}
+                            key={child.externalId}
+                            value={child.externalId}
+                            tasks={child.numberTasks}
+                            onClick={() => handleClickChild(child.externalId)}
+                          />
+                        ))
+                      }
+                    </div>
+                  </div>
                 }
               </div>
-            </div>
-          }
-
+              )
+            }
+          </div>
         </Container>
-      )}
-    </div>
   )
 }

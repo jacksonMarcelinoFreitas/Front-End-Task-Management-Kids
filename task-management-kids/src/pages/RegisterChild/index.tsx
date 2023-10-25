@@ -138,6 +138,7 @@ export function RegisterChild(){
           <Button
             type='submit'
             value='Cadastrar'
+            isLoading={formik.isSubmitting}
             disabled={!formik.isValid || formik.isSubmitting}
           />
         </form>
