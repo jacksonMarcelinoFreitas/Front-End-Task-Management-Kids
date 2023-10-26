@@ -1,24 +1,18 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  gap: 32px;
-
   width: 100%;
-  padding: 24px;
+  padding: 0 24px;
 
-  .box-wrapper{
+  form{
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: center;
     flex-direction: column;
     gap: 16px;
 
-    max-width: 257px;
-    min-width: 200px;
+    width: 100%;
+    height: 100vh;
   }
 
   p{

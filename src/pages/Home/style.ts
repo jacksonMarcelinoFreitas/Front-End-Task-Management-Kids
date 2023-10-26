@@ -75,6 +75,8 @@ export const Container = styled.div`
 `
 
 export const CardButton = styled.button`
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,8 +84,6 @@ export const CardButton = styled.button`
   width: 100%;
   height: 96px;
   padding: 0 32px;
-
-  position: relative;
 
   font-size: 16px;
   line-height: 20px;

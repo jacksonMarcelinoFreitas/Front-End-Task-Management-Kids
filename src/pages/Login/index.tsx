@@ -107,7 +107,7 @@ export function Login(){
               <div className='box-buttons'>
                 <button
                   type='button'
-                  onClick={() => navigate('/register')}
+                  onClick={() => navigate('/token')}
                 >
                   Esqueci a senha!
                 </button>

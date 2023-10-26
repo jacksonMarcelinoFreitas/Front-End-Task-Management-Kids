@@ -6,18 +6,21 @@ import { useAuth } from '../../hooks/auth';
 import { IHeaderTypes } from './type';
 import { useState } from "react";
 import Modal from 'react-modal';
+import { Sidebar } from '../../components/MenuSideBar';
 
 Modal.setAppElement('#root');
 
 export function Header({ icon, ...rest }: IHeaderTypes){
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const closeModal = () =>{setModalIsOpen(false)}
   const openModal = () =>{setModalIsOpen(true)}
   const navigate = useNavigate();
   const { signOut } = useAuth();
 
-  const openMenu = () => {
-    //implementar abertura do menu
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   }
 
   const handleSignOut = () =>{
@@ -27,10 +30,16 @@ export function Header({ icon, ...rest }: IHeaderTypes){
 
   return(
     <Container {...rest}>
+      {
+        isSidebarOpen&&
+        <Sidebar
+          toggleSidebar={toggleSidebar}
+        />
+      }
 
       <IoMenu
         size={24}
-        onClick={openMenu}
+        onClick={toggleSidebar}
         className='menu-icon'
       />
 

@@ -10,6 +10,7 @@ import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { Container } from "./style";
 import { useFormik } from "formik";
+import { Header } from "../../components/Header";
 
 export function RegisterTask(){
 
@@ -57,6 +58,7 @@ export function RegisterTask(){
 
   return(
     <Container>
+      <Header/>
       <TitleNavigation
         titleButton="Voltar"
         title="Cadastrar tarefa"
