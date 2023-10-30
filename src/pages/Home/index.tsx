@@ -13,6 +13,8 @@ import { api } from '../../services/api';
 import { TiPlus } from 'react-icons/ti';
 import { toast } from 'react-toastify';
 import { IData } from './type';
+import boyImageRight from '../../assets/register_child_background/boy_right.svg';
+import girlImageLeft from '../../assets/register_child_background/girl_left.svg';
 
 export function Home(){
   const navigate = useNavigate();
@@ -87,6 +89,8 @@ export function Home(){
                   (data.length !== 0) &&
                   <div className='card-container'>
                     <CardButton onClick={() => navigate('/registerChild')}>
+                        <img className='girlLeft' src={girlImageLeft} alt="girl in the left side" />
+                        <img className='boyRight' src={boyImageRight} alt="boy in the right side" />
                         <TiPlus className='icon-plus'/>
                         <p>Adicionar criança</p>
                     </CardButton>

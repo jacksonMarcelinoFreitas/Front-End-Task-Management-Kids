@@ -11,7 +11,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: .4rem;
 
     width: 100%;
 
@@ -20,30 +20,32 @@ export const Container = styled.div`
       align-items: center;
       justify-content: space-between;
 
-      height: 82px;
-      width: 100%;
-      padding: 0 16px;
 
+      height: 8.2rem;
+      width: 100%;
+      padding: 0 1.6rem;
+
+      box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
       color: ${({theme}) => theme.COLORS.WHITE};
       background-color: ${({theme}) => theme.COLORS.PINK_100};
 
-      border-radius: 12px 0 0 12px;
+      border-radius: 1.2rem 0 0 1.2rem;
 
       .intern-box-left, .intern-box-right{
         display: flex;
         align-items: start;
         justify-content: left;
         flex-direction: column;
-        gap: 4px;
+        gap: .4rem;
 
-        line-height: 20px;
+        line-height: 2rem;
 
         p{
-          font-size: 16px;
+          font-size: 1.6rem;
         }
 
         span{
-          font-size: 12px;
+          font-size: 1.2rem;
         }
       }
 
@@ -51,11 +53,11 @@ export const Container = styled.div`
         align-items: center;
 
         p{
-          font-size: 32px;
+          font-size: 3.2rem;
         }
 
         span{
-          font-size: 12px;
+          font-size: 1.2rem;
         }
       }
 
@@ -65,8 +67,8 @@ export const Container = styled.div`
   &:not(:last-child)::after {
     content: '';
     width: 98%;
-    margin: 4px 0 4px 0;
-    border-bottom: 2px dashed ${({theme}) => theme.COLORS.TURQUOSE_400};
+    margin: .4rem 0 .4rem 0;
+    border-bottom: .2rem dashed ${({theme}) => theme.COLORS.TURQUOSE_400};
   }
 
 
@@ -78,22 +80,24 @@ export const StyledCardButton = styled.button`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 4px;
+  gap: .4rem;
 
   border: none;
-  border-radius: 0 12px 12px 0;
 
-  line-height: 16px;
+  line-height: 1.6rem;
 
-  width: 96px;
-  height: 82px;
-  padding: 0 12px;
+  width: 9.6rem;
+  height: 8.2rem;
+  padding: 0 1.2rem;
 
+  border-radius: 0 1.2rem 1.2rem 0;
   color: ${({theme}) => theme.COLORS.WHITE};
   background-color: ${({theme}) => theme.COLORS.VIOLET_400};
 
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+
   span{
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 
 `

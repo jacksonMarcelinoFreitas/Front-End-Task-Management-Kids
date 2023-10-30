@@ -1,4 +1,3 @@
-import cardImage from '../../assets/card-button-child-boy-girl.svg';
 import styled from "styled-components";
 
 
@@ -89,26 +88,45 @@ export const CardButton = styled.button`
   line-height: 20px;
   text-align: center;
 
-  background-image: url(${cardImage});
-  background-repeat: no-repeat, repeat;
-  background-position: -16px 8px;
-  background-color: ${({theme}) => theme.COLORS.PINK_100};
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+
+  .girlLeft, .boyRight{
+    position: absolute;
+    width: 15rem;
+    z-index: 1;
+  }
+
+  .girlLeft{
+    left: -3rem;
+    width: 19rem;
+    bottom: -3rem;
+  }
+
+  .boyRight{
+    right: -.7rem;
+    width: 12rem;
+    bottom: -3rem;
+  }
+
 
   color: ${({theme}) => theme.COLORS.WHITE};
 
   border-radius: 12px;
   border: 2px solid  ${({theme}) => theme.COLORS.PINK_400};
+  background-color: ${({theme}) => theme.COLORS.PINK_100};
 
   overflow: hidden;
 
   .icon-plus{
     font-size: 36px;
     color: ${({theme}) => theme.COLORS.VIOLET_700};
+    z-index: 2;
   }
 
   p{
     max-width: fit-content;
     word-break: break-word;
+    z-index: 2;
   }
 
 `

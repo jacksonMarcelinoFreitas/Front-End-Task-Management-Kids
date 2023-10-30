@@ -2,6 +2,7 @@ import { AiFillEyeInvisible, AiFillEye } from  'react-icons/ai';
 import { schema } from '../../utils/form-schema-new-password';
 import { ButtonText } from '../../components/ButtonText';
 import { Button } from '../../components/Button';
+import logupImage from '../../assets/logup.svg';
 import { useNavigate } from "react-router-dom";
 import { Input } from '../../components/Input';
 import { MdVpnKey } from  'react-icons/md';
@@ -49,15 +50,16 @@ export function ConfirmToken(){
           }
           setSubmitting(false);
       },
-    })
+    }
+  )
 
   return(
     <Container>
+      <img src={logupImage} alt="logup image" />
       <form onSubmit={formik.handleSubmit}>
         <p>
           Informe o seu e-mail para criar a nova senha!!
         </p>
-
         <div className="box-inputs">
           <Input
             type="text"
@@ -95,7 +97,6 @@ export function ConfirmToken(){
             onClick={toggleEye}
           />
         </div>
-
         <div className="box-buttons">
           <Button
             type='submit'
