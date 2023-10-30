@@ -4,7 +4,7 @@
   // https://vitejs.dev/config/
   export default defineConfig({
     plugins: [react()],
-    base: "/Front-End-Task-Management-Kids",
+    base: "/Front-End-Task-Management-Kids/",
     define: {
       'process.env': process.env,
     },
