@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { device } from '../../utils/device';
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -37,14 +37,13 @@ export const Container = styled.div`
   }
 
   .box-buttons{
-    flex-direction: row;
+    flex-direction: column;
 
     width: 100%;
 
     button{
-      margin-top: 32px;
       font-size: clamp(1.2rem, 1.6rem, 2rem);
-      line-height: 1.6rem;
+      line-height: 2.4rem;
 
       border: none;
 
@@ -56,6 +55,14 @@ export const Container = styled.div`
   @media ${device.mobileL} {
     .form-container{
       width: 70%;
+    }
+
+    .box-buttons{
+      flex-direction: row;
+
+      button{
+        padding: .8rem;
+      }
     }
   }
 

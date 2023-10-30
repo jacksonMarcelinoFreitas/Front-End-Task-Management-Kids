@@ -2,7 +2,7 @@ import { PasswordStrengthMeter } from '../../components/PasswordStrengthMeter';
 import { CheckboxPrivacyPolicies } from '../../components/PrivacyPolicies';
 import { AiFillEye, AiFillEyeInvisible } from  'react-icons/ai';
 import { schema } from '../../utils/form-schema-logup';
-import imageLogin from '../../assets/image-login.svg';
+import imageLogup from '../../assets/logup.svg';
 import { BsFillPersonFill } from  'react-icons/bs';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
@@ -82,13 +82,11 @@ export function Logup(){
 
   return(
     <Container>
-      <div>
-        <img src={imageLogin} alt='imagem de login'/>
-      </div>
-      <h1>
-        Cadastre-se!
-      </h1>
+      <img src={imageLogup} alt='imagem de login'/>
       <form className='form-container' onSubmit={formik.handleSubmit}>
+        <h1>
+          Cadastre-se!
+        </h1>
         <Input
           name='name'
           type='text'
