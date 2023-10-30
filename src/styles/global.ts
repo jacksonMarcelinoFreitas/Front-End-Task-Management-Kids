@@ -8,6 +8,10 @@ export default createGlobalStyle`
         box-sizing: border-box;
     }
 
+  html{
+    font-size: 62.5%;
+  }
+
   #root{
     width: 100vw;
     height: 100%;
@@ -29,9 +33,15 @@ export default createGlobalStyle`
 
   }
 
+  h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 3.2vw, 4rem);
+  }
+
   body, input, button, textarea{
-      font-family: 'Poppins', sans-serif;
-      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.6rem;
 
       outline: none;
       font-style: normal;
@@ -57,13 +67,13 @@ export default createGlobalStyle`
   }
 
   body::-webkit-scrollbar{
-    width: 12px;
+    width: 1.2rem;
     background: transparent;
   }
 
   body::-webkit-scrollbar-thumb{
     background: ${({theme}) => theme.COLORS.TURQUOSE_400};
-    border-radius: 8px;
+    border-radius: 0.8rem;
   }
 
   .loader{

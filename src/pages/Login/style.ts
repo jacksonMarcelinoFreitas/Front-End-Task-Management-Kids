@@ -1,21 +1,20 @@
 import styled from "styled-components";
+import { device } from '../../utils/device';
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
-  gap: 32px;
+  flex-direction: column;
+  gap: 3.2rem;
 
   width: 100vw;
   height: 100vh;
 
-  padding: 24px 32px;
+  padding: 2.4rem 3.2rem;
 
-  h1{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+  img{
+    width: clamp(20rem, 40%, 50rem);
   }
 
   .form-container, .box-container, .box-buttons, .input-password{
@@ -26,14 +25,9 @@ export const Container = styled.div`
     width: 100%;
   }
 
-  .input-password{
-    gap: 4px;
-  }
-
   .form-container{
-    gap: 16px;
+    gap: 3.2rem;
 
-    margin: 0 24px;
     max-width: 100%;
     min-width: 200px;
   }
@@ -42,14 +36,14 @@ export const Container = styled.div`
     gap: 8px;
   }
 
-
   .box-buttons{
     flex-direction: row;
 
     width: 100%;
 
     button{
-      font-size: 16px;
+      font-size: clamp(1.2rem, 1.6rem, 2rem);
+      line-height: 1.6rem;
 
       border: none;
 
@@ -57,6 +51,31 @@ export const Container = styled.div`
       color: ${({ theme }) => theme.COLORS.VIOLET_400};
     }
   }
+
+  @media ${device.mobileL} {
+    .form-container{
+      width: 70%;
+    }
+  }
+
+  @media ${device.tablet} {
+    .form-container{
+      width: clamp(50%, 70%, 80%);
+    }
+  }
+
+  @media ${device.laptop} {
+    flex-direction: row;
+    gap: 10.8rem;
+
+    .form-container{
+      width: 40%;
+    }
+  }
+
+
+
+
 
 
 

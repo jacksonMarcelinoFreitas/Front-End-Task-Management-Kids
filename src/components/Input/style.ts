@@ -5,27 +5,29 @@ export const Container = styled.div`
   align-items: start;
   justify-content: left;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.4rem;
 
   width: 100%;
 
   label{
     font-weight: 400;
     color: ${({theme}) => theme.COLORS.GRAY_700};
+    font-size: clamp(1.4rem, 1.6rem, 2rem);
   }
 
   div{
     display: flex;
     align-items: start;
     justify-content: left;
-    gap: 8px;
+    gap: 0.4rem;
 
-    padding: 12px;
+    padding: 16px 12px;
+
     width: 100%;
 
     background: ${({theme}) => theme.COLORS.WHITE};
 
-    border-radius: 8px;
+    border-radius: 0.8rem;
 
     svg{
       color: ${({theme}) => theme.COLORS.GRAY_700};
@@ -35,7 +37,7 @@ export const Container = styled.div`
 
       &::placeholder{
         color: ${({theme}) => theme.COLORS.GRAY_300};
-        font-size: 12px;
+        font-size: 1.2rem;
       }
 
       color: ${({theme}) => theme.COLORS.GRAY_700};
@@ -51,7 +53,7 @@ export const Container = styled.div`
     width: 100%;
     font-family: 'Inter', sans-serif;
     text-align: left;
-    font-size: 12px;
+    font-size: 1.2rem;
     color: ${({theme}) => theme.COLORS.PINK_400};
   }
 `

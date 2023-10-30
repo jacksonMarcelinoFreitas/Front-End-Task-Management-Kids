@@ -1,6 +1,6 @@
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { schema } from '../../utils/form-schema-login';
-import imageLogup from '../../assets/image-logup.svg';
+import imageLogin from '../../assets/login.svg';
 import { Button } from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '../../components/Input';
@@ -62,63 +62,58 @@ export function Login(){
 
   return(
       <Container>
-          <div>
-            <img src={imageLogup} alt="imagem de login"/>
-          </div>
+        <img src={imageLogin} alt="imagem de login"/>
+        <form className='form-container' onSubmit={formik.handleSubmit}>
           <h1>
             Faça o login!
           </h1>
-          <form className='form-container' onSubmit={formik.handleSubmit}>
-            <div className='box-container'>
-              <Input
-                type="text"
-                name="login"
-                label="Login"
-                Icon={MdEmail}
-                onBlur={formik.handleBlur}
-                error={formik.errors.login}
-                value={formik.values.login}
-                touched={formik.touched.login}
-                onChange={formik.handleChange}
-                placeholder="jhonDoe@gmail.com or nickname"
-              />
-
-              <div className='input-password'>
-                <Input
-                  name="password"
-                  label="Password"
-                  onClick={toggleEye}
-                  placeholder="*************"
-                  onBlur={formik.handleBlur}
-                  error={formik.errors.password}
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                  touched={formik.touched.password}
-                  type={eyeIsClosed ? 'text' : 'password'}
-                  Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
-                />
-              </div>
-              <Button
-                type="submit"
-                value="Enviar"
-                isLoading={formik.isSubmitting}
-                disabled={!formik.isValid || formik.isSubmitting}
-              />
-              <div className='box-buttons'>
-                <button
-                  type='button'
-                  onClick={() => navigate('/token')}
-                >
-                  Esqueci a senha!
-                </button>
-                <button
-                  type='button'
-                  onClick={() => navigate('/register')}
-                >
-                  Cadastre-se!
-                </button>
-              </div>
+          <div className='box-container'>
+            <Input
+              type="text"
+              name="login"
+              label="Login"
+              Icon={MdEmail}
+              onBlur={formik.handleBlur}
+              error={formik.errors.login}
+              value={formik.values.login}
+              touched={formik.touched.login}
+              onChange={formik.handleChange}
+              placeholder="jhonDoe@gmail.com or nickname"
+            />
+            <Input
+              name="password"
+              label="Password"
+              onClick={toggleEye}
+              placeholder="*************"
+              onBlur={formik.handleBlur}
+              error={formik.errors.password}
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              touched={formik.touched.password}
+              type={eyeIsClosed ? 'text' : 'password'}
+              Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
+            />
+            <Button
+              type="submit"
+              value="Enviar"
+              isLoading={formik.isSubmitting}
+              disabled={!formik.isValid || formik.isSubmitting}
+            />
+            <div className='box-buttons'>
+              <button
+                type='button'
+                onClick={() => navigate('/token')}
+              >
+                Esqueci a senha!
+              </button>
+              <button
+                type='button'
+                onClick={() => navigate('/register')}
+              >
+                Cadastre-se!
+              </button>
             </div>
+          </div>
         </form>
     </Container>
   )
