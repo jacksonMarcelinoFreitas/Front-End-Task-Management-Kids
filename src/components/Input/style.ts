@@ -17,11 +17,11 @@ export const Container = styled.div`
 
   div{
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: left;
-    gap: 0.4rem;
+    gap: 1.2rem;
 
-    padding: 16px 12px;
+    padding: 1.6rem 1.2rem;
 
     width: 100%;
 
@@ -51,7 +51,7 @@ export const Container = styled.div`
 
   .message-error{
     width: 100%;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-align: left;
     font-size: 1.2rem;
     color: ${({theme}) => theme.COLORS.PINK_400};

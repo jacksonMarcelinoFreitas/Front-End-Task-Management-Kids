@@ -14,17 +14,16 @@ export const Container = styled.div`
   padding: 3.2rem;
 
   img{
-    width: clamp(20rem, 30%, 50% );
+    width: clamp(20rem, 25vw, 50rem);
   }
 
-  h1{
-    font-weight: 500;
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+
+  span{
+    font-size: clamp(1.2rem, 1.4vw, 1.6rem);
   }
 
   p{
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 1.4vw, 1.6rem);
     font-weight: 500;
     text-align: center;
     line-height: 1.4rem;
@@ -65,14 +64,6 @@ export const Container = styled.div`
   @media ${device.mobileL} {
     .form-container{
       width: 70%;
-    }
-
-    .box-buttons{
-      flex-direction: row;
-
-      button{
-        padding: .8rem;
-      }
     }
   }
 
