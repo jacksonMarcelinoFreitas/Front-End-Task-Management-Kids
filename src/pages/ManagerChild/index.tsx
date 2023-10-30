@@ -11,33 +11,37 @@ export function ManagerChild(){
   return(
     <Container>
       <Header />
-      <TitleNavigation
-        titleButton='Voltar'
-        title='Gerenciar criança'
-        onClick={() => navigate('/')}
-      />
-      <BoxCards>
-        <CardManager
-          typeCard='edit'
-          textCard='Editar criança'
-          onClick={() => {navigate(`/EditChild/${id}`)}}
-        />
-        <CardManager
-          typeCard='register'
-          textCard='Cadastrar tarefa'
-          onClick={() => {navigate(`/RegisterTask/${id}`)}}
-        />
-        <CardManager
-          typeCard='list'
-          textCard='Listar tarefas'
-          onClick={() => {navigate(`/ListTasksSponsor/${id}`)}}
-        />
-        <CardManager
-          typeCard='start'
-          textCard='Iniciar novo ciclo'
-          onClick={() => {navigate(`/StartNewCicle/${id}`)}}
-        />
-      </BoxCards>
+      <div className="wrapper-container">
+        <div className="box-container">
+          <TitleNavigation
+            titleButton='Voltar'
+            title='Gerenciar criança'
+            onClick={() => navigate('/')}
+          />
+          <BoxCards>
+            <CardManager
+              typeCard='edit'
+              textCard='Editar criança'
+              onClick={() => {navigate(`/EditChild/${id}`)}}
+            />
+            <CardManager
+              typeCard='register'
+              textCard='Cadastrar tarefa'
+              onClick={() => {navigate(`/RegisterTask/${id}`)}}
+            />
+            <CardManager
+              typeCard='list'
+              textCard='Listar tarefas'
+              onClick={() => {navigate(`/ListTasksSponsor/${id}`)}}
+            />
+            <CardManager
+              typeCard='start'
+              textCard='Iniciar novo ciclo'
+              onClick={() => {navigate(`/StartNewCicle/${id}`)}}
+            />
+          </BoxCards>
+        </div>
+      </div>
     </Container>
   )
 }

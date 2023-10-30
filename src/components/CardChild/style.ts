@@ -25,7 +25,6 @@ export const Container = styled.div`
       width: 100%;
       padding: 0 1.6rem;
 
-      box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
       color: ${({theme}) => theme.COLORS.WHITE};
       background-color: ${({theme}) => theme.COLORS.PINK_100};
 
@@ -66,12 +65,10 @@ export const Container = styled.div`
 
   &:not(:last-child)::after {
     content: '';
-    width: 98%;
+    width: 100%;
     margin: .4rem 0 .4rem 0;
     border-bottom: .2rem dashed ${({theme}) => theme.COLORS.TURQUOSE_400};
   }
-
-
 
 `
 
@@ -94,7 +91,6 @@ export const StyledCardButton = styled.button`
   color: ${({theme}) => theme.COLORS.WHITE};
   background-color: ${({theme}) => theme.COLORS.VIOLET_400};
 
-  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 
   span{
     font-size: 1.2rem;

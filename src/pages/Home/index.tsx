@@ -1,3 +1,5 @@
+import girlImageLeft from '../../assets/register_child_background/girl_left.svg';
+import boyImageRight from '../../assets/register_child_background/boy_right.svg';
 import { TitleNavigation } from '../../components/TitleNavigation';
 import noRegistryChild from '../../assets/no-regitry-child.svg';
 import { BorderDashed } from '../../components/BorderDashed';
@@ -13,8 +15,6 @@ import { api } from '../../services/api';
 import { TiPlus } from 'react-icons/ti';
 import { toast } from 'react-toastify';
 import { IData } from './type';
-import boyImageRight from '../../assets/register_child_background/boy_right.svg';
-import girlImageLeft from '../../assets/register_child_background/girl_left.svg';
 
 export function Home(){
   const navigate = useNavigate();
@@ -69,13 +69,10 @@ export function Home(){
               visible={isLoading}
             />) : (
               <div>
-                <TitleNavigation
-                  title='Crianças'
-                />
                 {
                   (data.length === 0) &&
                   <BorderDashed className='border-dashed' >
-                    <div className='box-container'>
+                    <div className='wrapper-container'>
                       <img src={noRegistryChild} alt="sem registros de crianças" />
                       <p className='message'>Você ainda não tem crianças registradas!</p>
                       <CardButton onClick={() => navigate('/registerChild')}>
@@ -87,28 +84,34 @@ export function Home(){
                 }
                 {
                   (data.length !== 0) &&
-                  <div className='card-container'>
-                    <CardButton onClick={() => navigate('/registerChild')}>
-                        <img className='girlLeft' src={girlImageLeft} alt="girl in the left side" />
-                        <img className='boyRight' src={boyImageRight} alt="boy in the right side" />
-                        <TiPlus className='icon-plus'/>
-                        <p>Adicionar criança</p>
-                    </CardButton>
-                    <div className="box-card">
-                      {
-                        data.map(child => (
-                          <CardChild
-                            age={child.age}
-                            Icon={FaUserEdit}
-                            textButton='Gerenciar'
-                            nameChild={child.name}
-                            key={child.externalId}
-                            value={child.externalId}
-                            tasks={child.numberTasks}
-                            onClick={() => handleClickChild(child.externalId)}
-                          />
-                        ))
-                      }
+                  <div className='wrapper-container'>
+                    <div className='card-container'>
+                      <TitleNavigation
+                        title='Crianças'
+                      />
+                      <CardButton onClick={() => navigate('/registerChild')}>
+                          <img className='girlLeft' src={girlImageLeft} alt="girl in the left side" />
+                          <img className='boyRight' src={boyImageRight} alt="boy in the right side" />
+                          <TiPlus className='icon-plus'/>
+                          <p>Adicionar criança</p>
+                      </CardButton>
+                      <div className="box-cards">
+                        {
+                          data.map(child => (
+                            <CardChild
+                              age={child.age}
+                              Icon={FaUserEdit}
+                              className='box-child'
+                              textButton='Gerenciar'
+                              nameChild={child.name}
+                              key={child.externalId}
+                              value={child.externalId}
+                              tasks={child.numberTasks}
+                              onClick={() => handleClickChild(child.externalId)}
+                            />
+                          ))
+                        }
+                      </div>
                     </div>
                   </div>
                 }

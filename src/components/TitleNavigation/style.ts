@@ -9,13 +9,13 @@ export const Container = styled.div`
 
   width: 100%;
 
-  margin: 32px 0 8px 0;
-  padding: 0 32px;
+  margin: 3.2rem 0 .8rem 0;
+  padding: 0 1.6rem;
 
   font-family: 'Poppins', sans-serif;
 
   p, button{
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 400;
 
     color: ${({theme}) => theme.COLORS.GRAY_700};
@@ -23,13 +23,16 @@ export const Container = styled.div`
 
   p{
     width: 100%;
+    line-height: 2rem;
     text-align: left;
   }
 
   button{
     width: 100%;
 
+    font-weight: 500;
     text-align: right;
+    color: ${({theme}) => theme.COLORS.VIOLET_700};
 
     border: none;
 

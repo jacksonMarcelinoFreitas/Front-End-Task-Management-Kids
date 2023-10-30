@@ -2,9 +2,9 @@ import { Container, StyledCardButton } from './style';
 import { ICardChild } from './type';
 
 
-export function CardChild({ Icon, nameChild, age, tasks, textButton, onClick, value, ...rest }: ICardChild){
+export function CardChild({className, Icon, nameChild, age, tasks, textButton, onClick, value, ...rest }: ICardChild){
   return(
-    <Container {...rest}>
+    <Container className={className} {...rest}>
       <div className="container-card">
         <div className='box-left'>
           <div className='intern-box-left'>

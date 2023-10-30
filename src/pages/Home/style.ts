@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/device";
 
 
 export const Container = styled.div`
@@ -22,37 +23,25 @@ export const Container = styled.div`
     line-height: 22px;
   }
 
-  .title-navigate{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    grid-area: 'title-navigate';
-
-    width: 100%;
-
-    padding: 0 32px;
-    margin: 32px 0 8px 0;
-
-    button, p{
-      font-size: 20px;
-      font-weight: 400;
-      color: ${({theme}) => theme.COLORS.GRAY_700};
-    }
-
-  }
-
-  .box-container{
+  .wrapper-container{
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    gap: 24px;
+    gap: 2rem;
+
+    padding: 0 3.2rem;
 
     width: 100%;
   }
 
-  .box-card{
+  .box-cards{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 1fr;
+    grid-column-gap: 1.6rem;
+
     width: 100%;
   }
 
@@ -66,10 +55,42 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     gap: 16px;
+    width: 100%;
 
-    grid-area: 'list-child';
+    /* grid-area: 'list-child'; */
 
     margin: 0 16px 32px 16px;
+  }
+
+  @media ${device.mobileL} {
+    .box-cards{
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media ${device.tablet} {
+    .card-container{
+      width: 90%;
+    }
+    .box-cards{
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media ${device.laptop} {
+    .box-cards{
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media ${device.laptopL} {
+    .card-container{
+      width: 80%;
+    }
+
+    .box-cards{
+      grid-template-columns: 1fr 1fr;
+    }
   }
 `
 
@@ -87,8 +108,6 @@ export const CardButton = styled.button`
   font-size: 16px;
   line-height: 20px;
   text-align: center;
-
-  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 
   .girlLeft, .boyRight{
     position: absolute;
@@ -128,5 +147,7 @@ export const CardButton = styled.button`
     word-break: break-word;
     z-index: 2;
   }
+
+
 
 `
