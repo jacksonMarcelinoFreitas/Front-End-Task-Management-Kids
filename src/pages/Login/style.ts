@@ -42,6 +42,7 @@ export const Container = styled.div`
     width: 100%;
 
     button{
+      margin-top: 32px;
       font-size: clamp(1.2rem, 1.6rem, 2rem);
       line-height: 1.6rem;
 
