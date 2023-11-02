@@ -8,10 +8,12 @@ import { customModalStyle } from './confirmDeleteTask';
 import schema from '../../utils/form-schema-edit-task';
 import { TextArea } from '../../components/TextArea';
 import { Header } from '../../components/Header';
+import { ThreeDots } from 'react-loader-spinner';
 import { Button } from '../../components/Button';
 import { useUserId } from '../../hooks/userId';
 import { Input } from '../../components/Input';
 import { useEffect, useState } from 'react';
+import { useAuth } from '../../hooks/auth';
 import { HiTrash } from 'react-icons/hi2';
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
@@ -19,13 +21,13 @@ import { Container } from './style';
 import { useFormik } from 'formik';
 
 import Modal from 'react-modal';
-import { ThreeDots } from 'react-loader-spinner';
 Modal.setAppElement('#root');
 
 export function EditTask(){
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const { signOut } = useAuth();
   const closeModal = () =>{setModalIsOpen(false)}
   const openModal = () =>{setModalIsOpen(true)}
   const { userId } = useUserId();
@@ -54,14 +56,17 @@ export function EditTask(){
       }
 
     } catch (error: any) {
-
-      if(error.response){
-        toast.error('Erro')
+      if (error.response) {
+        toast.error(error.response.data.message);
         setIsButtonLoading(false);
-
+        if (error.response.status === 403) {
+          signOut();
+          navigate('/');
+        }
+      }else{
+        toast.error("Não foi possível trazer a tarefa!")
       }
       setIsButtonLoading(false);
-
     }
   }
 
@@ -84,23 +89,15 @@ export function EditTask(){
         navigate(`/ListTasksSponsor/${userId}`);
 
       }catch(error: any){
-
-        if(error.response){
-
-          if(error.response.data.status === 403){
-
-            toast.error(`${'Problemas de autorização, tente fazer o login novamente!'}`);
-
+        if (error.response) {
+          toast.error(error.response.data.message);
+          if (error.response.status === 403) {
+            signOut();
+            navigate('/');
           }
-
-          toast.error(`${error.response.data.message}`);
-
         }else{
-
-          toast.error(`${'Não foi possível editar a criança!'}`);
-
+          toast.error("Não foi possível editar a tarefa!")
         }
-
       }
 
       setSubmitting(false);
@@ -126,9 +123,16 @@ export function EditTask(){
 
       } catch (error: any) {
         if (error.response) {
-          toast.error('Erro');
+          toast.error(error.response.data.message);
           setIsLoading(false);
+          if (error.response.status === 403) {
+            signOut();
+            navigate('/');
+          }
+        }else{
+          toast.error("Não foi possível trazer a tarefa!")
         }
+        setIsLoading(false);
       }
 
     }

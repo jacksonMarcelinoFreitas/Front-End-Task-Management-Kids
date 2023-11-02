@@ -11,7 +11,7 @@ export const Container = styled.div`
   height: fit-content;
 
   padding: 16px;
-  margin: 0 32px;
+  /* margin: 0 32px; */
 
   border-radius: 12px;
   border: 2px dashed ${({theme}) => theme.COLORS.TURQUOSE_400};

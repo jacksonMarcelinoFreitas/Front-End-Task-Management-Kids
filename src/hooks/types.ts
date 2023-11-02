@@ -20,6 +20,7 @@ export interface IJwtPayload {
   sub: string
   name: string
   role: string[];
+  exp: number;
   externalId: string
 }
 

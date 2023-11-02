@@ -1,16 +1,18 @@
-import { Container } from "./style";
-import warning from "../../assets/warning.svg";
-import { Button } from "../../components/Button"
-import { ButtonText } from "../../components/ButtonText";
 import { useNavigate, useParams } from "react-router-dom";
-import { useFormik } from "formik";
+import { ButtonText } from "../../components/ButtonText";
+import { Button } from "../../components/Button"
+import warning from "../../assets/warning.svg";
 import { useUserId } from "../../hooks/userId";
+import { useAuth } from "../../hooks/auth";
 import { api } from "../../services/api";
 import { toast } from 'react-toastify';
+import { Container } from "./style";
+import { useFormik } from "formik";
 
 export function StartNewCicle(){
   const navigate = useNavigate();
   const { userId } = useUserId();
+  const { signOut } = useAuth();
   const { id } = useParams();
 
   const formik = useFormik({
@@ -36,22 +38,16 @@ export function StartNewCicle(){
 
       }catch(error: any){
 
-        if(error.response){
-
-          if(error.response.data.status === 403){
-
-            toast.error(`${'Problemas de autorização, tente fazer o login novamente!'}`);
-
+        if (error.response) {
+          toast.error(error.response.data.message);
+          setSubmitting(false);
+          if (error.response.status === 403) {
+            signOut();
+            navigate('/');
           }
-
-          toast.error(`${error.response.data.message}`);
-
-        }else{
-
-          toast.error(`${'Não foi possível editar a criança!'}`);
-
+        } else {
+          toast.error('Não foi possível iniciar um novo ciclo!');
         }
-
       }
 
       setSubmitting(false);

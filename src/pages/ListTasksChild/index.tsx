@@ -12,9 +12,8 @@ import { toast } from 'react-toastify';
 import { Container } from './style';
 import { IData } from './type';
 
-
-
 export function ListTasksChild() {
+  const { signOut } = useAuth();
   const [data, setData] = useState<IData>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,9 +23,6 @@ export function ListTasksChild() {
 
   const navigate = useNavigate();
   const { user } = useAuth();
-
-  // useEffect(() => {
-  // }, [user]);
 
   useEffect(() => {
     async function fetchTasks() {
@@ -48,26 +44,17 @@ export function ListTasksChild() {
 
       } catch (error: any) {
         if (error.response) {
-
-          if (error.response.status === 400) {
-
-            toast.error(error.response.data.message);
-            setIsLoading(false);
-
-          } else if (error.response.status === 403) {
-
-            toast.error('Você teve problemas de autorização. Faça o login novamente!');
-            setIsLoading(false);
-
-          }
-
-        } else {
-
-          toast.error('Não foi possível listar as crianças!');
+          toast.error(error.response.data.message);
           setIsLoading(false);
 
+          if (error.response.status === 403) {
+            signOut();
+            navigate('/');
+          }
+        } else {
+          toast.error('Não foi possível listar as tarefas da criança!');
         }
-
+        setIsLoading(false)
       }
 
     }

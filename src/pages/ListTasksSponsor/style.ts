@@ -1,6 +1,6 @@
 import cardImage from '../../assets/child-task.svg';
+import { device } from '../../utils/device';
 import styled from "styled-components";
-
 
 export const Container = styled.div`
   display: grid;
@@ -14,6 +14,8 @@ export const Container = styled.div`
   color: ${({theme}) => theme.COLORS.GRAY_700};
 
   .border-dashed{
+    width: 100%;
+    height: 100%;
     margin-top: 32px;
   }
 
@@ -23,7 +25,7 @@ export const Container = styled.div`
     text-align: center;
   }
 
-  .title-navigate{
+  /* .title-navigate{
     grid-area: 'title-navigate';
 
     display: flex;
@@ -41,6 +43,17 @@ export const Container = styled.div`
       color: ${({theme}) => theme.COLORS.GRAY_700};
     }
 
+  } */
+
+  .wrapper-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3.2rem;
+  }
+
+  .inter-container{
+    width: 100%;
   }
 
   .box-container{
@@ -96,8 +109,64 @@ export const Container = styled.div`
       font-size: 14px;
       margin-top: 4px;
     }
+  }
 
+  @media ${device.mobileL} {
+    .box-cards{
+      grid-template-columns: 1fr;
+    }
 
+    .border-dashed{
+      width: fit-content;
+      padding: 3.2rem;
+    }
+  }
+
+  @media ${device.tablet} {
+    .card-container{
+      width: 90%;
+    }
+    .box-cards{
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .no-registry-image{
+      width: 30rem;
+    }
+  }
+
+  @media ${device.laptop} {
+    .box-cards{
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .no-registry-image{
+      width: 35rem;
+    }
+
+    .border-dashed{
+      width: fit-content;
+      padding: 6.4rem 10.8rem;
+    }
+  }
+
+  @media ${device.laptopL} {
+    .box-cards{
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .card-container{
+      width: 80%;
+    }
+
+    .no-registry-image{
+      width: 35rem;
+    }
+
+    .border-dashed{
+      width: fit-content;
+      padding: 6.4rem 10.8rem;
+    }
   }
 `
 

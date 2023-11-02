@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode  } from 'react';
 import { IAuthContextType, IJwtPayload, IUser, ICredentials} from './types';
+// import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
 import jwt_decode from 'jwt-decode';
@@ -7,6 +8,8 @@ import jwt_decode from 'jwt-decode';
 const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 
 function AuthProvider({ children }: { children: ReactNode }){
+
+  // const navigate = useNavigate();
 
   const [data, setData] = useState<{ user: IUser | null, token: string }>({
     user: null,
@@ -20,13 +23,14 @@ function AuthProvider({ children }: { children: ReactNode }){
 
       const { token } = response.data;
 
-      const { sub, externalId, name, role } = jwt_decode(token) as IJwtPayload;
+      const { sub, externalId, name, role, exp } = jwt_decode(token) as IJwtPayload;
 
       const user = {
         email: sub,
         externalId,
         name,
         role,
+        exp
       };
 
       setData({user, token});
@@ -59,17 +63,13 @@ function AuthProvider({ children }: { children: ReactNode }){
     api.defaults.headers.common['Authorization'] = null;
 
     setData({ user: null, token: '' });
-
   }
 
   useEffect(() => {
-    // busca no localstorage as credencias
-
     const token = localStorage.getItem("@kidsTasker:token");
     const user = localStorage.getItem("@kidsTasker:user");
 
     api.defaults.headers.common['Authorization'] = null;
-
 
     if(token && user){
       api.defaults.headers.common['Authorization'] = token;
@@ -105,3 +105,38 @@ export { AuthProvider, useAuth }
 //useContext: faz o uso do contexto já criado
 //createContext: faz a criação de um contexto
 //useAuth: usa um contexto chamado AuthContext, que permite que tudo do contexto seja acessado onde ele for chamado
+
+// useEffect(() => {
+  //   api.interceptors.response.use(
+  //     response => response,
+  //     error => {
+  //       if (error.response.status === 403) { // Se o status do erro for 403 (não autorizado), faça logout do usuário
+  //         console.log("Interceptor")
+  //         signOut();
+  //       }
+  //       return Promise.reject(error);
+  //     }
+  //   );
+  // }, [signOut]);
+    // const interval = setInterval(() => {
+      // const token = localStorage.getItem("@kidsTasker:token");
+      // const user = localStorage.getItem("@kidsTasker:user");
+
+      // if (user && token) {
+      //   const userObject = JSON.parse(user);
+      //   const exp = userObject.exp;
+
+      //   const expireDate = new Date(exp * 1000);
+      //   console.log(expireDate)
+      //   const currentDate = new Date();
+      //   console.log(currentDate)
+
+      //   if (currentDate > expireDate) {
+      //     toast.warning(`Sua sessão expirou. Faça o login novamente!`);
+      //     // signOut(); // Executa o logout quando o token expira
+      //   }
+      // }
+    // }, 10000); // Verifica a cada 1 minuto (pode ser ajustado conforme necessário)
+
+    // return () => clearInterval(interval); // Limpa o intervalo quando o componente é desmontado
+  // }, [signOut]);

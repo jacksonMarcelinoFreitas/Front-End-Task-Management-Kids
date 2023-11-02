@@ -11,6 +11,7 @@
   import { Header } from '../../components/Header';
   import { Input } from '../../components/Input';
   import { useEffect, useState } from 'react';
+  import { useAuth } from '../../hooks/auth';
   import { HiTrash } from 'react-icons/hi2';
   import { api } from '../../services/api';
   import { toast } from 'react-toastify';
@@ -31,6 +32,7 @@
     const closeModal = () =>{setModalIsOpen(false)}
     const openModal = () =>{setModalIsOpen(true)}
     const navigate = useNavigate();
+    const { signOut } = useAuth();
     const { id } = useParams();
 
     const [initialValues, setInitialValues] = useState({
@@ -61,9 +63,15 @@
 
         } catch (error: any) {
           if (error.response) {
-            toast.error('Erro');
+            toast.error(error.response.data.message);
             setIsLoading(false);
+            if (error.response.status === 403) {
+              setIsLoading(false);
+              signOut();
+              navigate('/');
+            }
           }
+          setIsLoading(false);
         }
       }
       fetchData();
@@ -87,12 +95,16 @@
         }
 
       } catch (error: any) {
-
-        if(error.response){
-          toast.error('Erro')
-          setIsButtonLoading(false);
-
+        if (error.response) {
+          toast.error(error.response.data.message);
+          setIsLoading(false);
+          if (error.response.status === 403) {
+            signOut();
+            navigate('/');
+          }
         }
+
+        setIsLoading(false);
 
       }
     }
@@ -129,14 +141,12 @@
         }catch(error: any){
 
           if(error.response){
+            toast.error(error.response.data.message);
+            setIsLoading(false);
 
-            if(error.response.data.status === 403){
-
-              toast.error(`${'Problemas de autorização, tente fazer o login novamente!'}`);
-
+            if (error.response.status === 403) {
+              signOut();
             }
-
-            toast.error(`${error.response.data.message}`);
 
           }else{
 
