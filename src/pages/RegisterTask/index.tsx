@@ -40,6 +40,7 @@ export function RegisterTask(){
             navigate(`/ManagerChild/${id}`);
 
           }catch(error: any){
+            console.log(error.response.data.message)
             if (error.response) {
               toast.error(error.response.data.message);
               setSubmitting(false);

@@ -12,12 +12,12 @@ export const Container = styled.div`
   color: ${({theme}) => theme.COLORS.GRAY_700};
 
   .border-dashed{
-    margin-top: 32px;
+    margin-top: 3.2rem;
   }
 
   .message{
     font-weight: 500;
-    line-height: 22px;
+    line-height: 2.2rem;
     text-align: center;
   }
 
@@ -39,12 +39,12 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    gap: 24px;
+    gap: 2.4rem;
 
     width: 100%;
 
     img{
-      width: clamp(183px, 40%, 350px);
+      width: clamp(18.3rem, 40%, 35.0rem);
     }
 
     p{
@@ -58,26 +58,25 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
+    gap: 1.0rem;
 
     grid-area: 'list-child';
 
-    margin: 32px 16px 32px 16px;
+    margin: 3.2rem 0;
 
     .box-performed, .box-not-performed{
       width: 100%;
     }
-
 
     .tasks-perfomed, .tasks-unperfomed, .total-value{
       width: 100%;
 
       text-align: left;
       font-weight: 500;
-      line-height: 18px;
+      line-height: 1.8rem;
 
-      padding-left: 8px;
-      padding-right: 8px;
+      padding-left: .8rem;
+      padding-right: .8rem;
     }
 
     .box-title-tasks-perfomed{
@@ -89,8 +88,8 @@ export const Container = styled.div`
       align-items: center;
       justify-content: space-between;
 
-      font-size: 14px;
-      margin-top: 4px;
+      font-size: 1.4rem;
+      margin-top: .4rem;
     }
   }
 
@@ -176,27 +175,27 @@ export const Container = styled.div`
 //   position: relative;
 
 //   width: 100%;
-//   height: 96px;
-//   padding: 0 32px;
+//   height: 9.6rem;
+//   padding: 0 3.2rem;
 
-//   font-size: 16px;
-//   line-height: 20px;
+//   font-size: 1.6rem;
+//   line-height: 2.0rem;
 //   text-align: center;
 
 //   color: ${({theme}) => theme.COLORS.WHITE};
 
-//   background-position: 9px 12px;
+//   background-position: .9rem 1.2rem;
 //   background-repeat: no-repeat, repeat;
 //   background-image: url(${cardImage});
 //   background-color: ${({theme}) => theme.COLORS.TURQUOSE_400};
 
-//   border-radius: 12px;
-//   border: 2px solid  ${({theme}) => theme.COLORS.TURQUOSE_700};
+//   border-radius: 1.2rem;
+//   border: .2rem solid  ${({theme}) => theme.COLORS.TURQUOSE_700};
 
 //   overflow: hidden;
 
 //   .icon-plus{
-//     font-size: 36px;
+//     font-size: 3.6rem;
 //     color: ${({theme}) => theme.COLORS.VIOLET_700};
 //   }
 

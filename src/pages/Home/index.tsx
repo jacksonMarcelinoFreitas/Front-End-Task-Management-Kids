@@ -117,7 +117,7 @@ export function Home(){
                             <CardChild
                               age={child.age}
                               Icon={FaUserEdit}
-                              className={`box-child`}
+                              className='box-child'
                               textButton='Gerenciar'
                               nameChild={child.name}
                               key={child.externalId}

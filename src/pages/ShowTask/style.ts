@@ -18,7 +18,11 @@ export const Container = styled.div`
 
   .box-container{
     display: grid;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     gap: 1.6rem;
+
   }
 
   .container-title, .container-description, .container-reward{
@@ -32,6 +36,8 @@ export const Container = styled.div`
     text-align: center;
 
     border-radius: 1.2rem;
+
+    height: 100%;
   }
 
   .container-title{
@@ -93,6 +99,9 @@ export const Container = styled.div`
     border-radius: 0 0 1.2rem 1.2rem;
 
     color: ${({theme}) => theme.COLORS.GRAY_700};
+
+    word-wrap: break-word;
+
   }
 
   .absolute{
@@ -240,13 +249,13 @@ export const Container = styled.div`
     }
 
     .title-name, .title-description, .title-reward{
-      height: 70%;
+      /* height: 70%; */
       font-size: clamp(1.4rem, 1.9vw, 2.4rem);
     }
 
     .value{
       font-size: clamp(1.4rem, 1.9vw, 2.4rem);
-      height: 30%;
+      /* height: 30%; */
     }
 
   }
@@ -282,13 +291,13 @@ export const Container = styled.div`
     }
 
     .title-name, .title-description, .title-reward{
-      height: 70%;
+      /* height: 70%; */
       font-size: clamp(1.4rem, 1.6vw, 2.4rem);
     }
 
     .value{
       font-size: clamp(1.4rem, 1.6vw, 2.4rem);
-      height: 30%;
+      /* height: 30%; */
     }
   }
 
@@ -328,7 +337,7 @@ export const Container = styled.div`
     }
 
     .value{
-      font-size: clamp(1.4rem, 1.5vw, 2.4rem);
+      font-size: clamp(1.4rem, 1.2vw, 2.4rem);
       height: 30%;
     }
 

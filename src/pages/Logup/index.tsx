@@ -82,77 +82,81 @@ export function Logup(){
 
   return(
     <Container>
-      <img src={imageLogup} alt='imagem de login'/>
-      <form className='form-container' onSubmit={formik.handleSubmit}>
-        <h1>
-          Cadastre-se!
-        </h1>
-        <Input
-          name='name'
-          type='text'
-          label='Nome completo'
-          placeholder='jhonDoe'
-          Icon={BsFillPersonFill}
-          error={formik.errors.name}
-          onBlur={formik.handleBlur}
-          value={formik.values.name}
-          touched={formik.touched.name}
-          onChange={formik.handleChange}
-        />
-        <Input
-          name='email'
-          type='email'
-          label='E-mail'
-          Icon={MdEmail}
-          onBlur={formik.handleBlur}
-          error={formik.errors.email}
-          value={formik.values.email}
-          placeholder='jhonDoe@gmail.com'
-          onChange={formik.handleChange}
-          touched={formik.touched.email}
-        />
-        <Input
-          label='Senha'
-          name='password'
-          onClick={toggleEye}
-          placeholder='*************'
-          onBlur={formik.handleBlur}
-          error={formik.errors.password}
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          touched={formik.touched.password}
-          type={eyeIsClosed ? 'text' : 'password'}
-          Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
-        />
-        <PasswordStrengthMeter password={formik.values.password}/>
-        <CheckboxPrivacyPolicies
-          link1='#'
-          link2='#'
-          text1='termos'
-          name='readTerms'
-          onBlur={formik.handleBlur}
-          text2='políticas de privacidade'
-          error={formik.errors.readTerms}
-          onChange={formik.handleChange}
-          checked={formik.values.readTerms}
-          touched={formik.touched.readTerms}
-        />
-        <div className='box-container'>
-          <p>*O cadastro deve ser realizado somente por um responsável</p>
-          <Button
-            value='Enviar'
-            type= 'submit'
-            isLoading={formik.isSubmitting}
-            disabled={!formik.isValid || formik.isSubmitting}
-          />
-          <button
-            type='button'
-            onClick={() => navigate('/')}
-          >
-            Fazer login
-          </button>
+      <div className="wrapper-container">
+        <div className="box-container">
+          <img src={imageLogup} alt='imagem de login'/>
+          <form className='form-container' onSubmit={formik.handleSubmit}>
+            <h1>
+              Cadastre-se!
+            </h1>
+            <Input
+              name='name'
+              type='text'
+              label='Nome completo'
+              placeholder='jhonDoe'
+              Icon={BsFillPersonFill}
+              error={formik.errors.name}
+              onBlur={formik.handleBlur}
+              value={formik.values.name}
+              touched={formik.touched.name}
+              onChange={formik.handleChange}
+            />
+            <Input
+              name='email'
+              type='email'
+              label='E-mail'
+              Icon={MdEmail}
+              onBlur={formik.handleBlur}
+              error={formik.errors.email}
+              value={formik.values.email}
+              placeholder='jhonDoe@gmail.com'
+              onChange={formik.handleChange}
+              touched={formik.touched.email}
+            />
+            <Input
+              label='Senha'
+              name='password'
+              onClick={toggleEye}
+              placeholder='*************'
+              onBlur={formik.handleBlur}
+              error={formik.errors.password}
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              touched={formik.touched.password}
+              type={eyeIsClosed ? 'text' : 'password'}
+              Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
+            />
+            <PasswordStrengthMeter password={formik.values.password}/>
+            <CheckboxPrivacyPolicies
+              link1='#'
+              link2='#'
+              text1='termos'
+              name='readTerms'
+              onBlur={formik.handleBlur}
+              text2='políticas de privacidade'
+              error={formik.errors.readTerms}
+              onChange={formik.handleChange}
+              checked={formik.values.readTerms}
+              touched={formik.touched.readTerms}
+            />
+            <div className='box-buttons'>
+              <p>*O cadastro deve ser realizado somente por um responsável</p>
+              <Button
+                value='Enviar'
+                type= 'submit'
+                isLoading={formik.isSubmitting}
+                disabled={!formik.isValid || formik.isSubmitting}
+              />
+              <button
+                type='button'
+                onClick={() => navigate('/')}
+              >
+                Fazer login
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </Container>
   )
 }

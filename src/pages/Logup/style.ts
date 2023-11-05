@@ -2,21 +2,25 @@ import { device } from "../../utils/device";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  gap: 3.2rem;
-
   width: 100vw;
-  height: 100%;
 
-  padding: 3.2rem;
-
-  img{
-    width: clamp(20rem, 25vw, 50rem);
+  .wrapper-container, .box-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3.2rem;
+    width: 100%;
   }
 
+  .box-container{
+    flex-direction: column;
+    padding: 0;
+    gap: 3.2rem;
+  }
+
+  img{
+    width: clamp(20rem, 40%, 50rem);
+  }
 
   span{
     font-size: clamp(1.2rem, 1.4vw, 1.6rem);
@@ -32,7 +36,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.PINK_400};
   }
 
-  .form-container, .box-container{
+  .form-container, .box-buttons{
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -44,10 +48,9 @@ export const Container = styled.div`
   .form-container{
     gap: 1.6rem;
 
-    margin: 0 2.4rem;
   }
 
-  .box-container{
+  .box-buttons{
     gap: .8rem;
   }
 
@@ -63,28 +66,57 @@ export const Container = styled.div`
 
   @media ${device.mobileL} {
     .form-container{
-      width: 70%;
+      width: 80%;
     }
   }
 
   @media ${device.tablet} {
+    .wrapper-container{
+      padding: 0 6.4rem;
+      height: 100vh;
+    }
+
+    .box-container{
+      flex-direction: row;
+      gap: 6.4rem;
+    }
+
     .form-container{
-      width: clamp(50%, 70%, 80%);
+      width: 100%;
     }
   }
 
   @media ${device.laptop} {
-    flex-direction: row;
-    gap: 10.8rem;
+    .wrapper-container{
+      padding: 0 10.8rem;
+      height: 100vh;
+    }
+
+    .box-container{
+      flex-direction: row;
+      gap: 6.4rem;
+    }
+
+    .form-container{
+      width: 50%;
+    }
+  }
+
+  @media ${device.laptopL} {
+    .wrapper-container{
+      padding: 0 10.8rem;
+      height: 100vh;
+    }
+
+    .box-container{
+      flex-direction: row;
+      gap: 6.4rem;
+    }
 
     .form-container{
       width: 40%;
     }
+
   }
-
-
-
-
-
 
 `

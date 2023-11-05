@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../utils/device";
 
-
 export const Container = styled.div`
   display: grid;
   grid-template-areas:
@@ -12,6 +11,8 @@ export const Container = styled.div`
   grid-template-rows: 64px min-content auto;
 
   color: ${({theme}) => theme.COLORS.GRAY_700};
+
+  padding-bottom: 3.2rem;
 
   .no-registry-image{
     width: 20rem;
@@ -50,24 +51,9 @@ export const Container = styled.div`
     gap: 1.6rem;
   }
 
-  .box-cards{
-    display: grid;
-    align-items: center;
-    justify-content: stretch;
-    grid-template-columns: 1fr;
 
-
-    grid-column-gap: 1.6rem;
-
+  .box-child{
     width: 100%;
-  }
-
-  .box-child {
-    width: 100%;
-  }
-
-  img{
-    width: 18rem;
   }
 
   .card-container{
@@ -78,6 +64,19 @@ export const Container = styled.div`
     gap: 1.6rem;
 
     width: 100%;
+  }
+
+  .box-cards{
+    display: grid;
+    align-items: center;
+    justify-content: stretch;
+    grid-template-columns: 1fr;
+
+    grid-column-gap: 1.6rem;
+
+    width: 100%;
+
+    grid-area: "list-child";
   }
 
   @media ${device.mobileL} {
@@ -97,7 +96,7 @@ export const Container = styled.div`
 
     .box-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(50%, 50%));
+      grid-template-columns: 1fr 1fr;
     }
 
     .box-child:nth-child(odd):last-child {
@@ -120,7 +119,7 @@ export const Container = styled.div`
 
     .box-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(50%, 50%));
+      grid-template-columns: 1fr 1fr;
     }
 
     .box-child:nth-child(odd):last-child {
@@ -143,7 +142,7 @@ export const Container = styled.div`
     }
 
     .box-cards {
-      grid-template-columns: repeat(auto-fill, minmax(50%, 50%));
+      grid-template-columns: 1fr 1fr;
     }
 
     .box-child:nth-child(odd):last-child {
@@ -175,6 +174,10 @@ export const CardButton = styled.button`
   font-size: 1.6rem;
   line-height: 2.0rem;
   text-align: center;
+
+  img{
+    width: 18rem;
+  }
 
   .girlLeft, .boyRight{
     position: absolute;
