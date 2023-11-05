@@ -15,7 +15,6 @@
   import { HiTrash } from 'react-icons/hi2';
   import { api } from '../../services/api';
   import { toast } from 'react-toastify';
-
   import { Container } from './style';
   import { useFormik } from 'formik';
   import { IChildData } from './type';
@@ -176,88 +175,94 @@
           ) : (
         <Container>
           <Header />
-          <TitleNavigation
-            titleButton='Voltar'
-            title='Editar criança'
-            onClick={() => {navigate(`/ManagerChild/${id}`)}}
-          />
-          <BorderDashed>
-            <form onSubmit={formik.handleSubmit}>
-              <Input
-                type='text'
-                name='name'
-                placeholder='Mariana'
-                label='Nome da criança'
-                error={formik.errors.name}
-                value={formik.values.name}
-                onBlur={formik.handleBlur}
-                touched={formik.touched.name}
-                onChange={formik.handleChange}
+          <div className="wrapper-container">
+            <div className="box-container">
+              <TitleNavigation
+                titleButton='Voltar'
+                title='Editar criança'
+                onClick={() => {navigate(`/ManagerChild/${id}`)}}
               />
-              <Input
-                type='text'
-                name='nickname'
-                label='Nickname'
-                placeholder='Mari'
-                onBlur={formik.handleBlur}
-                error={formik.errors.nickname}
-                onChange={formik.handleChange}
-                value={formik.values.nickname}
-                touched={formik.touched.nickname}
-              />
-              <Input
-                type='number'
-                name='age'
-                label='Idade'
-                placeholder='8'
-                onBlur={formik.handleBlur}
-                error={formik.errors.age}
-                onChange={formik.handleChange}
-                value={formik.values.age}
-                touched={formik.touched.age}
-              />
-              <Input
-                label='Senha'
-                name='password'
-                onClick={toggleEye}
-                placeholder='************'
-                onBlur={formik.handleBlur}
-                error={formik.errors.password}
-                onChange={formik.handleChange}
-                value={formik.values.password}
-                touched={formik.touched.password}
-                type={eyeIsClosed ? 'text' : 'password'}
-                Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
-              />
-              <Input
-                onClick={toggleEye}
-                name='confirmPassword'
-                label='Confirme a senha'
-                placeholder='************'
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                error={formik.errors.confirmPassword}
-                value={formik.values.confirmPassword}
-                type={eyeIsClosed ? 'text' : 'password'}
-                touched={formik.touched.confirmPassword}
-                Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
-              />
-              <Button
-                type='submit'
-                value='Editar'
-                isLoading={formik.isSubmitting}
-                disabled={!formik.isValid || formik.isSubmitting}
-              />
-              <Button
-                type='button'
-                value='Excluir'
-                Icon={HiTrash}
-                isLoading={isButtonLoading}
-                disabled={!formik.isValid || isButtonLoading}
-                onClick={openModal}
-              />
-            </form>
-          </BorderDashed>
+              <BorderDashed>
+                <form onSubmit={formik.handleSubmit}>
+                  <Input
+                    type='text'
+                    name='name'
+                    placeholder='Mariana'
+                    label='Nome da criança'
+                    error={formik.errors.name}
+                    value={formik.values.name}
+                    onBlur={formik.handleBlur}
+                    touched={formik.touched.name}
+                    onChange={formik.handleChange}
+                  />
+                  <Input
+                    type='text'
+                    name='nickname'
+                    label='Nickname'
+                    placeholder='Mari'
+                    onBlur={formik.handleBlur}
+                    error={formik.errors.nickname}
+                    onChange={formik.handleChange}
+                    value={formik.values.nickname}
+                    touched={formik.touched.nickname}
+                  />
+                  <Input
+                    type='number'
+                    name='age'
+                    label='Idade'
+                    placeholder='8'
+                    onBlur={formik.handleBlur}
+                    error={formik.errors.age}
+                    onChange={formik.handleChange}
+                    value={formik.values.age}
+                    touched={formik.touched.age}
+                  />
+                  <Input
+                    label='Senha'
+                    name='password'
+                    onClick={toggleEye}
+                    placeholder='************'
+                    onBlur={formik.handleBlur}
+                    error={formik.errors.password}
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    touched={formik.touched.password}
+                    type={eyeIsClosed ? 'text' : 'password'}
+                    Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
+                  />
+                  <Input
+                    onClick={toggleEye}
+                    name='confirmPassword'
+                    label='Confirme a senha'
+                    placeholder='************'
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    error={formik.errors.confirmPassword}
+                    value={formik.values.confirmPassword}
+                    type={eyeIsClosed ? 'text' : 'password'}
+                    touched={formik.touched.confirmPassword}
+                    Icon={eyeIsClosed ? AiFillEyeInvisible : AiFillEye}
+                  />
+                  <div className="box-button-form">
+                    <Button
+                      type='submit'
+                      value='Editar'
+                      isLoading={formik.isSubmitting}
+                      disabled={!formik.isValid || formik.isSubmitting}
+                    />
+                    <Button
+                      type='button'
+                      value='Excluir'
+                      Icon={HiTrash}
+                      isLoading={isButtonLoading}
+                      disabled={!formik.isValid || isButtonLoading}
+                      onClick={openModal}
+                    />
+                  </div>
+                </form>
+              </BorderDashed>
+            </div>
+          </div>
 
           <Modal
             isOpen={modalIsOpen}

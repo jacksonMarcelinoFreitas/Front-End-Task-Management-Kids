@@ -1,145 +1,337 @@
+import { device } from "../../utils/device";
 import styled from "styled-components";
 
 export const Container = styled.div`
+  padding-bottom: 3.2rem;
 
-.box-container{
-  display: grid;
-  gap: 16px;
-  margin-bottom: 32px;
-}
+  .wrapper-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.container-title, .container-description, .container-reward{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+    padding: 0 3.2rem;
+  }
 
-  box-shadow: 4px 4px 8px rgba(0,0,0,0.25);
+  .intern-container{
+    width: 100%;
+  }
 
-  text-align: center;
+  .box-container{
+    display: grid;
+    gap: 1.6rem;
+  }
 
-  margin: 0 16px;
+  .container-title, .container-description, .container-reward{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
-  border-radius: 12px;
-}
+    box-shadow: .4rem .4rem .8rem rgba(0,0,0,0.25);
 
-.title-name, .title-description, .title-reward, .value{
-  width: 100%;
-  padding: 16px;
+    text-align: center;
 
-}
+    border-radius: 1.2rem;
+  }
 
-.title-name, .title-description, .title-reward{
-  position: relative;
+  .container-title{
+    grid-area: 'name';
+  }
+  .container-reward{
+    grid-area: 'reward';
+  }
+  .container-description{
+    grid-area: 'description';
+  }
 
-  z-index: 1;
+  .title-name, .title-description, .title-reward, .value{
+    width: 100%;
+    padding: 1.6rem;
+  }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .title-name, .title-description, .title-reward{
+    position: relative;
 
-  height: 130px;
-  font-size: 14px;
-  font-weight: bold;
+    z-index: 1;
 
-  color: ${({theme}) => theme.COLORS.WHITE};
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  box-shadow: rgba(0,0,0,0.25) 0px 6px 4px;
+    height: 13rem;
+    font-size: 1.4rem;
+    font-weight: bold;
 
-  border-radius: 12px 12px 0 0;
+    color: ${({theme}) => theme.COLORS.WHITE};
 
-  overflow: hidden;
+    box-shadow: rgba(0,0,0,0.25) .0rem .6rem .4rem;
 
-  font-size: 16px;
-}
+    border-radius: 1.2rem 1.2rem 0 0;
 
-.title-name{
-  background-color: ${({theme}) => theme.COLORS.VIOLET_100};
-}
-.title-description{
-  background-color: ${({theme}) => theme.COLORS.PINK_100};
-}
-.title-reward{
-  background-color: ${({theme}) => theme.COLORS.TURQUOSE_100};
-}
+    overflow: hidden;
 
-.value{
-  background-color: ${({theme}) => theme.COLORS.WHITE};
+    font-size: 1.6rem;
+  }
 
-  border-radius: 0 0 12px 12px;
+  .title-name{
+    background-color: ${({theme}) => theme.COLORS.VIOLET_100};
+  }
+  .title-description{
+    background-color: ${({theme}) => theme.COLORS.PINK_100};
+  }
+  .title-reward{
+    background-color: ${({theme}) => theme.COLORS.TURQUOSE_100};
+  }
 
-  color: ${({theme}) => theme.COLORS.GRAY_700};
-}
+  .value{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.absolute{
-  position: absolute;
-}
+    background-color: ${({theme}) => theme.COLORS.WHITE};
 
-//CARD NAME
-.boy_image{
-  left: -8px;
-  bottom: -2px;
-  z-index: -1;
-}
-.girl_image{
-  right: -24px;
-  bottom: -2px;
-  z-index: -1;
-}
-.boll_soap_left_image{
-  bottom: 0;
-  left: -5px;
-  z-index: 0;
-}
-.boll_soap_right_image{
-  bottom: -20px;
-  right: 0;
-  z-index: -4;
-}
-.cloud_soap_image{
-  right: 0;
-  bottom: -24px;
-}
-.floor_cyan, .floor_green{
-  bottom: 0px;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 32px;
-  background-color: ${({theme})=> theme.COLORS.CYAN_700};
-  z-index: -6;
-}
-.floor_green{
-  background-color: #0E9262;
-}
+    border-radius: 0 0 1.2rem 1.2rem;
 
-//DESCRIPTION CARD
-.girl_left_image{
-  left: -14px;
-  bottom: -12px;
-  z-index: -1;
-}
-.sheet_girl_right_image{
-  right: 0px;
-  bottom: 0px;
-  z-index: -1;
-}
+    color: ${({theme}) => theme.COLORS.GRAY_700};
+  }
 
-//REWARD CARD
-.mom_girl_money_left_image{
-  left: -14px;
-  bottom: -12px;
-  z-index: -1;
-}
-.sheet_right_side{
-  right: -28px;
-  bottom: -24px;
-  z-index: -1;
-}
+  .absolute{
+    position: absolute;
+  }
 
-.custom-modal{
-  position: absolute;
-  z-index: 1000;
-}
+  //CARD NAME
+  .boy_image{
+    left: -.8rem;
+    bottom: -.2rem;
+    z-index: -1;
+    width: fit-content;
+  }
+  .girl_image{
+    right: -2.4rem;
+    bottom: -.2rem;
+    z-index: -1;
+  }
+  .boll_soap_left_image{
+    bottom: 0;
+    left: -.5rem;
+    z-index: 0;
+  }
+  .boll_soap_right_image{
+    bottom: -2.0rem;
+    right: 0;
+    z-index: -4;
+  }
+  .cloud_soap_image{
+    right: 0;
+    bottom: -2.4rem;
+  }
+  .floor_cyan, .floor_green{
+    bottom: .0rem;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 3.2rem;
+    background-color: ${({theme})=> theme.COLORS.CYAN_700};
+    z-index: -6;
+  }
+  .floor_green{
+    background-color: #0E9262;
+  }
+
+  //DESCRIPTION CARD
+  .girl_left_image{
+    left: -1.4rem;
+    bottom: -1.2rem;
+    z-index: -1;
+  }
+  .sheet_girl_right_image{
+    right: .0rem;
+    bottom: .0rem;
+    z-index: -1;
+  }
+
+  //REWARD CARD
+  .mom_girl_money_left_image{
+    left: -1.4rem;
+    bottom: -1.2rem;
+    z-index: -1;
+  }
+  .sheet_right_side{
+    right: -2.8rem;
+    bottom: -2.4rem;
+    z-index: -1;
+  }
+
+  .custom-modal{
+    position: absolute;
+    z-index: 1000;
+  }
+
+  @media ${device.mobileL} {
+    .wrapper-container{
+      height: 80vh;
+      padding: 0 3.2rem;
+    }
+
+    .intern-container{
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      align-items: stretch;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .box-container{
+      height: 70%;
+      /* grid-template-columns: 1fr 1fr; */
+      column-gap: 1.6rem;
+      grid-template:
+      "name reward"
+      "description description"
+      / 1fr 1fr;
+
+      .container-description{
+        grid-column: 1 / 3;
+      }
+    }
+
+    .title-name, .title-description, .title-reward{
+      height: 70%;
+      font-size: clamp(1.4rem, 1.9vw, 2.4rem);
+    }
+
+    .value{
+      font-size: clamp(1.4rem, 1.9vw, 2.4rem);
+      height: 30%;
+    }
+
+  }
+
+  @media ${device.tablet} {
+    .wrapper-container{
+      height: 80vh;
+      padding: 0 6.4rem;
+    }
+
+    .intern-container{
+      width: 90%;
+      height: 100%;
+
+      display: flex;
+      align-items: stretch;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .box-container{
+      height: 70%;
+      /* grid-template-columns: 1fr 1fr; */
+      column-gap: 1.6rem;
+      grid-template:
+      "name reward"
+      "description description"
+      / 1fr 1fr;
+
+      .container-description{
+        grid-column: 1 / 3;
+      }
+    }
+
+    .title-name, .title-description, .title-reward{
+      height: 70%;
+      font-size: clamp(1.4rem, 1.9vw, 2.4rem);
+    }
+
+    .value{
+      font-size: clamp(1.4rem, 1.9vw, 2.4rem);
+      height: 30%;
+    }
+
+  }
+
+  @media ${device.laptop} {
+    .wrapper-container{
+      height: 80vh;
+      padding: 0 10.8rem;
+    }
+
+    .intern-container{
+      width: 80%;
+      height: 100%;
+
+      display: flex;
+      align-items: stretch;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .box-container{
+      height: 100%;
+      /* grid-template-columns: 1fr 1fr; */
+      column-gap: 1.6rem;
+      grid-template:
+      "name reward"
+      "description description"
+      / 1fr 1fr;
+
+      .container-description{
+        grid-column: 1 / 3;
+      }
+    }
+
+    .title-name, .title-description, .title-reward{
+      height: 70%;
+      font-size: clamp(1.4rem, 1.6vw, 2.4rem);
+    }
+
+    .value{
+      font-size: clamp(1.4rem, 1.6vw, 2.4rem);
+      height: 30%;
+    }
+  }
+
+  @media ${device.laptopL} {
+    .wrapper-container{
+      height: 80vh;
+      padding: 0 10.8rem;
+    }
+
+    .intern-container{
+      width: 60%;
+      height: 100%;
+
+      display: flex;
+      align-items: stretch;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .box-container{
+      height: 100%;
+      /* grid-template-columns: 1fr 1fr; */
+      column-gap: 1.6rem;
+      grid-template:
+      "name reward"
+      "description description"
+      / 1fr 1fr;
+
+      .container-description{
+        grid-column: 1 / 3;
+      }
+    }
+
+    .title-name, .title-description, .title-reward{
+      height: 70%;
+      font-size: clamp(1.4rem, 1.5vw, 2.4rem);
+    }
+
+    .value{
+      font-size: clamp(1.4rem, 1.5vw, 2.4rem);
+      height: 30%;
+    }
+
+  }
 
 `

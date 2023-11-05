@@ -90,17 +90,19 @@ export function StartNewCicle(){
             <label htmlFor="unreuse">Não</label><br/>
             </div>
           </div>
-          <Button
-            value="Confirmar"
-            type="submit"
-            isLoading={formik.isSubmitting}
-            disabled={!formik.isValid || formik.isSubmitting}
-          />
-          <ButtonText
-            value="Voltar"
-            type="button"
-            onClick={() => navigate(`/ManagerChild/${id}`)}
-          />
+          <div className="box-buttons">
+            <Button
+              value="Confirmar"
+              type="submit"
+              isLoading={formik.isSubmitting}
+              disabled={!formik.isValid || formik.isSubmitting}
+            />
+            <ButtonText
+              value="Voltar"
+              type="button"
+              onClick={() => navigate(`/ManagerChild/${id}`)}
+            />
+          </div>
         </div>
       </form>
     </Container>

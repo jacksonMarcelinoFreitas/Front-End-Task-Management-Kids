@@ -69,48 +69,46 @@ export function ListTasksSponsor(){
         <Container>
           <Header />
           <div className="wrapper-container">
-            <div className="intern-container">
-              {
-                (data.length !== 0) &&
-                <TitleNavigation
-                  titleButton='Voltar'
-                  onClick={()=> navigate(`/ManagerChild/${id}`)}
-                />
-              }
-              {
-              isLoading ? (
-                <ThreeDots
-                  height="80"
-                  width="80"
-                  radius="9"
-                  color="#74309D"
-                  ariaLabel="three-dots-loading"
-                  wrapperStyle={{}}
-                  wrapperClass="loader"
-                  visible={isLoading}
-                />) : (
-                  <div className='intern-container'>
-                    {
-                      (data.length === 0) &&
-                      <BorderDashed className='border-dashed' >
-                        <div className='box-container'>
-                          <img src={noRegistryChild} alt="sem registros de tarefas" />
-                          <p className='message'>Você ainda não registrou tarefas para esta criança!</p>
-                          <CardButton onClick={() => navigate(`/RegisterTask/${id}`)}>
-                            <TiPlus className='icon-plus'/>
-                            <p>Adicionar tarefa</p>
-                          </CardButton>
-                        </div>
-                      </BorderDashed>
-                    }
-                    {
-                      (data.length !== 0) &&
-                      <div className='card-container'>
+            {
+            isLoading ? (
+              <ThreeDots
+                height="80"
+                width="80"
+                radius="9"
+                color="#74309D"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClass="loader"
+                visible={isLoading}
+              />) : (
+                <div className='intern-container'>
+                  {
+                    (data.length === 0) &&
+                    <BorderDashed className='border-dashed' >
+                      <div className='box-container'>
+                        <img src={noRegistryChild} alt="sem registros de tarefas" />
+                        <p className='message'>Você ainda não registrou tarefas para esta criança!</p>
+                        <CardButton onClick={() => navigate(`/RegisterTask/${id}`)}>
+                          <TiPlus className='icon-plus'/>
+                          <p>Adicionar tarefa</p>
+                        </CardButton>
+                      </div>
+                    </BorderDashed>
+                  }
+                  {
+                    (data.length !== 0) &&
+                    <>
+                      <TitleNavigation
+                        titleButton='Voltar'
+                        onClick={()=> navigate(`/ManagerChild/${id}`)}
+                      />
                         <CardButton onClick={() => navigate(`/RegisterTask/${id}`)}>
                             <TiPlus className='icon-plus'/>
                             <p>Adicionar tarefa</p>
                         </CardButton>
+
                         <p className='tasks-unperfomed'>Tarefas não realizadas</p>
+
                         <div className="box-not-performed">
                           {
                             notPerformedTasks.map(task => (
@@ -127,6 +125,7 @@ export function ListTasksSponsor(){
                             ))
                           }
                         </div>
+
                         <div className="box-title-tasks-perfomed">
                           <p className='tasks-perfomed'>Tarefas realizadas</p>
                           <div className='total-value'>
@@ -134,6 +133,7 @@ export function ListTasksSponsor(){
                             <span>R${totalValuePerformed}</span>
                           </div>
                         </div>
+
                         <div className="box-performed">
                           {
                             performedTasks.map(task => (
@@ -150,12 +150,11 @@ export function ListTasksSponsor(){
                             ))
                           }
                         </div>
-                      </div>
-                    }
-                  </div>
-                  )
-              }
-            </div>
+                    </>
+                  }
+                </div>
+                )
+            }
           </div>
         </Container>
   )

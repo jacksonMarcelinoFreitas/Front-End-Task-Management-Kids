@@ -113,11 +113,11 @@ export function Home(){
                       </CardButton>
                       <div className="box-cards">
                         {
-                          data.map(child => (
+                          data.map((child)=> (
                             <CardChild
                               age={child.age}
                               Icon={FaUserEdit}
-                              className='box-child'
+                              className={`box-child`}
                               textButton='Gerenciar'
                               nameChild={child.name}
                               key={child.externalId}

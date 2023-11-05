@@ -156,68 +156,74 @@ export function EditTask(){
       ) : (
         <Container>
           <Header />
-          <TitleNavigation
-            title='Editar tarefa'
-            titleButton='Voltar'
-            onClick={() => navigate(`/ListTasksSponsor/${userId}`)}
-          />
-          <BorderDashed>
-            <form onSubmit={formik.handleSubmit}>
-              <InputCheck
-                id='performed'
-                name='performed'
-                onBlur={formik.handleBlur}
-                text='Marcar como realizada'
-                onChange={formik.handleChange}
-                error={formik.errors.performed}
-                checked={formik.values.performed}
-                touched={formik.touched.performed}
+          <div className="wrapper-container">
+            <div className="box-container">
+              <TitleNavigation
+                title='Editar tarefa'
+                titleButton='Voltar'
+                onClick={() => navigate(`/ListTasksSponsor/${userId}`)}
               />
-              <Input
-                type='text'
-                name='name'
-                label='Nome da atividade'
-                error={formik.errors.name}
-                value={formik.values.name}
-                onBlur={formik.handleBlur}
-                touched={formik.touched.name}
-                onChange={formik.handleChange}
-              />
-              <Input
-                type='number'
-                name='reward'
-                label='Remuneração'
-                onBlur={formik.handleBlur}
-                error={formik.errors.reward}
-                value={formik.values.reward}
-                onChange={formik.handleChange}
-                touched={formik.touched.reward}
-              />
-              <TextArea
-                label='Descrição'
-                name='description'
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                error={formik.errors.description}
-                value={formik.values.description}
-                touched={formik.touched.description}
-              />
-              <Button
-                type='submit'
-                value='Editar'
-                isLoading={formik.isSubmitting}
-                disabled={!formik.isValid || formik.isSubmitting}
-              />
-              <Button
-                type='button'
-                value='Excluir'
-                Icon={HiTrash}
-                isLoading={isButtonLoading}
-                disabled={!formik.isValid || isButtonLoading}
-                onClick={openModal}
-              />
-            </form>
-          </BorderDashed>
+              <BorderDashed>
+                <form onSubmit={formik.handleSubmit}>
+                  <InputCheck
+                    id='performed'
+                    name='performed'
+                    onBlur={formik.handleBlur}
+                    text='Marcar como realizada'
+                    onChange={formik.handleChange}
+                    error={formik.errors.performed}
+                    checked={formik.values.performed}
+                    touched={formik.touched.performed}
+                  />
+                  <Input
+                    type='text'
+                    name='name'
+                    label='Nome da atividade'
+                    error={formik.errors.name}
+                    value={formik.values.name}
+                    onBlur={formik.handleBlur}
+                    touched={formik.touched.name}
+                    onChange={formik.handleChange}
+                  />
+                  <Input
+                    type='number'
+                    name='reward'
+                    label='Remuneração'
+                    onBlur={formik.handleBlur}
+                    error={formik.errors.reward}
+                    value={formik.values.reward}
+                    onChange={formik.handleChange}
+                    touched={formik.touched.reward}
+                  />
+                  <TextArea
+                    label='Descrição'
+                    name='description'
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    error={formik.errors.description}
+                    value={formik.values.description}
+                    touched={formik.touched.description}
+                  />
+                  <div className="box-button-form">
+                    <Button
+                      type='submit'
+                      value='Editar'
+                      isLoading={formik.isSubmitting}
+                      disabled={!formik.isValid || formik.isSubmitting}
+                    />
+                    <Button
+                      type='button'
+                      value='Excluir'
+                      Icon={HiTrash}
+                      isLoading={isButtonLoading}
+                      disabled={!formik.isValid || isButtonLoading}
+                      onClick={openModal}
+                    />
+                  </div>
+                </form>
+              </BorderDashed>
+            </div>
+          </div>
           <Modal
             isOpen={modalIsOpen}
             style={customModalStyle}

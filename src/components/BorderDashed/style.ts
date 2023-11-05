@@ -15,4 +15,5 @@ export const Container = styled.div`
 
   border-radius: 12px;
   border: 2px dashed ${({theme}) => theme.COLORS.TURQUOSE_400};
+
 `

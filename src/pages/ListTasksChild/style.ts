@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/device";
 
 export const Container = styled.div`
   display: grid;
@@ -20,6 +21,19 @@ export const Container = styled.div`
     text-align: center;
   }
 
+  .wrapper-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    padding: 0 3.2rem;
+  }
+
+  .intern-container{
+    width: 100%;
+  }
+
   .box-container{
     display: flex;
     align-items: center;
@@ -28,11 +42,16 @@ export const Container = styled.div`
     gap: 24px;
 
     width: 100%;
+
+    img{
+      width: clamp(183px, 40%, 350px);
+    }
+
+    p{
+      font-size: clamp(1.6rem, 1vw, 2.4rem);
+    }
   }
 
-  img{
-    width: clamp(183px, 40%, 350px);
-  }
 
   .card-container{
     display: flex;
@@ -73,7 +92,78 @@ export const Container = styled.div`
       font-size: 14px;
       margin-top: 4px;
     }
+  }
 
+  @media ${device.tablet} {
+    .wrapper-container{
+      padding: 0 6.4rem;
+    }
+
+    .intern-container{
+      width: 80%;
+    }
+
+    .no-registry-image{
+      width: 30rem;
+    }
+
+    .box-container{
+      img{
+        width: clamp(20rem, 30vw, 50rem);
+      }
+      p{
+        font-size: clamp(1.6rem, 2vw, 2.4rem);
+      }
+    }
+
+  }
+
+  @media ${device.laptop} {
+    .wrapper-container{
+      padding: 0 10.8rem;
+    }
+
+    .intern-container{
+      width: 60%;
+    }
+
+    .border-dashed{
+      width: 100%;
+      padding: 6.4rem 10.8rem;
+    }
+
+    .box-container{
+      img{
+        width: clamp(30rem, 30vw, 50rem);
+      }
+      p{
+        font-size: clamp(1.6rem, 2vw, 2.4rem);
+      }
+    }
+  }
+
+  @media ${device.laptopL} {
+    .wrapper-container{
+      padding: 0 10.8rem;
+    }
+
+    .intern-container{
+      width: 50%;
+    }
+
+    .border-dashed{
+      width: 100%;
+      padding: 6.4rem 10.8rem;
+    }
+
+    .box-container{
+      img{
+        width: clamp(40rem, 100%, 50rem);
+      }
+      p{
+        font-size: clamp(1.6rem, 2vw, 2.4rem);
+      }
+    }
 
   }
 `

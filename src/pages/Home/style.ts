@@ -18,21 +18,18 @@ export const Container = styled.div`
   }
 
   .border-dashed{
-    width: 100%;
-    height: 100%;
-    margin-top: 32px;
+    margin-top: 3.2rem;
   }
 
   .message{
     text-align: center;
     font-weight: 500;
-    line-height: 22px;
+    line-height: 2.2rem;
   }
 
   .wrapper-container{
     display: flex;
     align-items: center;
-    flex-direction: column;
     justify-content: center;
     gap: 2rem;
 
@@ -50,22 +47,27 @@ export const Container = styled.div`
   }
 
   .intern-container{
-    gap: 16px;
+    gap: 1.6rem;
   }
 
   .box-cards{
     display: grid;
     align-items: center;
-    justify-content: center;
+    justify-content: stretch;
     grid-template-columns: 1fr;
+
 
     grid-column-gap: 1.6rem;
 
     width: 100%;
   }
 
+  .box-child {
+    width: 100%;
+  }
+
   img{
-    width: clamp(183px, 40%, 350px);
+    width: 18rem;
   }
 
   .card-container{
@@ -73,45 +75,60 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
+    gap: 1.6rem;
+
     width: 100%;
-
-    /* grid-area: 'list-child'; */
-
-    margin: 0 16px 32px 16px;
   }
 
   @media ${device.mobileL} {
-    .box-cards{
-      grid-template-columns: 1fr;
+    .border-dashed{
+      padding: 3.2rem;
     }
 
-    .border-dashed{
-      width: fit-content;
-      padding: 3.2rem;
+    .no-registry-image{
+      width: clamp(20rem, 40vw, 50rem);
     }
   }
 
   @media ${device.tablet} {
-    .card-container{
-      width: 90%;
+    .wrapper-container{
+      padding: 0 6.4rem;
     }
-    .box-cards{
-      grid-template-columns: 1fr 1fr;
+
+    .box-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(50%, 50%));
+    }
+
+    .box-child:nth-child(odd):last-child {
+      grid-column: span 2;
+    }
+
+    .border-dashed{
+      padding: 6.4rem 10.8rem;
     }
 
     .no-registry-image{
-      width: 30rem;
+      width: clamp(30rem, 30vw, 50rem);
     }
   }
 
   @media ${device.laptop} {
-    .box-cards{
-      grid-template-columns: 1fr 1fr;
+    .card-container{
+      width: 70%;
+    }
+
+    .box-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(50%, 50%));
+    }
+
+    .box-child:nth-child(odd):last-child {
+      grid-column: span 2;
     }
 
     .no-registry-image{
-      width: 35rem;
+      width: clamp(30rem, 30vw, 50rem);
     }
 
     .border-dashed{
@@ -121,20 +138,24 @@ export const Container = styled.div`
   }
 
   @media ${device.laptopL} {
-    .box-cards{
-      grid-template-columns: 1fr 1fr;
+    .card-container{
+      width: 60%;
     }
 
-    .card-container{
-      width: 80%;
+    .box-cards {
+      grid-template-columns: repeat(auto-fill, minmax(50%, 50%));
     }
+
+    .box-child:nth-child(odd):last-child {
+      grid-column: span 2;
+    }
+
 
     .no-registry-image{
-      width: 35rem;
+      width: clamp(30rem, 30vw, 50rem);
     }
 
     .border-dashed{
-      width: fit-content;
       padding: 6.4rem 10.8rem;
     }
   }
@@ -148,11 +169,11 @@ export const CardButton = styled.button`
   justify-content: center;
 
   width: 100%;
-  height: 96px;
-  padding: 0 32px;
+  height: 9.6rem;
+  padding: 0 3.2rem;
 
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 1.6rem;
+  line-height: 2.0rem;
   text-align: center;
 
   .girlLeft, .boyRight{
@@ -176,14 +197,14 @@ export const CardButton = styled.button`
 
   color: ${({theme}) => theme.COLORS.WHITE};
 
-  border-radius: 12px;
-  border: 2px solid  ${({theme}) => theme.COLORS.PINK_400};
+  border-radius: 1.2rem;
+  border: .2rem solid  ${({theme}) => theme.COLORS.PINK_400};
   background-color: ${({theme}) => theme.COLORS.PINK_100};
 
   overflow: hidden;
 
   .icon-plus{
-    font-size: 36px;
+    font-size: 3.6rem;
     color: ${({theme}) => theme.COLORS.VIOLET_700};
     z-index: 2;
   }

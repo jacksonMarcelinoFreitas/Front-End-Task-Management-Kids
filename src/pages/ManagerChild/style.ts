@@ -4,13 +4,13 @@ import { device } from "../../utils/device";
 export const Container = styled.div`
   display: grid;
   grid-auto-rows: min-content;
-  grid-template-rows: 64px min-content auto;
+  grid-template-rows: 6.4rem min-content auto;
   grid-template-areas:
   "header"
   "title-navigate"
   "cards";
 
-  margin-bottom: 32px;
+  padding-bottom: 3.2rem ;
 
   color: ${({theme}) => theme.COLORS.GRAY_700};
 

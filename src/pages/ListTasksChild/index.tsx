@@ -65,7 +65,7 @@ export function ListTasksChild() {
   return (
     <Container>
       <Header />
-      <div>
+      <div className='wrapper-container'>
       {isLoading ? (
         <ThreeDots
           height="80"
@@ -77,7 +77,7 @@ export function ListTasksChild() {
           wrapperClass="loader"
           visible={isLoading}
         />) : (
-        <div>
+        <div className='intern-container'>
           {
             (data.length === 0) &&
             <BorderDashed className='border-dashed'>

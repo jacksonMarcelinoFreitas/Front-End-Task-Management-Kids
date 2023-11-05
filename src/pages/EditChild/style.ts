@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/device";
 
 export const Container = styled.div`
   display: grid;
@@ -34,6 +35,26 @@ export const Container = styled.div`
 
   }
 
+  .wrapper-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 3.2rem;
+  }
+
+  .box-container{
+    width: 100%;
+  }
+
+  .box-button-form{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+
+    width: 100%;
+  }
+
   form{
     display: flex;
     align-items: center;
@@ -42,6 +63,55 @@ export const Container = styled.div`
     gap: 8px;
 
     width: 100%;
+  }
+
+  @media ${device.mobileL} {
+    .wrapper-container{
+      padding: 0 6.4rem;
+    }
+
+  }
+
+  @media ${device.tablet} {
+    .wrapper-container{
+      padding: 0 6.4rem;
+    }
+
+    .box-container{
+      width: 80%;
+    }
+
+    .box-button-form{
+      flex-direction: row;
+    }
+  }
+
+  @media ${device.laptop} {
+    .wrapper-container{
+      padding: 0 10.8rem;
+    }
+
+    .box-container{
+      width: 80%;
+    }
+
+    .box-button-form{
+      flex-direction: row;
+    }
+  }
+
+  @media ${device.laptopL} {
+    .wrapper-container{
+      padding: 0 10.8rem;
+    }
+
+    .box-container{
+      width: 50%;
+    }
+
+    .box-button-form{
+      flex-direction: row;
+    }
   }
 
 `
