@@ -2,12 +2,13 @@ import { Container } from './style'
 
 interface ISidebarItem{
   Icon?: React.ElementType,
-  Text?: string
+  Text?: string,
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const SidebarItem = ({ Icon, Text }: ISidebarItem) => {
+const SidebarItem = ({ Icon, Text, onClick}: ISidebarItem) => {
   return (
-    <Container>
+    <Container onClick={onClick}>
       {
         Icon&&
         <Icon size={20}/>

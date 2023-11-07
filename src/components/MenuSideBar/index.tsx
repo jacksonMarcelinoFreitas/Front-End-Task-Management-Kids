@@ -1,17 +1,18 @@
 import backgrounImage from '../../assets/fly-background.svg';
-import { Container, Content } from './style'
-import { FaHome } from 'react-icons/fa'
-import { CgClose } from 'react-icons/cg';
-
-
-import SidebarItem from '../SidebarItem'
 import { Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Container, Content } from './style'
+import { CgClose } from 'react-icons/cg';
+import SidebarItem from '../SidebarItem';
+import { FaHome } from 'react-icons/fa';
+import { BiLogOut } from 'react-icons/bi';
 
 interface IMenuSidebar{
   toggleSidebar: Dispatch<SetStateAction<boolean>>;
 }
 
 export function Sidebar({ toggleSidebar } : IMenuSidebar){
+  const navigate = useNavigate();
 
   return (
     <Container >
@@ -24,8 +25,17 @@ export function Sidebar({ toggleSidebar } : IMenuSidebar){
         <CgClose size={32} onClick={toggleSidebar} />
       </div>
       <Content>
-        <SidebarItem Icon={FaHome} Text="Home" />
-        <SidebarItem Icon={FaHome} Text="Home" />
+        <SidebarItem
+          Icon={FaHome}
+          Text="Home"
+          onClick={() => {navigate("/")}}
+        />
+        <SidebarItem
+          Icon={BiLogOut}
+          Text="Sair"
+          onClick={() => {navigate("/")}}
+        />
+        {/* </SidebarItem> */}
       </Content>
     </Container>
   )

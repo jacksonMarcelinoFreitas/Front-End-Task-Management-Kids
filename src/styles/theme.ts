@@ -3,7 +3,7 @@ export default {
     COLORS: {
         PINK_700: "#701D33",
         PINK_400: "#F03F6D",
-        PINK_100: " ",
+        PINK_100: "#F288A4",
 
         YELLOW_700: "#FFCB01",
         YELLOW_400: "#FFDB4D",
@@ -14,6 +14,7 @@ export default {
 
         TURQUOSE_700: "#28AB7B",
         TURQUOSE_400: "#31DB9D",
+        TURQUOSE_300: "#31DB9D",
         TURQUOSE_100: "#75E1BA",
 
         VIOLET_700: "#74309D",
