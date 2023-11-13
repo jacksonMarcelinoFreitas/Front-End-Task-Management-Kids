@@ -18,7 +18,7 @@ export const Container = styled.div`
   .border-dashed{
     width: 100%;
     height: 100%;
-    margin-top: 3.2rem;
+    /* margin-top: 3.2rem; */
   }
 
   .message{
@@ -139,8 +139,7 @@ export const Container = styled.div`
     }
 
     .border-dashed{
-      width: fit-content;
-      padding: 6.4rem 10.8rem;
+      padding: 3.2rem 10.8rem;
     }
 
     .box-container{
@@ -160,8 +159,7 @@ export const Container = styled.div`
     }
 
     .border-dashed{
-      width: fit-content;
-      padding: 6.4rem 10.8rem;
+      padding: 3.2rem 10.8rem;
     }
 
     .box-container{

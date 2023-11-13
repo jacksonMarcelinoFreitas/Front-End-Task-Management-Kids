@@ -39,6 +39,22 @@ export const Container = styled.div`
     }
   }
 
+  .profile{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    margin: 24px 0;
+
+    p{
+      font-size: 2rem;
+      font-weight: 500;
+    }
+  }
+
   .image-background{
     position: absolute;
     z-index: -1;
@@ -65,8 +81,6 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  margin-top: 32px;
-
   display: flex;
   flex-direction: column;
   gap: 12px;

@@ -1,4 +1,5 @@
 import { confirmLogout, customModalStyle } from './confirmLogout';
+import { Sidebar } from '../../components/MenuSideBar';
 import { IoMenu, IoPower } from 'react-icons/io5';
 import { Container, StyledModal } from "./style";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +7,6 @@ import { useAuth } from '../../hooks/auth';
 import { IHeaderTypes } from './type';
 import { useState } from "react";
 import Modal from 'react-modal';
-import { Sidebar } from '../../components/MenuSideBar';
 
 Modal.setAppElement('#root');
 
@@ -17,7 +17,11 @@ export function Header({ icon, ...rest }: IHeaderTypes){
   const closeModal = () =>{setModalIsOpen(false)}
   const openModal = () =>{setModalIsOpen(true)}
   const navigate = useNavigate();
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
+
+  let userName = user?.name || 'User';
+  let parts = userName.split(' ');
+  let name = parts[0];
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -42,6 +46,11 @@ export function Header({ icon, ...rest }: IHeaderTypes){
         onClick={toggleSidebar}
         className='menu-icon'
       />
+
+      <div className='name'>
+        <span>Olá, &nbsp;</span>
+        <p>{name}</p>
+      </div>
 
       <IoPower
         size={24}

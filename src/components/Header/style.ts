@@ -5,7 +5,8 @@ export const Container = styled.header`
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 2.4rem;
 
   height: 64px;
   padding: 0 24px;
@@ -13,6 +14,22 @@ export const Container = styled.header`
   border-radius: 0 0 12px 12px;
 
   background-color: ${({theme}) => theme.COLORS.VIOLET_700};
+
+  .name{
+    width: 100%;
+    color: ${({theme}) => theme.COLORS.TURQUOSE_100};
+
+    span{
+      font-weight: 300;
+      font-size: 1.6rem;
+    }
+
+    p{
+      display: inline;
+      font-size: 1.6rem;
+      font-weight: 500;
+    }
+  }
 
   svg {
     color: ${({theme}) => theme.COLORS.PINK_100};

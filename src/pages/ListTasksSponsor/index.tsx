@@ -82,6 +82,10 @@ export function ListTasksSponsor(){
                 visible={isLoading}
               />) : (
                 <div className='intern-container'>
+                  <TitleNavigation
+                        titleButton='Voltar'
+                        onClick={()=> navigate(`/ManagerChild/${id}`)}
+                  />
                   {
                     (data.length === 0) &&
                     <BorderDashed className='border-dashed' >
@@ -98,10 +102,6 @@ export function ListTasksSponsor(){
                   {
                     (data.length !== 0) &&
                     <>
-                      <TitleNavigation
-                        titleButton='Voltar'
-                        onClick={()=> navigate(`/ManagerChild/${id}`)}
-                      />
                         <CardButton onClick={() => navigate(`/RegisterTask/${id}`)}>
                             <TiPlus className='icon-plus'/>
                             <p>Adicionar tarefa</p>
