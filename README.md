@@ -30,6 +30,8 @@
 
 ### Back-End
 
+[👉🏻 Back-end repository](https://github.com/Matheus-Juliao/projeto-integrador)
+
 <p align="left">
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=spring,maven,java,aws,intelij" />
