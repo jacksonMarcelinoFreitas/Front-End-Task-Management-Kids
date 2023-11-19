@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./src/assets/Logo.svg" />
+  <img src="./src/assets/cover_readme.png" />
 </p>
 
 <h1 style="text-align: center;">Task management app for kids</h1>
