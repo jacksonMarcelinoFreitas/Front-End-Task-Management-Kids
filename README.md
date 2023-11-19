@@ -2,7 +2,7 @@
   <img src="./src/assets/cover_readme.png" />
 </p>
 
-<h1 style="text-align: center;">Task management app for kids</h1>
+<h1 align="center">Task management app for kids</h1>
 
 ### 👨🏻‍💻 Run:
 
