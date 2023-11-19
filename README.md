@@ -54,9 +54,9 @@
   </a>
 </p>
 
-<p style="text-align: center;">Developed by:</p>
+<p align="center" >Developed by:</p>
 
-<p style="text-align: center;" >
+<p align="center" >
   <a href="https://github.com/jacksonMarcelinoFreitas">
       <img style="width: 50px;"  src="./src/assets/participants/jackson.png" />
   </a>
