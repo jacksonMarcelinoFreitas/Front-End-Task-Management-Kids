@@ -56,7 +56,30 @@
   </a>
 </p>
 
-<p align="center" >Developed by:</p>
+### Screens
+
+#### Responsivity
+
+
+<p align="center" style="display: flex; align-items: center; justify-content:center; flex-direction:column; gap: 12px">
+    <div style="display: flex; align-items: center; justify-content:center; flex-direction:row; gap: 24px">
+        <img src="./src/assets/gif3.gif" width="50%" />
+        <img src="./src/assets/gif4.gif" width="50%" />
+    </div>
+</p>
+
+#### Mobile
+
+<p align="center" style="display: flex; align-items: center; justify-content:center; flex-direction:column; gap: 12px">
+    <div style="display: flex; align-items: center; justify-content:space-evenly; flex-direction:row; gap: 24px">
+        <img src="./src/assets/gif1.gif" width="300px" />
+        <img src="./src/assets/gif2.gif" width="300px" />
+    </div>
+</p>
+
+##
+
+<p align="center" ><strong>Developed by:</strong></p>
 
 <p align="center" >
   <a href="https://github.com/jacksonMarcelinoFreitas">
@@ -73,5 +96,11 @@
   </a>
   <a href="#">
     <img style="width: 50px;"  src="./src/assets/participants/leonardo.png" />
+  </a>
+  <a href="#">
+    <img style="width: 50px;"  src="./src/assets/participants/hugo.png" />
+  </a>
+  <a href="#">
+    <img style="width: 50px;"  src="./src/assets/participants/nicolas.png" />
   </a>
 </p>
