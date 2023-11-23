@@ -63,8 +63,8 @@
 
 <p align="center" style="display: flex; align-items: center; justify-content:center; flex-direction:column; gap: 12px">
     <div style="display: flex; align-items: center; justify-content:center; flex-direction:row; gap: 24px">
-        <img src="./src/assets/gif3.gif" width="50%" />
-        <img src="./src/assets/gif4.gif" width="50%" />
+        <img src="./src/assets/gif3.gif" width="45%" />
+        <img src="./src/assets/gif4.gif" width="45%" />
     </div>
 </p>
 
